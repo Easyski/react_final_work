@@ -2,8 +2,8 @@ import { FC, useState } from "react";
 import { ILocation } from "../types";
 import { GeoSearch, SearchResults } from "./index";
 import { ISidebar } from "./Sidebar.types";
-import "./Sidebar.css";
 import { LngLatLike } from "mapbox-gl";
+import "./Sidebar.css";
 
 const Sidebar: FC<ISidebar> = ({ setMapCenter }) => {
 	const [locations, setLocations] = useState<ILocation[]>();
