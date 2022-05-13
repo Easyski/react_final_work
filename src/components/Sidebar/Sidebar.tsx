@@ -6,10 +6,10 @@ import { LngLatLike } from "mapbox-gl";
 import "./Sidebar.css";
 
 const Sidebar: FC<ISidebar> = ({ setMapCenter }) => {
-	const [locations, setLocations] = useState<ILocation[]>();
+	const [locations, setLocations] = useState<ILocation[]>([]);
 
 	const handleFetchResults = (results: any) => {
-		if (!results.features.length) return;
+		if (!results.features) return setLocations([]);
 		const filteredResults = results.features.map((element: any) => {
 			return {
 				name: element.text as String,
@@ -17,12 +17,7 @@ const Sidebar: FC<ISidebar> = ({ setMapCenter }) => {
 				center: element.center as LngLatLike,
 			};
 		});
-
 		setLocations(filteredResults);
-	};
-
-	const handleSetCenter = (center: LngLatLike) => {
-		setMapCenter(center);
 	};
 
 	return (
@@ -30,12 +25,10 @@ const Sidebar: FC<ISidebar> = ({ setMapCenter }) => {
 			<GeoSearch
 				handleFetchResults={(results: any) => handleFetchResults(results)}
 			/>
-			{locations && (
-				<SearchResults
-					locations={locations}
-					setCenter={(center: LngLatLike) => handleSetCenter(center)}
-				/>
-			)}
+			<SearchResults
+				locations={locations}
+				setCenter={(center: LngLatLike) => setMapCenter(center)}
+			/>
 		</div>
 	);
 };
