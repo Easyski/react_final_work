@@ -22,19 +22,19 @@ export const Navigation: FC<INavigationTypes> = ({
 	});
 
 	useEffect(() => {
-		setNewCoordinates();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [centerCoordinates]);
-
-	const setNewCoordinates = () => {
 		if (!map.current || !centerCoordinates) return;
 		map.current.flyTo({ center: centerCoordinates, zoom: 14 });
+	}, [centerCoordinates]);
+
+	const handleMapClick = (press: any) => {
+		console.log(press);
 	};
 
 	return (
 		<div
 			ref={mapContainer}
 			className={fullScreen && "map-container__fullscreen"}
+			onClick={(press) => handleMapClick(press)}
 		/>
 	);
 };
