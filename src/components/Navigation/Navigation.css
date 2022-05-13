@@ -1,0 +1,8 @@
+.map-container {
+	width: 100px;
+	height: 100px;
+}
+
+.map-container__fullscreen {
+	height: 100vh;
+}

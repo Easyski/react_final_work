@@ -1,26 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { LngLatLike } from "mapbox-gl";
+import { FC, useState } from "react";
+import { Navigation, Sidebar } from "./components";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+export const App: FC = () => {
+	const [mapCenter, setMapCenter] = useState<LngLatLike>();
+	return (
+		<div>
+			<Navigation fullScreen centerCoordinates={mapCenter} />
+			<Sidebar setMapCenter={(center: LngLatLike) => setMapCenter(center)} />
+		</div>
+	);
+};
