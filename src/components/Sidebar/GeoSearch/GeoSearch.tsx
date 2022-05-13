@@ -8,7 +8,7 @@ const GeoSearch: FC<IGeoSearchTypes> = ({ handleFetchResults }) => {
 		if (!event.target.value) return handleFetchResults([]);
 
 		fetch(
-			`https://api.mapbox.com/geocoding/v5/mapbox.places/${event.target.value}}.json?access_token=pk.eyJ1Ijoid2hlaXJzdHJhdGUiLCJhIjoiY2wwenRlNnM1MDVlMjNjbXN1bG1rMmw4cSJ9.iINJllchmyCz1jksG_NFFw`
+			`https://api.mapbox.com/geocoding/v5/mapbox.places/${event.target.value}}.json?access_token=${process.env.REACT_APP_MAPBOX_KEY}`
 		)
 			.then((req) => req.json())
 			.then((results) => {

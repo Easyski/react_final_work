@@ -1,10 +1,7 @@
 import { FC, useEffect, useRef } from "react";
-import mapboxgl, { LngLatLike, Map } from "mapbox-gl";
+import mapboxgl, { Map } from "mapbox-gl";
 import { INavigationTypes } from "./Navigation.types";
 import "./Navigation.css";
-
-mapboxgl.accessToken =
-	"pk.eyJ1Ijoid2hlaXJzdHJhdGUiLCJhIjoiY2wwenRlNnM1MDVlMjNjbXN1bG1rMmw4cSJ9.iINJllchmyCz1jksG_NFFw";
 
 export const Navigation: FC<INavigationTypes> = ({
 	fullScreen,
