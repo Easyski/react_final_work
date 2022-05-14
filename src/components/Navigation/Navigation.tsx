@@ -1,40 +1,54 @@
-import { FC, useEffect, useRef } from "react";
-import mapboxgl, { Map } from "mapbox-gl";
+import { FC, useEffect, useState } from "react";
 import { INavigationTypes } from "./Navigation.types";
+import ReactMapboxGl from "react-mapbox-gl";
 import "./Navigation.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 export const Navigation: FC<INavigationTypes> = ({
 	fullScreen,
 	startCoordinates = [4.34878, 50.85045],
 	centerCoordinates,
 }) => {
-	const mapContainer = useRef<HTMLDivElement>(null);
-	const map = useRef<Map | null>(null);
+	const [center, setCenter] = useState<[number, number]>(
+		startCoordinates as [number, number]
+	);
 
-	useEffect(() => {
-		if (map.current || !mapContainer.current) return; // initialize map only once
-		map.current = new mapboxgl.Map({
-			container: mapContainer.current,
-			style: "mapbox://styles/mapbox/streets-v11",
-			center: startCoordinates,
-			zoom: 6,
-		});
+	const Map = ReactMapboxGl({
+		accessToken: process.env.REACT_APP_MAPBOX_KEY as string,
+		minZoom: 5,
+		maxZoom: 15,
+		dragRotate: false,
+		doubleClickZoom: false,
 	});
 
 	useEffect(() => {
-		if (!map.current || !centerCoordinates) return;
-		map.current.flyTo({ center: centerCoordinates, zoom: 14 });
+		setCenter(centerCoordinates as [number, number]);
 	}, [centerCoordinates]);
 
-	const handleMapClick = (press: any) => {
-		console.log(press);
+	const handleMapClick = (click: any) => {
+		console.log(click);
 	};
 
 	return (
-		<div
-			ref={mapContainer}
-			className={fullScreen && "map-container__fullscreen"}
-			onClick={(press) => handleMapClick(press)}
+		<Map
+			// eslint-disable-next-line react/style-prop-object
+			style="mapbox://styles/mapbox/streets-v11"
+			containerStyle={
+				fullScreen
+					? {
+							height: "100vh",
+							width: "100vw",
+					  }
+					: { height: "100px", width: "100px" }
+			}
+			onClick={(click) => handleMapClick(click)}
+			center={center}
+			zoom={[6]}
+			movingMethod={"easeTo"}
+			animationOptions={{
+				duration: 1,
+				animate: true,
+			}}
 		/>
 	);
 };
