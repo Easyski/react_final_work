@@ -5,3 +5,5 @@ export interface ILocation {
 	detailedName: string;
 	center: LngLatLike;
 }
+
+export type Coordinates = [number, number];
