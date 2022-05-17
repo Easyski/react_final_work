@@ -1,5 +1,5 @@
-import { LngLatLike } from "mapbox-gl";
+import { ICoordinates } from "../types";
 
 export interface ISidebar {
-	setMapCenter: (center: LngLatLike) => void;
+	setMapCenter: (center: ICoordinates) => void;
 }

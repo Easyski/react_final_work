@@ -1,8 +1,7 @@
 import { FC, useState } from "react";
-import { ILocation } from "../types";
+import { ICoordinates, ILocation } from "../types";
 import { GeoSearch, SearchResults } from "./index";
 import { ISidebar } from "./Sidebar.types";
-import { LngLatLike } from "mapbox-gl";
 import "./Sidebar.css";
 
 const Sidebar: FC<ISidebar> = ({ setMapCenter }) => {
@@ -14,7 +13,7 @@ const Sidebar: FC<ISidebar> = ({ setMapCenter }) => {
 			return {
 				name: element.text as String,
 				detailedName: element.place_name as String,
-				center: element.center as LngLatLike,
+				center: element.center as ICoordinates,
 			};
 		});
 		setLocations(filteredResults);
@@ -27,7 +26,7 @@ const Sidebar: FC<ISidebar> = ({ setMapCenter }) => {
 			/>
 			<SearchResults
 				locations={locations}
-				setCenter={(center: LngLatLike) => setMapCenter(center)}
+				setCenter={(center: ICoordinates) => setMapCenter(center)}
 			/>
 		</div>
 	);

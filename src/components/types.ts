@@ -1,7 +1,7 @@
-import { LngLatLike } from "mapbox-gl";
-
 export interface ILocation {
 	name: string;
 	detailedName: string;
-	center: LngLatLike;
+	center: ICoordinates;
 }
+
+export type ICoordinates = [number, number];
