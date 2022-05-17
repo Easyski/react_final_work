@@ -1,7 +1,7 @@
-import { LngLatLike } from "mapbox-gl";
+import { ICoordinates } from "../types";
 
 export interface INavigationTypes {
 	fullScreen?: true;
-	centerCoordinates?: LngLatLike;
-	startCoordinates?: LngLatLike;
+	centerCoordinates?: ICoordinates;
+	startCoordinates?: ICoordinates;
 }

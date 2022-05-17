@@ -1,39 +1,34 @@
 import { FC, useEffect, useState } from "react";
 import { INavigationTypes } from "./Navigation.types";
-import ReactMapboxGl from "react-mapbox-gl";
+import Map from "react-map-gl";
 import "./Navigation.css";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { ICoordinates } from "../types";
 
 export const Navigation: FC<INavigationTypes> = ({
 	fullScreen,
-	startCoordinates = [4.34878, 50.85045],
+	startCoordinates = [10.12886, 47.264923],
 	centerCoordinates,
 }) => {
-	const [center, setCenter] = useState<[number, number]>(
-		startCoordinates as [number, number]
-	);
-
-	const Map = ReactMapboxGl({
-		accessToken: process.env.REACT_APP_MAPBOX_KEY as string,
-		minZoom: 5,
-		maxZoom: 15,
-		dragRotate: false,
-		doubleClickZoom: false,
-	});
+	const [center, setCenter] = useState<ICoordinates>(startCoordinates);
 
 	useEffect(() => {
-		setCenter(centerCoordinates as [number, number]);
+		if (centerCoordinates) setCenter(centerCoordinates);
 	}, [centerCoordinates]);
 
-	const handleMapClick = (click: any) => {
-		console.log(click);
+	useEffect(() => {
+		console.log("center", center);
+	}, [center]);
+
+	const handleMapClick = async (event: any) => {
+		const { lat, lng } = await event.lngLat;
+		setCenter([lng, lat]);
 	};
 
 	return (
 		<Map
-			// eslint-disable-next-line react/style-prop-object
-			style="mapbox://styles/mapbox/streets-v11"
-			containerStyle={
+			mapStyle="mapbox://styles/mapbox/streets-v11"
+			style={
 				fullScreen
 					? {
 							height: "100vh",
@@ -41,14 +36,16 @@ export const Navigation: FC<INavigationTypes> = ({
 					  }
 					: { height: "100px", width: "100px" }
 			}
-			onClick={(click) => handleMapClick(click)}
-			center={center}
-			zoom={[6]}
-			movingMethod={"easeTo"}
-			animationOptions={{
-				duration: 1,
-				animate: true,
+			onClick={handleMapClick}
+			initialViewState={{
+				zoom: 6,
+				longitude: center[0],
+				latitude: center[1],
 			}}
+			minZoom={5}
+			maxZoom={15}
+			maxPitch={0}
+			doubleClickZoom={false}
 		/>
 	);
 };
