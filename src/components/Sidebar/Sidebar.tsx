@@ -5,7 +5,7 @@ import { ISidebar } from "./Sidebar.types";
 import { LngLatLike } from "mapbox-gl";
 import "./Sidebar.css";
 
-const Sidebar: FC<ISidebar> = ({ setMapCenter }) => {
+const Sidebar: FC<ISidebar> = () => {
 	const [locations, setLocations] = useState<ILocation[]>([]);
 
 	const handleFetchResults = (results: any) => {
@@ -25,10 +25,7 @@ const Sidebar: FC<ISidebar> = ({ setMapCenter }) => {
 			<GeoSearch
 				handleFetchResults={(results: any) => handleFetchResults(results)}
 			/>
-			<SearchResults
-				locations={locations}
-				setCenter={(center: LngLatLike) => setMapCenter(center)}
-			/>
+			<SearchResults locations={locations} />
 		</div>
 	);
 };
