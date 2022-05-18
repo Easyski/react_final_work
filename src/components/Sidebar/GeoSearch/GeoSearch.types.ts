@@ -1,3 +1,1 @@
-export interface IGeoSearchTypes {
-	handleFetchResults: (value: any) => void;
-}
+export interface IGeoSearchTypes {}
