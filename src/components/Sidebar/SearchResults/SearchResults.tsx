@@ -1,9 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+
 import { setCenterCoordinates } from "../../../store/slices/mapSlice";
 import { ISearchResults } from "./SearchResults.types";
-import "./SearchResults.css";
 import { ILocation } from "../../types";
+
+import "./SearchResults.css";
 
 const SearchResults: FC<ISearchResults> = ({ locations }) => {
 	const dispatch = useDispatch();
