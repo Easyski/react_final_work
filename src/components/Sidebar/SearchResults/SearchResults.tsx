@@ -1,24 +1,34 @@
-import { FC, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { FC } from "react";
+import { useDispatch, useSelector, batch } from "react-redux";
 
 import { setCenterCoordinates } from "../../../store/slices/mapSlice";
+import { setLocations } from "../../../store/slices/sidebarSlice";
 import { ISearchResults } from "./SearchResults.types";
-import { ILocation } from "../../types";
+import { Coordinates, ILocation } from "../../types";
 
 import "./SearchResults.css";
 
-const SearchResults: FC<ISearchResults> = ({ locations }) => {
+const SearchResults: FC<ISearchResults> = () => {
 	const dispatch = useDispatch();
-	const [hasLocations, setHasLocations] = useState<boolean>(!!locations.length);
+	const locations = useSelector((state: any) => state.sidebar.locations);
 
-	useEffect(() => {
-		setHasLocations(!!locations.length);
-	}, [locations.length]);
-
-	const handleResultClick = (center: any) => {
-		dispatch(setCenterCoordinates(center));
+	/**
+	 * This function will fire whenever a search result is clicked. It will
+	 * tell te store to set the new center and clear the results of the search.
+	 * @param center The coordinates the map needs to move to.
+	 */
+	const handleResultClick = (center: Coordinates) => {
+		batch(() => {
+			dispatch(setCenterCoordinates(center));
+			dispatch(setLocations([]));
+		});
 	};
 
+	/**
+	 * This function uses the fetched locationdata to make React HTMLElements. They
+	 * are then added to the document.
+	 * @returns JSX elements of the fetched location data.
+	 */
 	const setElements = () => {
 		const elements = locations.map((element: ILocation, index: number) => {
 			return (
@@ -33,7 +43,7 @@ const SearchResults: FC<ISearchResults> = ({ locations }) => {
 
 	return (
 		<div>
-			{hasLocations && (
+			{!!locations.length && (
 				<div className="searchResultsContainer">{setElements()}</div>
 			)}
 		</div>

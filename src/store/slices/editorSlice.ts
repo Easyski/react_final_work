@@ -9,7 +9,7 @@ const initialState: IInitialState = {
 };
 
 export const editorSlice = createSlice({
-	name: "mapSlice",
+	name: "editorSlice",
 	initialState,
 	reducers: {
 		setMode: (state, action) => {

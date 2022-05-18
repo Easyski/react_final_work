@@ -1,5 +1,1 @@
-import { ILocation } from "../../types";
-
-export interface ISearchResults {
-	locations: ILocation[] | [];
-}
+export interface ISearchResults {}

@@ -22,7 +22,6 @@ export const Navigation: FC<INavigationTypes> = () => {
 	 */
 	useEffect(() => {
 		if (map.current || !mapContainer.current) return; // initialize map only once
-		console.log("map init, center:", center);
 		map.current = new mapboxgl.Map({
 			container: mapContainer.current,
 			style: "mapbox://styles/mapbox/streets-v9",
