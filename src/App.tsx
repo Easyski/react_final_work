@@ -1,13 +1,18 @@
-import { LngLatLike } from "mapbox-gl";
-import { FC, useState } from "react";
-import { Navigation, Sidebar } from "./components";
+// import mapboxgl from "mapbox-gl";
+import mapboxgl from "mapbox-gl";
+import { FC } from "react";
+import { Provider } from "react-redux";
+import { EditorConfig, Navigation, Sidebar } from "./components";
+import store from "./store";
+
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY as string;
 
 export const App: FC = () => {
-	const [mapCenter, setMapCenter] = useState<LngLatLike>();
 	return (
-		<div>
-			<Navigation fullScreen centerCoordinates={mapCenter} />
-			<Sidebar setMapCenter={(center: LngLatLike) => setMapCenter(center)} />
-		</div>
+		<Provider store={store}>
+			<Navigation />
+			<Sidebar />
+			<EditorConfig />
+		</Provider>
 	);
 };
