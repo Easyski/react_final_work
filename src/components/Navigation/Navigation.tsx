@@ -1,18 +1,29 @@
-import { FC, useEffect, useRef } from "react";
-import { INavigationTypes } from "./Navigation.types";
-import { useSelector } from "react-redux";
+import { FC, useEffect, useRef, useState } from "react";
+import { useSelector, useDispatch, batch } from "react-redux";
 import mapboxgl, { Map } from "mapbox-gl";
+
+import { INavigationTypes } from "./Navigation.types";
+import {
+	setMode,
+	setMarkerModal,
+	setAllowNewMarker,
+} from "../../store/slices/editorSlice";
+import MarkerModal from "./MarkerModal/MarkerModal";
 
 import "./Navigation.css";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { useDispatch } from "react-redux";
-import { setMode } from "../../store/slices/editorSlice";
+import { Coordinates } from "../types";
 
 export const Navigation: FC<INavigationTypes> = () => {
 	const dispatch = useDispatch();
 	const center = useSelector((state: any) => state.map.centerCoordinates);
 	const editorMode = useSelector((state: any) => state.editor.mode);
+	const allowNewMarker = useSelector(
+		(state: any) => state.editor.allowNewMarker
+	);
+	const newMarkerPlaced = useSelector((state: any) => state.editor.markerModal);
 
+	const [markerLocation, setMarkerLocation] = useState<Coordinates>();
 	const map = useRef<Map>();
 	const mapContainer = useRef<HTMLDivElement | null>(null);
 
@@ -46,15 +57,32 @@ export const Navigation: FC<INavigationTypes> = () => {
 	}, [center]);
 
 	/**
-	 * Listens to the @param editorMode and allows a new marker to
-	 * be placed if the @param editorMode is set to "points". It then
-	 * resets the editorMode to "null".
+	 * Listens to the @param editorMode and adds an eventlistener on **1**
+	 * click if the @param editorMode is set to "points".
 	 * */
 	useEffect(() => {
-		if (editorMode !== "points" || !map.current) return;
+		if (!map.current) return;
+		if (editorMode === "points") {
+			map.current.once("click", handleMapClick);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [editorMode]);
+
+	/**
+	 * Listens to the @param allowNewMarker and allows a new marker to
+	 * be placed if the @param allowNewMarker is set to true by adding an
+	 * eventlistener. It then resets the param to false.
+	 **/
+
+	useEffect(() => {
+		if (!map.current || !allowNewMarker) return;
+
+		console.log("Navigation allowNewMarker", allowNewMarker);
+
 		map.current.once("click", handleMapClick);
-		dispatch(setMode("null"));
-	}, [dispatch, editorMode]);
+		dispatch(setAllowNewMarker(false));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [allowNewMarker]);
 
 	/**
 	 *The function to be excecuted when the editor allows new markers to be placed.
@@ -65,12 +93,20 @@ export const Navigation: FC<INavigationTypes> = () => {
 		const { lng, lat } = evt.lngLat;
 
 		new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current);
+		batch(() => {
+			setMarkerLocation([lng, lat]);
+			dispatch(setMode(null));
+			dispatch(setMarkerModal(true));
+		});
+		console.log("Navigation: Map clicked");
 	};
 
 	return (
 		<div>
 			<div ref={mapContainer} className="navigationContainer__fullscreen" />
-			{/* <PointModal /> */}
+			{newMarkerPlaced && markerLocation && (
+				<MarkerModal center={markerLocation} />
+			)}
 		</div>
 	);
 };
