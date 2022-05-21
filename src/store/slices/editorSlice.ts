@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Coordinates } from "../../components/types";
 
 interface IInitialState {
 	mode: null | "points" | "tracks" | "routes";
-	allowNewMarker: boolean;
-	markerModal: boolean;
+	newMarkers: IMarker[] | [];
+}
+
+interface IMarker {
+	center: Coordinates;
+	name?: string;
 }
 
 const initialState: IInitialState = {
 	mode: null,
-	allowNewMarker: false,
-	markerModal: false,
+	newMarkers: [],
 };
 
 export const editorSlice = createSlice({
@@ -19,16 +23,12 @@ export const editorSlice = createSlice({
 		setMode: (state, action) => {
 			state.mode = action.payload;
 		},
-		setAllowNewMarker: (state, action) => {
-			state.allowNewMarker = action.payload;
-		},
-		setMarkerModal: (state, action) => {
-			state.markerModal = action.payload;
+		setNewMarkers: (state, action) => {
+			state.newMarkers = action.payload;
 		},
 	},
 });
 
-export const { setMode, setAllowNewMarker, setMarkerModal } =
-	editorSlice.actions;
+export const { setMode, setNewMarkers } = editorSlice.actions;
 
 export default editorSlice.reducer;
