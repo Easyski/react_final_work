@@ -7,7 +7,7 @@ import { GiCancel } from "react-icons/gi";
 import { setCenterCoordinates, setZoom } from "../../../../store/slices";
 import { Coordinates } from "../../../types";
 
-import "./MarkerOption.css";
+import "./MarkerOption.scss";
 import "animate.css";
 
 const MarkerOption: FC<{ center: Coordinates }> = ({ center }) => {
@@ -54,6 +54,12 @@ const MarkerOption: FC<{ center: Coordinates }> = ({ center }) => {
 				className="smallMapContainer"
 				onClick={handleMapClicked}
 			/>
+			<input
+				className="markerOptionInput"
+				type="text"
+				placeholder="Name (optional)"
+				autoComplete="off"
+			/>
 			<p>
 				<b>Coordinates</b>
 			</p>
@@ -63,15 +69,16 @@ const MarkerOption: FC<{ center: Coordinates }> = ({ center }) => {
 			<p className="markerOptionCoordinate">
 				y: {(center[1] as number).toFixed(4)}
 			</p>
-			<input
-				className="markerOptionInput"
-				type="text"
-				placeholder="Name (optional)"
-			/>
-			<button onClick={() => handleButtonClicked(true)}>
+			<button
+				onClick={() => handleButtonClicked(true)}
+				className="markerOptionButton markerOptionButton__accept"
+			>
 				<BsCheckLg />
 			</button>
-			<button onClick={() => handleButtonClicked(false)}>
+			<button
+				onClick={() => handleButtonClicked(false)}
+				className="markerOptionButton markerOptionButton__delete"
+			>
 				<GiCancel />
 			</button>
 		</div>
