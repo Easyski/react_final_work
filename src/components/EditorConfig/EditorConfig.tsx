@@ -8,6 +8,7 @@ import { FaRoute } from "react-icons/fa";
 import { RiGuideLine } from "react-icons/ri";
 
 import "./EditorConfig.css";
+import MarkersConfig from "./MarkersConfig/MarkersConfig";
 
 const EditorConfig: FC = () => {
 	const editorMode = useSelector((state: any) => state.editor.mode);
@@ -17,17 +18,20 @@ const EditorConfig: FC = () => {
 	}, [editorMode]);
 
 	return (
-		<div className="editorContainer">
-			<ModeConfig mode="points" selectedMode={editorMode}>
-				<BiLocationPlus />
-			</ModeConfig>
-			<ModeConfig mode="tracks" selectedMode={editorMode}>
-				<RiGuideLine />
-			</ModeConfig>
-			<ModeConfig mode="routes" selectedMode={editorMode}>
-				<FaRoute />
-			</ModeConfig>
-		</div>
+		<>
+			<div className="editorContainer">
+				<ModeConfig mode="points" selectedMode={editorMode}>
+					<BiLocationPlus />
+				</ModeConfig>
+				<ModeConfig mode="tracks" selectedMode={editorMode}>
+					<RiGuideLine />
+				</ModeConfig>
+				<ModeConfig mode="routes" selectedMode={editorMode}>
+					<FaRoute />
+				</ModeConfig>
+			</div>
+			<MarkersConfig />
+		</>
 	);
 };
 
