@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useDispatch, useSelector, batch } from "react-redux";
 
-import { setCenterCoordinates } from "../../../store/slices/mapSlice";
+import { setCenterCoordinates, setZoom } from "../../../store/slices/mapSlice";
 import { setLocations } from "../../../store/slices/sidebarSlice";
 import { ISearchResults } from "./SearchResults.types";
 import { Coordinates, ILocation } from "../../types";
@@ -21,6 +21,7 @@ const SearchResults: FC<ISearchResults> = () => {
 		batch(() => {
 			dispatch(setCenterCoordinates(center));
 			dispatch(setLocations([]));
+			dispatch(setZoom(13));
 		});
 	};
 
