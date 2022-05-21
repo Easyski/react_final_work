@@ -1,0 +1,24 @@
+.markerOptionContainer {
+	display: grid;
+	grid-template-columns: 50% 25% 25%;
+	grid-template-rows: repeat(5, 50px);
+	background-color: white;
+}
+
+/* -------------------- */
+
+.markerOptionCoordinate {
+	grid-column: 2 / span 2;
+}
+
+.markerOptionInput {
+	grid-column: 2 / span 2;
+}
+
+/* -------------------- */
+
+.smallMapContainer {
+	width: 150px;
+	grid-row-start: span 5;
+	margin-right: 15px;
+}
