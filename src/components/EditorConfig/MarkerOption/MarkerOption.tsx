@@ -4,7 +4,7 @@ import { useDispatch, batch } from "react-redux";
 import { BsCheckLg } from "react-icons/bs";
 import { GiCancel } from "react-icons/gi";
 
-import { setCenterCoordinates, setZoom } from "../../../store/slices/mapSlice";
+import { setCenterCoordinates, setZoom } from "../../../store/slices";
 import { Coordinates } from "../../types";
 
 import "./MarkerOption.css";

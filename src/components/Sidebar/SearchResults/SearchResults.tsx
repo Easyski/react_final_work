@@ -1,8 +1,11 @@
 import { FC } from "react";
 import { useDispatch, useSelector, batch } from "react-redux";
 
-import { setCenterCoordinates, setZoom } from "../../../store/slices/mapSlice";
-import { setLocations } from "../../../store/slices/sidebarSlice";
+import {
+	setCenterCoordinates,
+	setZoom,
+	setLocations,
+} from "../../../store/slices";
 import { ISearchResults } from "./SearchResults.types";
 import { Coordinates, ILocation } from "../../types";
 

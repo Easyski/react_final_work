@@ -4,7 +4,7 @@ import { IGeoSearchTypes } from "./GeoSearch.types";
 import { useDispatch } from "react-redux";
 
 import "./GeoSearch.css";
-import { setLocations } from "../../../store/slices/sidebarSlice";
+import { setLocations } from "../../../store/slices";
 import { Coordinates, ILocation } from "../../types";
 import { useSelector } from "react-redux";
 

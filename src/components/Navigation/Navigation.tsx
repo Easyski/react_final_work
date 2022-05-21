@@ -2,7 +2,7 @@ import { FC, useEffect, useCallback, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import mapboxgl, { Map } from "mapbox-gl";
 
-import { setNewMarkers } from "../../store/slices/editorSlice";
+import { setNewMarkers } from "../../store/slices";
 import { Coordinates } from "../types";
 import { INavigationTypes } from "./Navigation.types";
 

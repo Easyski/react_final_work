@@ -3,7 +3,7 @@ import { IModeConfigTypes } from "./ModeConfig.types";
 
 import "./ModeConfig.css";
 import { useDispatch } from "react-redux";
-import { setMode } from "../../../store/slices/editorSlice";
+import { setMode } from "../../../store/slices";
 
 const ModeConfig: FC<IModeConfigTypes> = ({ mode, selectedMode, children }) => {
 	const dispatch = useDispatch();
