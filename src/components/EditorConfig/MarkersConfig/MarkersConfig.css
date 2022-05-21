@@ -1,0 +1,9 @@
+.markersContainer {
+	position: absolute;
+	right: 15px;
+	top: 70px;
+	border-radius: 10px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	max-height: 90vh;
+}
