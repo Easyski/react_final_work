@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
-import MarkerOption from "../MarkerOption/MarkerOption";
+import MarkerOption from "./MarkerOption/MarkerOption";
 
 import "./MarkersConfig.css";
 
