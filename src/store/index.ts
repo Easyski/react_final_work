@@ -1,8 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import mapReducer from "./slices/mapSlice";
-import editorReducer from "./slices/editorSlice";
-import sidebarReducer from "./slices/sidebarSlice";
+import { mapReducer, editorReducer, sidebarReducer } from "./slices";
 
 // const composeEnhancers =
 // 	(window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
