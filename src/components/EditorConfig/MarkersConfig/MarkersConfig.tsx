@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 import MarkerOption from "./MarkerOption/MarkerOption";
 
-import "./MarkersConfig.css";
+import "./MarkersConfig.scss";
 
 const MarkersConfig: FC = () => {
 	const markersToBeAdded = useSelector((store: any) => store.editor.newMarkers);

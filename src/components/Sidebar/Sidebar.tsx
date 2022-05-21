@@ -1,7 +1,9 @@
 import { FC } from "react";
+
 import { GeoSearch, SearchResults } from "./index";
 import { ISidebar } from "./Sidebar.types";
-import "./Sidebar.css";
+
+import "./Sidebar.scss";
 
 const Sidebar: FC<ISidebar> = () => {
 	return (

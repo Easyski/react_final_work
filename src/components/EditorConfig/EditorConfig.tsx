@@ -7,7 +7,7 @@ import { BiLocationPlus } from "react-icons/bi";
 import { FaRoute } from "react-icons/fa";
 import { RiGuideLine } from "react-icons/ri";
 
-import "./EditorConfig.css";
+import "./EditorConfig.scss";
 import MarkersConfig from "./MarkersConfig/MarkersConfig";
 
 const EditorConfig: FC = () => {

@@ -1,8 +1,4 @@
 .searchContainer {
-	/* center but with fixed width */
-	/* left: 0; */
-	/* right: 0; */
-	/* margin: auto; */
 	width: 350px;
 	padding-left: 15px;
 	padding-right: 15px;
@@ -18,16 +14,16 @@
 	text-decoration: none;
 	height: 30px;
 	background-color: transparent;
-}
-
-.searchInput:focus {
-	border: none;
-	outline: none;
-}
-
-.searchInput::placeholder {
-	color: grey;
-	font-style: italic;
+	
+	&:focus {
+		border: none;
+		outline: none;
+	}
+	
+	&::placeholder {
+		color: grey;
+		font-style: italic;
+	}
 }
 
 /*--------------------*/
@@ -35,8 +31,8 @@
 .searchButton {
 	background: none;
 	border: none;
-}
-
-.searchButton:active {
-	border-color: red;
+	
+	&:active {
+		border-color: red;
+	}
 }

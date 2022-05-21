@@ -6,10 +6,10 @@ import {
 	setZoom,
 	setLocations,
 } from "../../../store/slices";
-import { ISearchResults } from "./SearchResults.types";
 import { Coordinates, ILocation } from "../../types";
+import { ISearchResults } from "./SearchResults.types";
 
-import "./SearchResults.css";
+import "./SearchResults.scss";
 
 const SearchResults: FC<ISearchResults> = () => {
 	const dispatch = useDispatch();

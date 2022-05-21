@@ -1,12 +1,11 @@
 import { FC, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { IGeoSearchTypes } from "./GeoSearch.types";
-import { useDispatch } from "react-redux";
-
-import "./GeoSearch.css";
 import { setLocations } from "../../../store/slices";
 import { Coordinates, ILocation } from "../../types";
-import { useSelector } from "react-redux";
+import { IGeoSearchTypes } from "./GeoSearch.types";
+
+import "./GeoSearch.scss";
 
 const GeoSearch: FC<IGeoSearchTypes> = () => {
 	const dispatch = useDispatch();
