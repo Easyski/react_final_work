@@ -5,15 +5,22 @@
 @use "variables";
 
 // -------------------------------------------------------------------
+// :: UTILITIES
+// -------------------------------------------------------------------
+
+@use "./utilities/flex";
+
+// -------------------------------------------------------------------
 // :: ORGANISMS
 // -------------------------------------------------------------------
 
-@use "organisms/editor-config";
+@use "organisms/mode";
 @use "organisms/geo-search";
 @use "organisms/marker-option";
-@use "organisms/mode-config";
+@use "organisms/mode-item";
 @use "organisms/navigation";
 @use "organisms/search-results";
 @use "organisms/sidebar";
 @use "organisms/styled-text";
 @use "organisms/topbar";
+@use "organisms/menu";
