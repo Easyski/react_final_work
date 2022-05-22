@@ -83,7 +83,7 @@ const GeoSearch: FC<IGeoSearchTypes> = () => {
 	};
 
 	return (
-		<div className="geoSearchContainer">
+		<div className="geoSearchContainer flex-h">
 			<input
 				type="text"
 				className="searchInput"

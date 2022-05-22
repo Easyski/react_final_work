@@ -1,15 +1,15 @@
 import { FC } from "react";
 
-import { GeoSearch, SearchResults, EditorConfig } from "../";
+import { GeoSearch, SearchResults, Mode } from "../";
 import { ITopbar } from "./Topbar.types";
 import { GoSearch } from "react-icons/go";
 
 const Topbar: FC<ITopbar> = () => {
 	return (
-		<div className="topbarContainer">
+		<div className="topbar flex">
 			<GoSearch className="searchIcon" />
 			<GeoSearch />
-			<EditorConfig />
+			<Mode />
 			<SearchResults />
 		</div>
 	);
