@@ -36,6 +36,7 @@ export const Navigation: FC<INavigationTypes> = () => {
 			doubleClickZoom: false,
 			pitchWithRotate: false,
 			dragRotate: false,
+			logoPosition: "bottom-right",
 		});
 	});
 
