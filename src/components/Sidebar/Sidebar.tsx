@@ -4,8 +4,6 @@ import { useSelector } from "react-redux";
 import { StyledText } from "..";
 import MarkerOption from "./MarkerOption/MarkerOption";
 
-import "./Sidebar.scss";
-
 const Sidebar: FC = () => {
 	const markersToBeAdded = useSelector((store: any) => store.editor.newMarkers);
 

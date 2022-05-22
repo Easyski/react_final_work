@@ -7,7 +7,6 @@ import { Coordinates } from "../types";
 import { INavigationTypes } from "./Navigation.types";
 
 import "mapbox-gl/dist/mapbox-gl.css";
-import "./Navigation.scss";
 
 export const Navigation: FC<INavigationTypes> = () => {
 	const dispatch = useDispatch();

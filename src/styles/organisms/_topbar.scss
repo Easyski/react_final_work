@@ -1,3 +1,5 @@
+@use "../variables" as v;
+
 .topbarContainer {
 	position: absolute;
 	z-index: 1;
@@ -8,9 +10,9 @@
 	min-width: 375px;
 	max-width: 570px;
 	
-	background-color: white;
-	border-radius: 15px;
-	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+	background-color: v.$white;
+	border-radius: v.$border-radius-lg;
+	box-shadow: v.$box-shadow;
 
 	display: flex;
 	flex-flow: wrap;

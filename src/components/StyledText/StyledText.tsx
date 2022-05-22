@@ -1,9 +1,26 @@
 import { FC } from "react";
-import { IStyledText } from "./styledText.types";
-import "./StyledText.scss";
+import cn from "classnames";
 
-const StyledText: FC<IStyledText> = ({ content }) => {
-	return <p className="styledText">{content}</p>;
+import { IStyledText } from "./styledText.types";
+
+const StyledText: FC<IStyledText> = ({ content, bold, italic, type }) => {
+	const renderText = () => {
+		const classNames = cn(`styled-${type}`, { bold: bold, italic: italic });
+		switch (type) {
+			case "h1":
+				return <h1 className={classNames}>{content}</h1>;
+			case "h2":
+				return <h2 className={classNames}>{content}</h2>;
+			case "h3":
+				return <h3 className={classNames}>{content}</h3>;
+			case "p":
+				return <p className={classNames}>{content}</p>;
+			default:
+				return <p className={classNames}>{content}</p>;
+		}
+	};
+
+	return renderText();
 };
 
 export default StyledText;

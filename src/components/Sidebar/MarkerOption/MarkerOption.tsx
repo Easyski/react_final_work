@@ -7,7 +7,6 @@ import { GiCancel } from "react-icons/gi";
 import { setCenterCoordinates, setZoom } from "../../../store/slices";
 import { Coordinates } from "../../types";
 
-import "./MarkerOption.scss";
 import "animate.css";
 
 const MarkerOption: FC<{ center: Coordinates }> = ({ center }) => {
