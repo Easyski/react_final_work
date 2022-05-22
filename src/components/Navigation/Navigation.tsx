@@ -13,7 +13,7 @@ export const Navigation: FC<INavigationTypes> = () => {
 	const dispatch = useDispatch();
 	const zoom = useSelector((state: any) => state.map.zoom);
 	const center = useSelector((state: any) => state.map.centerCoordinates);
-	const editorMode = useSelector((state: any) => state.editor.mode);
+	const editorMode = useSelector((state: any) => state.topbar.mode);
 	const newMarkers = useSelector((state: any) => state.editor.newMarkers);
 
 	const map = useRef<Map>();

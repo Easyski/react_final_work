@@ -1,16 +1,16 @@
 import { FC, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import ModeConfig from "./ModeConfig/ModeConfig";
-
 import { BiLocationPlus } from "react-icons/bi";
 import { FaRoute } from "react-icons/fa";
 import { RiGuideLine } from "react-icons/ri";
 
+import ModeConfig from "./ModeConfig/ModeConfig";
+
 import "./EditorConfig.scss";
 
 const EditorConfig: FC = () => {
-	const editorMode = useSelector((state: any) => state.editor.mode);
+	const editorMode = useSelector((state: any) => state.topbar.mode);
 
 	useEffect(() => {
 		console.log("EditorConfig: editorMode", editorMode);
