@@ -1,6 +1,6 @@
-import mapboxgl, { Map } from "mapbox-gl";
 import { FC, useEffect, useRef } from "react";
 import { useDispatch, batch } from "react-redux";
+import mapboxgl, { Map } from "mapbox-gl";
 import { BsCheckLg } from "react-icons/bs";
 import { GiCancel } from "react-icons/gi";
 

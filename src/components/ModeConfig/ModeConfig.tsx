@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { IModeConfigTypes } from "./ModeConfig.types";
-
 import { useDispatch } from "react-redux";
+
+import { IModeConfigTypes } from "./ModeConfig.types";
 import { setMode } from "../../store/slices";
 
 const ModeConfig: FC<IModeConfigTypes> = ({ mode, selectedMode, children }) => {

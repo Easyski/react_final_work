@@ -6,14 +6,12 @@ import { GoSearch } from "react-icons/go";
 
 const Topbar: FC<ITopbar> = () => {
 	return (
-		<>
-			<div className="topbarContainer">
-				<GoSearch className="searchIcon" />
-				<GeoSearch />
-				<EditorConfig />
-				<SearchResults />
-			</div>
-		</>
+		<div className="topbarContainer">
+			<GoSearch className="searchIcon" />
+			<GeoSearch />
+			<EditorConfig />
+			<SearchResults />
+		</div>
 	);
 };
 
