@@ -7,7 +7,8 @@ export {
 export {
 	setCenterCoordinates,
 	setZoom,
+	setLocationName,
 	default as mapReducer,
 } from "./mapSlice";
 
-export { setLocations, default as sidebarReducer } from "./sidebarSlice";
+export { setLocations, default as topbarReducer } from "./topbarSlice";

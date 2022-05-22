@@ -9,8 +9,8 @@ const initialState: IInitialState = {
 	locations: [],
 };
 
-export const sidebarSlice = createSlice({
-	name: "sidebarSlice",
+export const topbarSlice = createSlice({
+	name: "topbarSlice",
 	initialState,
 	reducers: {
 		setLocations: (state, action) => {
@@ -19,6 +19,6 @@ export const sidebarSlice = createSlice({
 	},
 });
 
-export const { setLocations } = sidebarSlice.actions;
+export const { setLocations } = topbarSlice.actions;
 
-export default sidebarSlice.reducer;
+export default topbarSlice.reducer;
