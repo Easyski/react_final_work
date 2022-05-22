@@ -1,8 +1,4 @@
-export {
-	setMode,
-	setNewMarkers,
-	default as editorReducer,
-} from "./editorSlice";
+export { setNewMarkers, default as editorReducer } from "./editorSlice";
 
 export {
 	setCenterCoordinates,
@@ -10,5 +6,7 @@ export {
 	setLocationName,
 	default as mapReducer,
 } from "./mapSlice";
+
+export { setMode } from "./topbarSlice";
 
 export { setLocations, default as topbarReducer } from "./topbarSlice";
