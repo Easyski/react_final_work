@@ -1,26 +1,32 @@
 import { FC } from "react";
 import { useDispatch, useSelector, batch } from "react-redux";
 
-import { setCenterCoordinates } from "../../../store/slices/mapSlice";
-import { setLocations } from "../../../store/slices/sidebarSlice";
-import { ISearchResults } from "./SearchResults.types";
+import {
+	setCenterCoordinates,
+	setZoom,
+	setLocations,
+	setLocationName,
+} from "../../../store/slices";
 import { Coordinates, ILocation } from "../../types";
+import { ISearchResults } from "./SearchResults.types";
 
-import "./SearchResults.css";
+import "./SearchResults.scss";
 
 const SearchResults: FC<ISearchResults> = () => {
 	const dispatch = useDispatch();
-	const locations = useSelector((state: any) => state.sidebar.locations);
+	const locations = useSelector((state: any) => state.topbar.locations);
 
 	/**
 	 * This function will fire whenever a search result is clicked. It will
 	 * tell te store to set the new center and clear the results of the search.
 	 * @param center The coordinates the map needs to move to.
 	 */
-	const handleResultClick = (center: Coordinates) => {
+	const handleResultClick = (center: Coordinates, name: string) => {
 		batch(() => {
 			dispatch(setCenterCoordinates(center));
+			dispatch(setLocationName(name));
 			dispatch(setLocations([]));
+			dispatch(setZoom(13));
 		});
 	};
 
@@ -32,7 +38,12 @@ const SearchResults: FC<ISearchResults> = () => {
 	const setElements = () => {
 		const elements = locations.map((element: ILocation, index: number) => {
 			return (
-				<p onClick={() => handleResultClick(element.center)} key={index}>
+				<p
+					onClick={() =>
+						handleResultClick(element.center, element.detailedName)
+					}
+					key={index}
+				>
 					<b>{element.name}</b>, {element.detailedName}
 				</p>
 			);

@@ -1,8 +1,0 @@
-.sidebarContainer {
-	position: absolute;
-	top: 20px;
-	left: 20px;
-	z-index: 1;
-	padding: 10px;
-	/* height: calc(100vh - 60px); */
-}

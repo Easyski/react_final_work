@@ -1,0 +1,59 @@
+.markerOptionContainer {
+	display: grid;
+	grid-template-columns: 50% 25% 25%;
+	grid-template-rows: repeat(5, 50px);
+	background-color: white;
+	border-bottom: 1px solid black;
+}
+
+/* -------------------- */
+
+.markerOptionCoordinate {
+	grid-column: 2 / span 2;
+}
+
+.markerOptionInput {
+	grid-column: 2 / span 2;
+	border: none;
+	border-bottom: 1px solid black;
+	
+	&:focus {
+		outline: none;
+	}
+}
+
+.markerOptionButton {
+	background: none;
+	border-radius: 10px;
+	box-sizing: border-box;
+	margin: 5px;
+	text-align: center;
+	line-height: 40px;
+
+	&__accept {
+		color: rgb(52, 118, 19);
+
+		&:hover{
+			color: black;
+			background-color: rgb(116, 255, 47);
+		}
+	}
+
+	&__delete {
+		color: rgb(224, 94, 94);
+		
+		&:hover {
+			color: black;
+			background-color: rgb(224, 94, 94);
+		}
+	}
+
+}
+
+/* -------------------- */
+
+.smallMapContainer {
+	width: 150px;
+	grid-row-start: span 5;
+	margin-right: 15px;
+}
