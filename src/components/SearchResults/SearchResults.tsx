@@ -6,8 +6,8 @@ import {
 	setZoom,
 	setLocations,
 	setLocationName,
-} from "../../../store/slices";
-import { Coordinates, ILocation } from "../../types";
+} from "../../store/slices";
+import { Coordinates, ILocation } from "../types";
 import { ISearchResults } from "./SearchResults.types";
 
 const SearchResults: FC<ISearchResults> = () => {

@@ -1,11 +1,10 @@
 import { FC } from "react";
-import cn from "classnames";
 
 import { IStyledText } from "./styledText.types";
 
 const StyledText: FC<IStyledText> = ({ content, bold, italic, type }) => {
 	const renderText = () => {
-		const classNames = cn(`styled-${type}`, { bold: bold, italic: italic });
+		const classNames = "";
 		switch (type) {
 			case "h1":
 				return <h1 className={classNames}>{content}</h1>;
