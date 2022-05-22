@@ -1,7 +1,6 @@
 import { FC } from "react";
 
-import { GeoSearch, SearchResults } from "./index";
-import EditorConfig from "./EditorConfig/EditorConfig";
+import { GeoSearch, SearchResults, EditorConfig } from "../";
 import { ITopbar } from "./Topbar.types";
 import { GoSearch } from "react-icons/go";
 

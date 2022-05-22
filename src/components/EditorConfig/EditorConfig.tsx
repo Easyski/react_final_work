@@ -5,7 +5,7 @@ import { BiLocationPlus } from "react-icons/bi";
 import { FaRoute } from "react-icons/fa";
 import { RiGuideLine } from "react-icons/ri";
 
-import ModeConfig from "./ModeConfig/ModeConfig";
+import ModeConfig from "../ModeConfig/ModeConfig";
 
 const EditorConfig: FC = () => {
 	const editorMode = useSelector((state: any) => state.topbar.mode);
