@@ -1,4 +1,7 @@
-.navigationContainer {
+@use "../variables" as v;
+
+.navigation {
 	height: 100vh;
 	width: 100vw;
+	z-index: v.$bottom
 }

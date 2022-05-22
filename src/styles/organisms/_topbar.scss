@@ -1,8 +1,8 @@
 @use "../variables" as v;
 
-.topbarContainer {
+.topbar {
 	position: absolute;
-	z-index: 1;
+	z-index: v.$overlay;
 	top: 20px;
 	left: 50%;
 	transform: translateX(-50%);
@@ -14,7 +14,6 @@
 	border-radius: v.$border-radius-lg;
 	box-shadow: v.$box-shadow;
 
-	display: flex;
 	flex-flow: wrap;
 
 	.searchIcon {
