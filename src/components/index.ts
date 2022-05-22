@@ -1,6 +1,6 @@
 import Navigation from "./Navigation/Navigation";
-import Sidebar from "./Sidebar/Sidebar";
+import Topbar from "./Topbar/Topbar";
 import StyledText from "./StyledText/StyledText";
-import EditorConfig from "./EditorConfig/EditorConfig";
+import EditorConfig from "./Topbar/EditorConfig/EditorConfig";
 
-export { Navigation, StyledText, Sidebar, EditorConfig };
+export { Navigation, StyledText, Topbar, EditorConfig };
