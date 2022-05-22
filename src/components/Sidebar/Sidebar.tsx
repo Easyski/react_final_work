@@ -2,9 +2,9 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 import MarkerOption from "./MarkerOption/MarkerOption";
 
-import "./MarkersConfig.scss";
+import "./Sidebar.scss";
 
-const MarkersConfig: FC = () => {
+const Sidebar: FC = () => {
 	const markersToBeAdded = useSelector((store: any) => store.editor.newMarkers);
 
 	const handleMarkersAdded = () => {
@@ -18,7 +18,7 @@ const MarkersConfig: FC = () => {
 		return markersAsElements;
 	};
 
-	return <div className="markersContainer">{handleMarkersAdded()}</div>;
+	return <div className="sidebarContainer">{handleMarkersAdded()}</div>;
 };
 
-export default MarkersConfig;
+export default Sidebar;
