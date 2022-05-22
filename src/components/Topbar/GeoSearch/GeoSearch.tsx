@@ -1,5 +1,6 @@
-import { FC, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector, batch } from "react-redux";
+import { GiCancel } from "react-icons/gi";
 
 import { setLocations } from "../../../store/slices";
 import { Coordinates, ILocation } from "../../types";
@@ -9,17 +10,22 @@ import "./GeoSearch.scss";
 
 const GeoSearch: FC<IGeoSearchTypes> = () => {
 	const dispatch = useDispatch();
-	const locations = useSelector((state: any) => state.sidebar.locations);
+	const locationName = useSelector((state: any) => state.map.locationName);
 
+	const [isEmpty, setIsEmpty] = useState<boolean>(true);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	/**
-	 * This function will trigger everytime the @param locations is empty.
-	 * It will clear the input field.
+	 * This function will trigger everytime the  value of @param locationName
+	 * is changed in the store. It will set the input field's placeholder to
+	 * the current location.
 	 */
 	useEffect(() => {
-		if (!locations.length && inputRef.current) inputRef.current.value = "";
-	}, [locations]);
+		if (!inputRef.current || !locationName) return;
+		inputRef.current.placeholder = locationName;
+		inputRef.current.value = "";
+		setIsEmpty(true);
+	}, [locationName]);
 
 	/**
 	 * This function will be excecuted whenever the value of the input field
@@ -29,7 +35,14 @@ const GeoSearch: FC<IGeoSearchTypes> = () => {
 	 * @param event This is used to access the value of the input field.
 	 */
 	const handleSearchInput = (event: any) => {
-		if (!event.target.value) return handleFetchResults(null);
+		if (!event || !event.target.value) {
+			batch(() => {
+				!isEmpty && setIsEmpty(true);
+				handleFetchResults(null);
+			});
+			return;
+		}
+		isEmpty && setIsEmpty(false);
 
 		fetch(
 			`https://api.mapbox.com/geocoding/v5/mapbox.places/${event.target.value}}.json?access_token=${process.env.REACT_APP_MAPBOX_KEY}`
@@ -65,8 +78,14 @@ const GeoSearch: FC<IGeoSearchTypes> = () => {
 		dispatch(setLocations(filteredResults));
 	};
 
+	const handleClearButtonClick = () => {
+		if (!inputRef.current) return;
+		inputRef.current.value = "";
+		handleSearchInput(null);
+	};
+
 	return (
-		<div className="searchContainer">
+		<div className="geoSearchContainer">
 			<input
 				type="text"
 				className="searchInput"
@@ -74,6 +93,9 @@ const GeoSearch: FC<IGeoSearchTypes> = () => {
 				onChange={handleSearchInput}
 				ref={inputRef}
 			/>
+			{!isEmpty && (
+				<GiCancel className="searchCancel" onClick={handleClearButtonClick} />
+			)}
 		</div>
 	);
 };

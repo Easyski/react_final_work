@@ -1,0 +1,28 @@
+.geoSearchContainer {
+	display: flex;
+	flex-direction: row;
+	flex-grow: 9;
+	
+	.searchInput {
+		border: none;
+		text-decoration: none;
+		height: 40px;
+		flex-grow: 9;
+		
+		
+		&:focus {
+			border: none;
+			outline: none;
+		}
+		
+		&::placeholder {
+			color: grey;
+			font-style: italic;
+		}
+	}
+
+	.searchCancel {
+		flex-grow: 1;
+		align-self: center;
+	}
+}
