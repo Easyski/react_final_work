@@ -8,7 +8,6 @@ import { FaRoute } from "react-icons/fa";
 import { RiGuideLine } from "react-icons/ri";
 
 import "./EditorConfig.scss";
-import MarkersConfig from "./MarkersConfig/MarkersConfig";
 
 const EditorConfig: FC = () => {
 	const editorMode = useSelector((state: any) => state.editor.mode);
@@ -30,7 +29,6 @@ const EditorConfig: FC = () => {
 					<FaRoute />
 				</ModeConfig>
 			</div>
-			<MarkersConfig />
 		</>
 	);
 };
