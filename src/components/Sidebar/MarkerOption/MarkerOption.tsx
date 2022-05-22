@@ -48,7 +48,7 @@ const MarkerOption: FC<{ center: Coordinates }> = ({ center }) => {
 	};
 
 	return (
-		<div className="markerOptionContainer animate__animated animate__fadeInRight">
+		<div className="markerOptionContainer animate__animated animate__fadeInLeft">
 			<div
 				ref={smallMapContainer}
 				className="smallMapContainer"
