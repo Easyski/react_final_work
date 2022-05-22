@@ -112,7 +112,7 @@ export const Navigation: FC<INavigationTypes> = () => {
 
 	return (
 		<div>
-			<div ref={mapContainer} className="navigationContainer" />
+			<div ref={mapContainer} className="navigation" />
 		</div>
 	);
 };
