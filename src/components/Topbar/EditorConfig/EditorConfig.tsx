@@ -7,8 +7,6 @@ import { RiGuideLine } from "react-icons/ri";
 
 import ModeConfig from "./ModeConfig/ModeConfig";
 
-import "./EditorConfig.scss";
-
 const EditorConfig: FC = () => {
 	const editorMode = useSelector((state: any) => state.topbar.mode);
 

@@ -3,8 +3,6 @@ import { FC } from "react";
 import { GeoSearch, SearchResults } from "./index";
 import EditorConfig from "./EditorConfig/EditorConfig";
 import { ITopbar } from "./Topbar.types";
-
-import "./Topbar.scss";
 import { GoSearch } from "react-icons/go";
 
 const Topbar: FC<ITopbar> = () => {

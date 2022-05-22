@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
-import MarkerOption from "./MarkerOption/MarkerOption";
 
-import "./Sidebar.scss";
+import { StyledText } from "..";
+import MarkerOption from "./MarkerOption/MarkerOption";
 
 const Sidebar: FC = () => {
 	const markersToBeAdded = useSelector((store: any) => store.editor.newMarkers);
@@ -18,7 +18,13 @@ const Sidebar: FC = () => {
 		return markersAsElements;
 	};
 
-	return <div className="sidebarContainer">{handleMarkersAdded()}</div>;
+	return (
+		<div className="sidebarContainer">
+			<StyledText content="Markers to be placed" type="p" bold italic />
+
+			{handleMarkersAdded()}
+		</div>
+	);
 };
 
 export default Sidebar;

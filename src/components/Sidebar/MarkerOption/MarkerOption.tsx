@@ -7,7 +7,6 @@ import { GiCancel } from "react-icons/gi";
 import { setCenterCoordinates, setZoom } from "../../../store/slices";
 import { Coordinates } from "../../types";
 
-import "./MarkerOption.scss";
 import "animate.css";
 
 const MarkerOption: FC<{ center: Coordinates }> = ({ center }) => {
@@ -48,7 +47,7 @@ const MarkerOption: FC<{ center: Coordinates }> = ({ center }) => {
 	};
 
 	return (
-		<div className="markerOptionContainer animate__animated animate__fadeInRight">
+		<div className="markerOptionContainer animate__animated animate__fadeInLeft">
 			<div
 				ref={smallMapContainer}
 				className="smallMapContainer"

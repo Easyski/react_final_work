@@ -6,8 +6,6 @@ import { setLocations } from "../../../store/slices";
 import { Coordinates, ILocation } from "../../types";
 import { IGeoSearchTypes } from "./GeoSearch.types";
 
-import "./GeoSearch.scss";
-
 const GeoSearch: FC<IGeoSearchTypes> = () => {
 	const dispatch = useDispatch();
 	const locationName = useSelector((state: any) => state.map.locationName);

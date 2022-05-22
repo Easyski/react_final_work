@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { Navigation, Topbar } from "./components";
 import Sidebar from "./components/Sidebar/Sidebar";
 import store from "./store";
+import "./styles/main.scss";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY as string;
 

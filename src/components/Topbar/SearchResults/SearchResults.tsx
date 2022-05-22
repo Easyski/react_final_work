@@ -10,8 +10,6 @@ import {
 import { Coordinates, ILocation } from "../../types";
 import { ISearchResults } from "./SearchResults.types";
 
-import "./SearchResults.scss";
-
 const SearchResults: FC<ISearchResults> = () => {
 	const dispatch = useDispatch();
 	const locations = useSelector((state: any) => state.topbar.locations);
