@@ -2,7 +2,7 @@ import { FC } from "react";
 import { IModeConfigTypes } from "./ModeConfig.types";
 
 import { useDispatch } from "react-redux";
-import { setMode } from "../../../store/slices";
+import { setMode } from "../../../../store/slices";
 
 import "./ModeConfig.scss";
 

@@ -17,19 +17,17 @@ const EditorConfig: FC = () => {
 	}, [editorMode]);
 
 	return (
-		<>
-			<div className="editorContainer">
-				<ModeConfig mode="points" selectedMode={editorMode}>
-					<BiLocationPlus />
-				</ModeConfig>
-				<ModeConfig mode="tracks" selectedMode={editorMode}>
-					<RiGuideLine />
-				</ModeConfig>
-				<ModeConfig mode="routes" selectedMode={editorMode}>
-					<FaRoute />
-				</ModeConfig>
-			</div>
-		</>
+		<div className="editorContainer">
+			<ModeConfig mode="points" selectedMode={editorMode}>
+				<BiLocationPlus />
+			</ModeConfig>
+			<ModeConfig mode="tracks" selectedMode={editorMode}>
+				<RiGuideLine />
+			</ModeConfig>
+			<ModeConfig mode="routes" selectedMode={editorMode}>
+				<FaRoute />
+			</ModeConfig>
+		</div>
 	);
 };
 
