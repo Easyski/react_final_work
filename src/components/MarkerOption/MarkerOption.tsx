@@ -1,17 +1,15 @@
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useDispatch, batch } from "react-redux";
 import mapboxgl, { Map } from "mapbox-gl";
-import { BsCheckLg } from "react-icons/bs";
-import { GiCancel } from "react-icons/gi";
+import { ToggleSlider } from "react-toggle-slider";
 
 import { setCenterCoordinates, setZoom } from "../../store/slices";
 import { Coordinates } from "../types";
 
-import "animate.css";
-
 const MarkerOption: FC<{ center: Coordinates }> = ({ center }) => {
 	const dispatch = useDispatch();
 
+	const [isGuide, setIsGuide] = useState<boolean>(false);
 	const map = useRef<Map>();
 	const smallMapContainer = useRef<HTMLDivElement | null>(null);
 
@@ -42,44 +40,63 @@ const MarkerOption: FC<{ center: Coordinates }> = ({ center }) => {
 	};
 
 	const handleButtonClicked = (accept: boolean) => {
-		if (accept) {
-		}
+		console.log(accept);
 	};
 
 	return (
-		<div className="markerOptionContainer animate__animated animate__fadeInLeft">
-			<div
-				ref={smallMapContainer}
-				className="smallMapContainer"
-				onClick={handleMapClicked}
-			/>
+		<div className="marker-option grid animate__fadeInLeft font-md">
 			<input
-				className="markerOptionInput"
+				className="input italic"
 				type="text"
 				placeholder="Name (optional)"
 				autoComplete="off"
 			/>
+			<div
+				ref={smallMapContainer}
+				className="small-map"
+				onClick={handleMapClicked}
+			/>
+			<div className="flex flex-h">
+				<p>
+					<span className={!isGuide ? "bold" : "regular"}>Main point</span> /
+					<span className={isGuide ? "bold" : "regular"}>Guide</span>
+				</p>
+				<ToggleSlider
+					onToggle={(toggle) => setIsGuide(toggle)}
+					barHeight={20}
+					barWidth={40}
+					handleSize={12}
+					barStyles={{ marginLeft: 20 }}
+					handleStyles={{ marginLeft: 20 }}
+					draggable={true}
+				/>
+			</div>
 			<p>
-				<b>Coordinates</b>
+				<span className="bold">Longitude: </span>
+				{(center[0] as number).toFixed(4)}
 			</p>
-			<p className="markerOptionCoordinate">
-				x: {(center[0] as number).toFixed(4)}
+			<p>
+				<span className="bold">Latitude: </span>
+				{(center[1] as number).toFixed(4)}
 			</p>
-			<p className="markerOptionCoordinate">
-				y: {(center[1] as number).toFixed(4)}
+			<p>
+				<span className="bold">Altitude: </span>
+				{(center[1] as number).toFixed(4)}
 			</p>
-			<button
-				onClick={() => handleButtonClicked(true)}
-				className="markerOptionButton markerOptionButton__accept"
-			>
-				<BsCheckLg />
-			</button>
-			<button
-				onClick={() => handleButtonClicked(false)}
-				className="markerOptionButton markerOptionButton__delete"
-			>
-				<GiCancel />
-			</button>
+			<div className="flex flex-h justify-evenly">
+				<button
+					onClick={() => handleButtonClicked(true)}
+					className="marker-button bold border"
+				>
+					<p>Save</p>
+				</button>
+				<button
+					onClick={() => handleButtonClicked(false)}
+					className="marker-button"
+				>
+					<p>Delete</p>
+				</button>
+			</div>
 		</div>
 	);
 };

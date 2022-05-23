@@ -5,13 +5,20 @@
 	left: v.$spacer-md;
 	top: v.$spacer-md;
 	bottom: v.$spacer-md;
-	overflow-x: hidden;
-	overflow-y: scroll;
-	width: 375px;
 	z-index: v.$overlay;
+	width: 375px;
+	padding: v.$spacer-md v.$spacer-lg;
 
 	animation: fadeInLeft;
 	-webkit-animation: fadeInLeft;
 	-moz-animation: fadeInLeft;
 	animation-duration: 1s;
+
+	.scroll-container {
+		margin-top: v.$spacer-md;
+		overflow-x: hidden;
+		overflow-y: scroll;
+		height: calc(100% - v.$spacer-md * 3);
+
+	}
 }

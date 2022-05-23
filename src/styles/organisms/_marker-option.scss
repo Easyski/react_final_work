@@ -1,61 +1,40 @@
 @use "../variables" as v;
 
-.markerOptionContainer {
-	display: grid;
-	grid-template-columns: 50% 25% 25%;
-	grid-template-rows: repeat(5, 50px);
+.marker-option {
+	grid-template-columns: 65% 35%;
+	grid-template-rows: repeat(6, 30px);
 	background-color: v.$white;
-	border-bottom: 1px solid black;
+	margin-bottom: 8px;
+
+	.input {
+		grid-column: span 2;
+	}
+
+	.small-map {
+		width: 100%;
+		grid-row: 2 / span 5;
+		grid-column: 2;
+		margin-right: 15px;
+	}
+
+	.marker-button {
+		width: 40%;
+		background-color: v.$light-grey;
+		border: none;
+		border-radius: 2px;
+		box-shadow: v.$box-shadow;
+		cursor: pointer;
+
+		&:active {
+			margin-top: 2px;
+		}
+	}
+
+	.border {
+		border: 2px solid v.$green;
+	}
 }
 
 /* -------------------- */
 
-.markerOptionCoordinate {
-	grid-column: 2 / span 2;
-}
 
-.markerOptionInput {
-	grid-column: 2 / span 2;
-	border: none;
-	border-bottom: 1px solid black;
-	
-	&:focus {
-		outline: none;
-	}
-}
-
-.markerOptionButton {
-	background: none;
-	border-radius: v.$border-radius-md;
-	box-sizing: border-box;
-	margin: 5px;
-	text-align: center;
-	line-height: 40px;
-
-	&__accept {
-		color: rgb(52, 118, 19);
-
-		&:hover{
-			color: black;
-			background-color: rgb(116, 255, 47);
-		}
-	}
-
-	&__delete {
-		color: rgb(224, 94, 94);
-		
-		&:hover {
-			color: black;
-			background-color: rgb(224, 94, 94);
-		}
-	}
-
-}
-
-/* -------------------- */
-
-.smallMapContainer {
-	width: 150px;
-	grid-row-start: span 5;
-	margin-right: 15px;
-}
