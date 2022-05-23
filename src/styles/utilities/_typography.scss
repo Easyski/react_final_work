@@ -1,0 +1,37 @@
+@use "../variables" as v;
+
+// -------------------------------------------------------------------
+// :: FONT SIZE
+// -------------------------------------------------------------------
+
+.font-xs {
+    font-size: v.$font-xs;
+}
+
+.font-md {
+    font-size: v.$font-md;
+}
+
+.font-lg {
+    font-size: v.$font-lg;
+}
+
+.font-xl {
+    font-size: v.$font-xl;
+}
+
+.font-xxl {
+    font-size: v.$font-xxl;
+}
+
+// -------------------------------------------------------------------
+// :: COLOR
+// -------------------------------------------------------------------
+
+.font-white {
+    color: v.$white;
+}
+
+.font-black {
+    color: v.$black
+}
