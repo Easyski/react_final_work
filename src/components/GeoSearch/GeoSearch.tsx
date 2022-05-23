@@ -2,11 +2,9 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector, batch } from "react-redux";
 import { GiCancel } from "react-icons/gi";
 
-import { setLocations } from "../../../store/slices";
-import { Coordinates, ILocation } from "../../types";
+import { setLocations } from "../../store/slices";
+import { Coordinates, ILocation } from "../types";
 import { IGeoSearchTypes } from "./GeoSearch.types";
-
-import "./GeoSearch.scss";
 
 const GeoSearch: FC<IGeoSearchTypes> = () => {
 	const dispatch = useDispatch();
@@ -85,7 +83,7 @@ const GeoSearch: FC<IGeoSearchTypes> = () => {
 	};
 
 	return (
-		<div className="geoSearchContainer">
+		<div className="geoSearchContainer flex-h">
 			<input
 				type="text"
 				className="searchInput"

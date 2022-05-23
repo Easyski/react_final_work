@@ -1,12 +1,11 @@
 import { FC } from "react";
-import { IModeConfigTypes } from "./ModeConfig.types";
-
 import { useDispatch } from "react-redux";
-import { setMode } from "../../../../store/slices";
+import cn from "classnames";
 
-import "./ModeConfig.scss";
+import { IModeItemTypes } from "./ModeItem.types";
+import { setMode } from "../../store/slices";
 
-const ModeConfig: FC<IModeConfigTypes> = ({ mode, selectedMode, children }) => {
+const ModeItem: FC<IModeItemTypes> = ({ mode, selectedMode, children }) => {
 	const dispatch = useDispatch();
 
 	const handleSelectorClick = (mode: "points" | "tracks" | "routes") => {
@@ -16,11 +15,9 @@ const ModeConfig: FC<IModeConfigTypes> = ({ mode, selectedMode, children }) => {
 
 	return (
 		<div
-			className={
-				selectedMode === mode
-					? "editorSelector editorSelected"
-					: "editorSelector"
-			}
+			className={cn("modeItem flex", {
+				"modeItem--selected": selectedMode === mode,
+			})}
 			onClick={() => handleSelectorClick(mode)}
 		>
 			{children}
@@ -28,4 +25,4 @@ const ModeConfig: FC<IModeConfigTypes> = ({ mode, selectedMode, children }) => {
 	);
 };
 
-export default ModeConfig;
+export default ModeItem;

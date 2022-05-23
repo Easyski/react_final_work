@@ -1,0 +1,12 @@
+@use "../variables" as v;
+
+.bottombar {
+    position: absolute;
+    bottom: v.$spacer-md;
+    left: 55%;
+    z-index: v.$overlay;
+    animation: fadeInUp;
+    animation-duration: 1s;
+
+    padding: 5px 15px;
+}

@@ -1,0 +1,12 @@
+@use "../variables" as v;
+
+.container {
+    background-color: v.$white;
+    border-radius: v.$border-radius-md;
+    box-shadow: v.$box-shadow;
+    border: none;
+}
+
+.border-box {
+    box-sizing: border-box;
+}

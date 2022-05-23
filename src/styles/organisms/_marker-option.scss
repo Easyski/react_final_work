@@ -1,0 +1,40 @@
+@use "../variables" as v;
+
+.marker-option {
+	grid-template-columns: 65% 35%;
+	grid-template-rows: repeat(6, 30px);
+	background-color: v.$white;
+	margin-bottom: 8px;
+
+	.input {
+		grid-column: span 2;
+	}
+
+	.small-map {
+		width: 100%;
+		grid-row: 2 / span 5;
+		grid-column: 2;
+		margin-right: 15px;
+	}
+
+	.marker-button {
+		width: 40%;
+		background-color: v.$light-grey;
+		border: none;
+		border-radius: 2px;
+		box-shadow: v.$box-shadow;
+		cursor: pointer;
+
+		&:active {
+			margin-top: 2px;
+		}
+	}
+
+	.border {
+		border: 2px solid v.$green;
+	}
+}
+
+/* -------------------- */
+
+

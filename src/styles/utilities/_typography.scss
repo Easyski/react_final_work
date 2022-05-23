@@ -1,0 +1,81 @@
+@use "../variables" as v;
+
+// -------------------------------------------------------------------
+// :: FONT SIZE
+// -------------------------------------------------------------------
+
+.font-xs {
+    font-size: v.$font-xs;
+}
+
+.font-md {
+    font-size: v.$font-md;
+}
+
+.font-lg {
+    font-size: v.$font-lg;
+}
+
+.font-xl {
+    font-size: v.$font-xl;
+}
+
+.font-xxl {
+    font-size: v.$font-xxl;
+}
+
+// -------------------------------------------------------------------
+// :: COLOR
+// -------------------------------------------------------------------
+
+.font-color-white {
+    color: v.$white;
+}
+
+.font-color-black {
+    color: v.$black
+}
+
+// -------------------------------------------------------------------
+// :: WEIGHT
+// -------------------------------------------------------------------
+
+.light {
+    font-weight: v.$font-light;
+}
+
+.regular {
+    font-weight: v.$font-regular;
+}
+
+.bold {
+    font-weight: v.$font-bold;
+}
+
+.bolder {
+    font-weight: v.$font-bolder;
+}
+
+.black {
+    font-weight: v.$font-bold;
+}
+
+.xblack {
+    color: v.$font-xblack
+}
+
+// -------------------------------------------------------------------
+// :: DECORATION
+// -------------------------------------------------------------------
+
+.italic {
+    font-style: italic;
+}
+
+// -------------------------------------------------------------------
+// :: TEXT STYLES
+// -------------------------------------------------------------------
+
+.text-center {
+    text-align: center;
+}

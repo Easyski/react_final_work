@@ -7,13 +7,12 @@ import { Coordinates } from "../types";
 import { INavigationTypes } from "./Navigation.types";
 
 import "mapbox-gl/dist/mapbox-gl.css";
-import "./Navigation.scss";
 
 export const Navigation: FC<INavigationTypes> = () => {
 	const dispatch = useDispatch();
 	const zoom = useSelector((state: any) => state.map.zoom);
 	const center = useSelector((state: any) => state.map.centerCoordinates);
-	const editorMode = useSelector((state: any) => state.editor.mode);
+	const editorMode = useSelector((state: any) => state.topbar.mode);
 	const newMarkers = useSelector((state: any) => state.editor.newMarkers);
 
 	const map = useRef<Map>();
@@ -36,6 +35,7 @@ export const Navigation: FC<INavigationTypes> = () => {
 			doubleClickZoom: false,
 			pitchWithRotate: false,
 			dragRotate: false,
+			logoPosition: "bottom-right",
 		});
 	});
 
@@ -112,7 +112,7 @@ export const Navigation: FC<INavigationTypes> = () => {
 
 	return (
 		<div>
-			<div ref={mapContainer} className="navigationContainer" />
+			<div ref={mapContainer} className="navigation" />
 		</div>
 	);
 };

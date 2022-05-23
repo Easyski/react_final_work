@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export interface IModeConfigTypes {
+export interface IModeItemTypes {
 	children: ReactNode;
 	mode: modes;
 	selectedMode: modes | null;
