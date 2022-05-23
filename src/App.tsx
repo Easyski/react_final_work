@@ -12,8 +12,10 @@ import mapboxgl from "mapbox-gl";
 import Map from "./pages/map.page";
 import store from "./store";
 
-import "./styles/main.scss";
 import { Menu } from "./components";
+
+import "./styles/main.scss";
+import "animate.css";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY as string;
 
