@@ -1,4 +1,4 @@
-export { setNewMarkers, default as editorReducer } from "./editorSlice";
+export { setNewMarkers, default as sidebarReducer } from "./sidebarSlice";
 
 export {
 	setCenterCoordinates,
