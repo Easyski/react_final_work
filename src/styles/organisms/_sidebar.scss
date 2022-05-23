@@ -1,18 +1,12 @@
 @use "../variables" as v;
 
-.sidebarContainer {
+.sidebar {
 	position: absolute;
-	left: 15px;
-	top: 15px;
-	bottom: 15px;
-	border-radius: v.$border-radius-lg;
+	left: v.$spacer-md;
+	top: v.$spacer-md;
+	bottom: v.$spacer-md;
 	overflow-x: hidden;
 	overflow-y: scroll;
-	background-color: v.$white;
 	width: 375px;
-
-	.title {
-		font-size: v.$font-lg;
-		text-align: center;
-	}
+	z-index: v.$overlay
 }
