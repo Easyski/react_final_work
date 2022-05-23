@@ -18,7 +18,7 @@ const Sidebar: FC = () => {
 	};
 
 	return (
-		<div className="sidebarContainer">
+		<div className="sidebar container">
 			<StyledText content="Markers to be placed" type="p" bold italic />
 
 			{handleMarkersAdded()}

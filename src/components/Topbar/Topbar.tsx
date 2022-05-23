@@ -6,8 +6,8 @@ import { GoSearch } from "react-icons/go";
 
 const Topbar: FC<ITopbar> = () => {
 	return (
-		<div className="topbar flex">
-			<GoSearch className="searchIcon" />
+		<div className="topbar container flex">
+			<GoSearch className="searchIcon font-xl self-align-center" />
 			<GeoSearch />
 			<Mode />
 			<SearchResults />
