@@ -8,6 +8,7 @@ const Map: FC = () => {
 			<Navigation />
 			<Topbar />
 			<Sidebar />
+			{/* <Bottombar /> */}
 		</>
 	);
 };
