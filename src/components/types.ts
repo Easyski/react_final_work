@@ -1,7 +1,12 @@
 export interface ILocation {
 	name: string;
 	detailedName: string;
-	center: Coordinates;
+	coordinates: ICoordinates;
 }
 
-export type Coordinates = [number, number];
+export interface ICoordinates {
+	lat: number;
+	lng: number;
+	alt?: number;
+}
+export type LatLng = [number, number];
