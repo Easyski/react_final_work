@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import mapboxgl, { Map } from "mapbox-gl";
 
 import { setNewMarkers } from "../../store/slices";
-import { Coordinates } from "../types";
+import { ICoordinates } from "../types";
 import { INavigationTypes } from "./Navigation.types";
 
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -11,14 +11,16 @@ import "mapbox-gl/dist/mapbox-gl.css";
 export const Navigation: FC<INavigationTypes> = () => {
 	const dispatch = useDispatch();
 	const zoom = useSelector((state: any) => state.map.zoom);
-	const center = useSelector((state: any) => state.map.centerCoordinates);
+	const center: ICoordinates = useSelector(
+		(state: any) => state.map.centerCoordinates
+	);
 	const editorMode = useSelector((state: any) => state.topbar.mode);
-	const newMarkers = useSelector((state: any) => state.editor.newMarkers);
+	const newMarkers = useSelector((state: any) => state.sidebar.newMarkers);
 
 	const map = useRef<Map>();
 	const mapContainer = useRef<HTMLDivElement | null>(null);
 	const [newMarkerCoordinates, setNewMarkerCoordinates] =
-		useState<Coordinates>();
+		useState<ICoordinates>();
 
 	/**
 	 * Initialise map with set parameters
@@ -47,7 +49,7 @@ export const Navigation: FC<INavigationTypes> = () => {
 		map.current.flyTo({
 			center,
 			duration: 1500,
-			zoom: zoom,
+			zoom,
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [center]);
@@ -107,7 +109,7 @@ export const Navigation: FC<INavigationTypes> = () => {
 			.setLngLat([lng, lat])
 			.addTo(map.current);
 
-		setNewMarkerCoordinates([lng, lat]);
+		setNewMarkerCoordinates({ lat, lng });
 	};
 
 	return (

@@ -2,10 +2,13 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 
 import { MarkerOption } from "..";
+import { ICoordinates } from "../types";
 
 const Sidebar: FC = () => {
 	const mode = useSelector((store: any) => store.topbar.mode);
-	const markersToBeAdded = useSelector((store: any) => store.editor.newMarkers);
+	const markersToBeAdded = useSelector(
+		(store: any) => store.sidebar.newMarkers
+	);
 
 	const handleMarkersAdded = () => {
 		if (!markersToBeAdded[0])
@@ -15,8 +18,8 @@ const Sidebar: FC = () => {
 				</p>
 			);
 		const markersAsElements = markersToBeAdded.map(
-			(marker: any, index: number) => {
-				return <MarkerOption center={marker} key={index} />;
+			(coordinates: ICoordinates, index: number) => {
+				return <MarkerOption coordinates={coordinates} key={index} />;
 			}
 		);
 
