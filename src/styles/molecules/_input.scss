@@ -1,0 +1,9 @@
+@use "../variables" as v;
+
+.input {
+    border: none;
+
+    &:focus {
+		outline: none;
+	}
+}
