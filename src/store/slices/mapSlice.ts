@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ICoordinates } from "../../components/types";
 
-const initialState = {
-	centerCoordinates: [4.34878, 50.85045],
+interface IInitialState {
+	centerCoordinates: ICoordinates;
+	zoom: number;
+	locationName: string;
+}
+
+const initialState: IInitialState = {
+	centerCoordinates: { lng: 14.34878, lat: 50.85045 },
 	zoom: 6,
 	locationName: "",
 };
