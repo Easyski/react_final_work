@@ -3,21 +3,16 @@
 .topbar {
 	position: absolute;
 	z-index: v.$overlay;
-	top: 20px;
+	top: v.$spacer-md;
 	left: 50%;
-	transform: translateX(-50%);
+	transform: translateX(-25%);
 	width: 40%;
 	min-width: 375px;
 	max-width: 570px;
-	
-	background-color: v.$white;
-	border-radius: v.$border-radius-lg;
-	box-shadow: v.$box-shadow;
 
 	flex-flow: wrap;
 
 	.searchIcon {
-		font-size: 20px;
 		align-self: center;
 		padding: 0 5px;
 		flex-grow: 1;
