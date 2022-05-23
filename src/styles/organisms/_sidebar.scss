@@ -8,5 +8,10 @@
 	overflow-x: hidden;
 	overflow-y: scroll;
 	width: 375px;
-	z-index: v.$overlay
+	z-index: v.$overlay;
+
+	animation: fadeInLeft;
+	-webkit-animation: fadeInLeft;
+	-moz-animation: fadeInLeft;
+	animation-duration: 1s;
 }

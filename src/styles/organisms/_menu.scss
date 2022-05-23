@@ -2,10 +2,55 @@
 
 .menu {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 25px;
-    height: 20px;
-    background-color: red;
+    top: v.$spacer-md;
+    right: v.$spacer-md;
     z-index: v.$top;
+    color: v.$black;
+    color: v.$white;
+
+    animation: fadeInDown;
+	-webkit-animation: fadeInDown;
+	-moz-animation: fadeInDown;
+	animation-duration: 1s;
+
+    &-icon {
+        font-size: 28px;
+    }
+}
+
+.menu-overlay {
+    position: absolute;
+    z-index: v.$menu;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    // opacity: 0.3;
+
+    .item {
+        margin: 5%;
+        text-align: center;
+        box-sizing: border-box;
+
+        animation: fadeInDown;
+        -webkit-animation: fadeInDown;
+        -moz-animation: fadeInDown;
+        animation-duration: 1s;
+
+        text-decoration: none;
+        color: white;
+
+        &:hover {
+            padding-bottom: 15px;
+            font-size: v.$font-xxl;
+        }
+    }
+
+    .selected {
+        padding-bottom: 3px;
+        text-decoration: underline;
+    }
 }

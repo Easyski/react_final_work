@@ -4,13 +4,17 @@
 	position: absolute;
 	z-index: v.$overlay;
 	top: v.$spacer-md;
-	left: 50%;
-	transform: translateX(-25%);
+	left: 40%;
 	width: 40%;
 	min-width: 375px;
 	max-width: 570px;
 
 	flex-flow: wrap;
+
+	animation: fadeInDown;
+	-webkit-animation: fadeInDown;
+	-moz-animation: fadeInDown;
+	animation-duration: 1s;
 
 	.searchIcon {
 		align-self: center;

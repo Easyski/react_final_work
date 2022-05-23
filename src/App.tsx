@@ -1,7 +1,12 @@
 // import mapboxgl from "mapbox-gl";
 import { FC } from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate,
+} from "react-router-dom";
 import mapboxgl from "mapbox-gl";
 
 import Map from "./pages/map.page";
@@ -18,8 +23,14 @@ export const App: FC = () => {
 			<Router>
 				<Menu />
 				<Routes>
-					<Route path="/" element={<p>HOME</p>} />
+					<Route path="/" element={<Navigate to="/map" />} />
+					<Route path="/profile" element={<p>PROFILE</p>} />
 					<Route path="/map" element={<Map />} />
+					<Route path="/about" element={<p>ABOUT THIS PROJECT</p>} />
+					<Route path="/guide" element={<p>HOW TO USE</p>} />
+					<Route path="/logout" element={<p>LOGOUT</p>} />
+
+					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>
 			</Router>
 		</Provider>

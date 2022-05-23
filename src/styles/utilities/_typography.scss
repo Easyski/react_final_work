@@ -28,10 +28,38 @@
 // :: COLOR
 // -------------------------------------------------------------------
 
-.font-white {
+.font-color-white {
     color: v.$white;
 }
 
-.font-black {
+.font-color-black {
     color: v.$black
+}
+
+// -------------------------------------------------------------------
+// :: WEIGHT
+// -------------------------------------------------------------------
+
+.light {
+    font-weight: v.$font-light;
+}
+
+.regular {
+    font-weight: v.$font-regular;
+}
+
+.bold {
+    font-weight: v.$font-bold;
+}
+
+.bolder {
+    font-weight: v.$font-bolder;
+}
+
+.black {
+    font-weight: v.$font-bold;
+}
+
+.xblack {
+    color: v.$font-xblack
 }
