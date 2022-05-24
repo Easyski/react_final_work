@@ -5,6 +5,8 @@
 	grid-template-rows: repeat(6, 30px);
 	background-color: v.$white;
 	margin-bottom: 8px;
+	animation: fadeInLeft;
+	animation-duration: .3s;
 
 	.input {
 		grid-column: span 2;

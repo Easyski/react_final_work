@@ -86,10 +86,10 @@ const GeoSearch: FC<IGeoSearchTypes> = () => {
 	};
 
 	return (
-		<div className="geoSearchContainer flex-h">
+		<div className="geo-search flex-h border-box">
 			<input
 				type="text"
-				className="searchInput"
+				className="input search-input"
 				placeholder="Find your destination"
 				onChange={handleSearchInput}
 				ref={inputRef}

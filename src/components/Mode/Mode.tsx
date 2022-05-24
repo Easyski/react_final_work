@@ -15,7 +15,7 @@ const Mode: FC = () => {
 	}, [selectedMode]);
 
 	return (
-		<div className="mode flex-h">
+		<div className="mode flex flex-h">
 			<ModeItem mode="points" selectedMode={selectedMode}>
 				<BiLocationPlus />
 			</ModeItem>

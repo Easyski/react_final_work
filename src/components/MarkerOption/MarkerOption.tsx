@@ -34,7 +34,7 @@ const MarkerOption: FC<{ coordinates: ICoordinates }> = ({ coordinates }) => {
 
 	const handleMapClicked = () => {
 		batch(() => {
-			dispatch(setZoom(11.5));
+			dispatch(setZoom(14));
 			dispatch(setCenterCoordinates(coordinates));
 		});
 	};
@@ -44,7 +44,7 @@ const MarkerOption: FC<{ coordinates: ICoordinates }> = ({ coordinates }) => {
 	};
 
 	return (
-		<div className="marker-option grid animate__fadeInLeft font-md">
+		<div className="marker-option grid font-md">
 			<input
 				className="input italic"
 				type="text"
