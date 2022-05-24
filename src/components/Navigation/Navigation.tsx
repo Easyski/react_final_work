@@ -105,9 +105,10 @@ export const Navigation: FC<INavigationTypes> = () => {
 	const handleMapClick = (evt: mapboxgl.MapMouseEvent) => {
 		if (!map.current) return;
 		const { lng, lat } = evt.lngLat;
-		new mapboxgl.Marker({ color: "rgb(221, 147, 147)" })
-			.setLngLat([lng, lat])
-			.addTo(map.current);
+		const markerEl = document.createElement("div");
+		markerEl.className = "marker";
+
+		new mapboxgl.Marker(markerEl).setLngLat([lng, lat]).addTo(map.current);
 
 		setNewMarkerCoordinates({ lat, lng });
 	};
