@@ -1,0 +1,30 @@
+@use "../variables" as v;
+
+.background {
+    background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+    linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+    linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+}
+
+.login {
+    height: 300px;
+    width: 500px;
+
+    .title {
+        padding: v.$spacer-md;
+
+    }
+
+    &-input {
+        width: 70%;
+        font-size: v.$font-md;
+        border-bottom: 1px solid black;
+        text-indent: v.$spacer-md;
+        height: 40px;
+    }
+
+    &-button {
+        width: 40%;
+        padding: 10px;
+    }
+}
