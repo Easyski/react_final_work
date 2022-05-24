@@ -7,6 +7,6 @@ export {
 	default as mapReducer,
 } from "./mapSlice";
 
-export { setMode } from "./topbarSlice";
+export { setUser, default as userReducer } from "./userSlice";
 
-export { setLocations, default as topbarReducer } from "./topbarSlice";
+export { setLocations, setMode, default as topbarReducer } from "./topbarSlice";
