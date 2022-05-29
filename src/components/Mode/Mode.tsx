@@ -1,8 +1,7 @@
 import { FC, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { BiLocationPlus } from "react-icons/bi";
-import { FaRoute } from "react-icons/fa";
+import { BiLocationPlus, BiTrip } from "react-icons/bi";
 import { RiGuideLine } from "react-icons/ri";
 
 import ModeItem from "../ModeItem/ModeItem";
@@ -23,7 +22,7 @@ const Mode: FC = () => {
 				<RiGuideLine />
 			</ModeItem>
 			<ModeItem mode="routes" selectedMode={selectedMode}>
-				<FaRoute />
+				<BiTrip />
 			</ModeItem>
 		</div>
 	);
