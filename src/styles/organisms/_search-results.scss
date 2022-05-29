@@ -1,13 +1,11 @@
-@use "../variables" as v;
-
 .search-results {
 	width: 100%;
-	background-color: v.$white;
-	padding: v.$spacer-sm v.$spacer-md;
-	border-bottom-left-radius: v.$border-radius-md;
-	border-bottom-right-radius: v.$border-radius-md;
+	background-color: $white;
+	padding: $spacer-sm $spacer-md;
+	border-bottom-left-radius: $border-radius-md;
+	border-bottom-right-radius: $border-radius-md;
 
 	.result {
-		padding: v.$spacer-xs;
+		padding: $spacer-xs;
 	}
 }

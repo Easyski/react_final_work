@@ -1,7 +1,9 @@
-@use "../variables" as v;
-
 .input {
     border: none;
+    font-size: $font-md;
+    height: 20px;
+    padding: 10px 0;
+    text-overflow: ellipsis;
 
     &:focus {
 		outline: none;

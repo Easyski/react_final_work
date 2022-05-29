@@ -1,12 +1,10 @@
-@use "../variables" as v;
-
 .menu {
     position: absolute;
-    top: v.$spacer-md;
-    right: v.$spacer-md;
-    z-index: v.$top;
-    color: v.$black;
-    color: v.$black;
+    top: $spacer-md;
+    right: $spacer-md;
+    z-index: $top;
+    color: $black;
+    color: $black;
 
     animation: fadeInDown;
 	-webkit-animation: fadeInDown;
@@ -20,7 +18,7 @@
 
 .menu-overlay {
     position: absolute;
-    z-index: v.$menu;
+    z-index: $menu;
     top: 0;
     left: 0;
     right: 0;
@@ -45,7 +43,7 @@
 
         &:hover {
             padding-bottom: 15px;
-            font-size: v.$font-xxl;
+            font-size: $font-xxl;
         }
     }
 

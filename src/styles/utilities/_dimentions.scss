@@ -1,4 +1,6 @@
-@use "../variables" as v;
+// -------------------------------------------------------------------
+// :: WIDTH - HEIGHT
+// -------------------------------------------------------------------
 
 .full-width {
     width: 100%;
@@ -25,14 +27,18 @@
     width: 100vw;
 }
 
-.padding-sm {
-    padding: 5px;
+.contain {
+    width: fit-content;
 }
 
-.padding-md {
-    padding: 10px;
+// -------------------------------------------------------------------
+// :: PADDING - MARGIN
+// -------------------------------------------------------------------
+
+.margin-lg {
+    margin: $spacer-lg;
 }
 
-.padding-lg {
-    padding: 15px;
+.margin-top-lg {
+    margin-top: $spacer-lg;
 }
