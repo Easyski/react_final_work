@@ -86,7 +86,7 @@ const GeoSearch: FC<IGeoSearchTypes> = () => {
 	};
 
 	return (
-		<div className="geo-search flex-h border-box">
+		<div className="geo-search flex flex-h border-box">
 			<input
 				type="text"
 				className="input search-input"
