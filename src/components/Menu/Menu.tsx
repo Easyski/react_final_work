@@ -1,11 +1,14 @@
 import { FC, useState } from "react";
 import { BiMenu } from "react-icons/bi";
+import { batch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { Logout } from "..";
 
 import { IMenuItems } from "./Menu.types";
 
 const Menu: FC = () => {
 	const [isMenuToggled, setMenuToggle] = useState<boolean>(false);
+	const [logout, setLogout] = useState<boolean>(false);
 
 	const handleMenuToggle = () => {
 		setMenuToggle(!isMenuToggled);
@@ -21,6 +24,21 @@ const Menu: FC = () => {
 		];
 
 		return menuItems.map((item: IMenuItems, index: number) => {
+			if (item.slug === "logout")
+				return (
+					<button
+						className="btn-as-text item font-color-white font-xl bold pointer"
+						onClick={() =>
+							batch(() => {
+								setLogout(true);
+								setMenuToggle(false);
+							})
+						}
+						key="logout"
+					>
+						Logout
+					</button>
+				);
 			return (
 				<NavLink
 					to={`/${item.slug}`}
@@ -52,6 +70,7 @@ const Menu: FC = () => {
 					{getMenuItems()}
 				</div>
 			)}
+			{logout && <Logout />}
 		</>
 	);
 };
