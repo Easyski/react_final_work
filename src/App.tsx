@@ -8,13 +8,14 @@ import {
 } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
 
-import { Map, Login } from "./pages";
+import { Map, Login, Logout, Profile } from "./pages";
 import store from "./store";
 
-import { Menu } from "./components";
+import { AuthRoute, Menu } from "./components";
 
 import "./styles/main.scss";
 import "animate.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY as string;
 
@@ -25,11 +26,11 @@ export const App: FC = () => {
 				<Menu />
 				<Routes>
 					<Route path="/" element={<Login />} />
-					<Route path="/profile" element={<p>PROFILE</p>} />
-					<Route path="/map" element={<Map />} />
 					<Route path="/about" element={<p>ABOUT THIS PROJECT</p>} />
+					<Route path="/profile" element={<AuthRoute route={<Profile />} />} />
+					<Route path="/map" element={<AuthRoute route={<Map />} />} />
 					<Route path="/guide" element={<p>HOW TO USE</p>} />
-					<Route path="/logout" element={<p>LOGOUT</p>} />
+					<Route path="/logout" element={<AuthRoute route={<Logout />} />} />
 
 					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>
