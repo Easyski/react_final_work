@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
 
-import { Map, Login, Logout, Profile } from "./pages";
+import { Map, Login, Profile } from "./pages";
 import store from "./store";
 
 import { AuthRoute, Menu } from "./components";
@@ -30,7 +30,6 @@ export const App: FC = () => {
 					<Route path="/profile" element={<AuthRoute route={<Profile />} />} />
 					<Route path="/map" element={<AuthRoute route={<Map />} />} />
 					<Route path="/guide" element={<p>HOW TO USE</p>} />
-					<Route path="/logout" element={<AuthRoute route={<Logout />} />} />
 
 					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>
