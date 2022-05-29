@@ -2,6 +2,7 @@ import AuthRoute from "./AuthRoute/AuthRoute";
 import Bottombar from "./Bottombar/Bottombar";
 import GeoSearch from "./GeoSearch/GeoSearch";
 import Link from "./Link/Link";
+import Logout from "./Logout/Logout";
 import MarkerOption from "./MarkerOption/MarkerOption";
 import Menu from "./Menu/Menu";
 import Mode from "./Mode/Mode";
@@ -17,6 +18,7 @@ export {
 	Bottombar,
 	GeoSearch,
 	Link,
+	Logout,
 	MarkerOption,
 	Menu,
 	Mode,
