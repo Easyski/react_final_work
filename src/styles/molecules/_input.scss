@@ -1,9 +1,34 @@
-@use "../variables" as v;
-
 .input {
     border: none;
+    font-size: $font-md;
+    height: 20px;
+    text-overflow: ellipsis;
 
     &:focus {
-		outline: none;
-	}
+        outline: none;
+    }
+
+    &-form {
+        border-bottom: $border-sm $grey;
+        width: 240px;
+        padding: 20px 0 10px;
+        text-indent: 5px;
+        margin-top: 10px;
+
+        &::placeholder {
+            font-weight: $font-black
+        }
+
+        &:first-child {
+            margin-top: -$spacer-md;
+        }
+    }
+}
+
+.invalid {
+    border-color: $red;
+}
+
+.valid {
+    border-color: $green;
 }

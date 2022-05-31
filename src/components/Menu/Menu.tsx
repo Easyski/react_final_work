@@ -1,12 +1,14 @@
 import { FC, useState } from "react";
 import { BiMenu } from "react-icons/bi";
-import { batch } from "react-redux";
+import { batch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { Logout } from "..";
 
+import { Logout } from "..";
 import { IMenuItems } from "./Menu.types";
 
 const Menu: FC = () => {
+	const isLoggedIn = useSelector((state: any) => state.user.loggedIn);
+
 	const [isMenuToggled, setMenuToggle] = useState<boolean>(false);
 	const [logout, setLogout] = useState<boolean>(false);
 
@@ -15,19 +17,27 @@ const Menu: FC = () => {
 	};
 
 	const getMenuItems = () => {
-		const menuItems: IMenuItems[] = [
-			{ name: "Profile", slug: "profile" },
-			{ name: "Map", slug: "map" },
-			{ name: "About This Project", slug: "about" },
-			{ name: "How To Use", slug: "guide" },
-			{ name: "Logout", slug: "logout" },
-		];
+		const menuItems = (): IMenuItems[] => {
+			if (isLoggedIn)
+				return [
+					{ name: "Profile", slug: "profile" },
+					{ name: "Map", slug: "map" },
+					{ name: "About This Project", slug: "about" },
+					{ name: "How To Use", slug: "guide" },
+					{ name: "Logout", slug: "logout" },
+				];
+			return [
+				{ name: "Login", slug: "" },
+				{ name: "About This Project", slug: "about" },
+				{ name: "How To Use", slug: "guide" },
+			];
+		};
 
-		return menuItems.map((item: IMenuItems, index: number) => {
+		return menuItems().map((item: IMenuItems, index: number) => {
 			if (item.slug === "logout")
 				return (
 					<button
-						className="btn-as-text item font-color-white font-xl bold pointer"
+						className="btn-as-text item color-white font-xl bold pointer"
 						onClick={() =>
 							batch(() => {
 								setLogout(true);
@@ -43,7 +53,7 @@ const Menu: FC = () => {
 				<NavLink
 					to={`/${item.slug}`}
 					className={({ isActive }) =>
-						`item font-color-white font-xl bold ${isActive ? "selected" : ""}`
+						`item color-white font-xl bold ${isActive ? "selected" : ""}`
 					}
 					key={index}
 					onClick={handleMenuToggle}
@@ -58,7 +68,7 @@ const Menu: FC = () => {
 		<>
 			<div className="menu flex-h">
 				<button
-					className="font-lg flex flex-h align-center btn-as-text font-color-white bold"
+					className="font-lg flex flex-h align-center btn-as-text color-white bold"
 					onClick={handleMenuToggle}
 				>
 					menu

@@ -1,7 +1,5 @@
-@use "../variables" as v;
-
 .popup {
-    z-index: v.$overlay;
+    z-index: $overlay;
     width: 300px;
     height: 140px;
 }

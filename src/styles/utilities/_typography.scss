@@ -1,39 +1,53 @@
-@use "../variables" as v;
-
 // -------------------------------------------------------------------
 // :: FONT SIZE
 // -------------------------------------------------------------------
 
 .font-xs {
-    font-size: v.$font-xs;
+    font-size: $font-xs;
+}
+
+.font-sm {
+    font-size: $font-sm;
 }
 
 .font-md {
-    font-size: v.$font-md;
+    font-size: $font-md;
 }
 
 .font-lg {
-    font-size: v.$font-lg;
+    font-size: $font-lg;
 }
 
 .font-xl {
-    font-size: v.$font-xl;
+    font-size: $font-xl;
 }
 
 .font-xxl {
-    font-size: v.$font-xxl;
+    font-size: $font-xxl;
 }
 
 // -------------------------------------------------------------------
 // :: COLOR
 // -------------------------------------------------------------------
 
-.font-color-white {
-    color: v.$white;
+.color-white {
+    color: $white;
 }
 
-.font-color-black {
-    color: v.$black
+.color-black {
+    color: $black
+}
+
+.color-light-grey {
+    color: $light-grey
+}
+
+.color-grey {
+    color: $grey
+}
+
+.color-dark-grey {
+    color: $dark-grey
 }
 
 // -------------------------------------------------------------------
@@ -41,27 +55,27 @@
 // -------------------------------------------------------------------
 
 .light {
-    font-weight: v.$font-light;
+    font-weight: $font-light;
 }
 
 .regular {
-    font-weight: v.$font-regular;
+    font-weight: $font-regular;
 }
 
 .bold {
-    font-weight: v.$font-bold;
+    font-weight: $font-bold;
 }
 
 .bolder {
-    font-weight: v.$font-bolder;
+    font-weight: $font-bolder;
 }
 
 .black {
-    font-weight: v.$font-bold;
+    font-weight: $font-bold;
 }
 
 .xblack {
-    color: v.$font-xblack
+    color: $font-xblack
 }
 
 // -------------------------------------------------------------------
@@ -70,6 +84,10 @@
 
 .italic {
     font-style: italic;
+}
+
+.uppercase {
+    text-transform: uppercase;
 }
 
 // -------------------------------------------------------------------

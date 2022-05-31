@@ -1,9 +1,7 @@
-@use "../variables" as v;
-
 .topbar {
 	position: absolute;
-	z-index: v.$overlay;
-	top: v.$spacer-md;
+	z-index: $overlay;
+	top: $spacer-md;
 	left: 40%;
 	width: 40%;
 	min-width: 375px;

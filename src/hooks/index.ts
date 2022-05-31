@@ -1,4 +1,4 @@
 import usePointsCollection from "./getPointsCollection";
-import { signIn, signUp } from "./useCredentials";
+import { signIn, signUp, signInWithGoogle } from "./useCredentials";
 
-export { usePointsCollection, signIn, signUp };
+export { usePointsCollection, signIn, signUp, signInWithGoogle };

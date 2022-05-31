@@ -1,9 +1,7 @@
-@use "../variables" as v;
-
 .container {
-    background-color: v.$white;
-    border-radius: v.$border-radius-md;
-    box-shadow: v.$box-shadow;
+    background-color: $white;
+    border-radius: $border-radius-md;
+    box-shadow: $box-shadow;
     border: none;
 }
 

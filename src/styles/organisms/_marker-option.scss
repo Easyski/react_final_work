@@ -1,9 +1,7 @@
-@use "../variables" as v;
-
 .marker-option {
 	grid-template-columns: 65% 35%;
 	grid-template-rows: repeat(6, 30px);
-	background-color: v.$white;
+	background-color: $white;
 	margin-bottom: 8px;
 	animation: fadeInLeft;
 	animation-duration: .3s;
@@ -21,10 +19,10 @@
 
 	.marker-button {
 		width: 40%;
-		background-color: v.$light-grey;
+		background-color: $light-grey;
 		border: none;
 		border-radius: 2px;
-		box-shadow: v.$box-shadow;
+		box-shadow: $box-shadow;
 		cursor: pointer;
 
 		&:active {
@@ -33,7 +31,7 @@
 	}
 
 	.border {
-		border: 2px solid v.$green;
+		border: 2px solid $green;
 	}
 }
 
