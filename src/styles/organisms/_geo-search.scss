@@ -1,17 +1,12 @@
 .geo-search {
 	flex-grow: 9;
 	padding-right: $spacer-sm;
-	
+
 	.search-input {
 		height: 40px;
 		flex-grow: 9;
-			
-		&::placeholder {
-			color: grey;
-			font-style: italic;
-		}
 
-		&:placeholder-shown{
+		&:placeholder-shown {
 			text-overflow: ellipsis;
 		}
 	}

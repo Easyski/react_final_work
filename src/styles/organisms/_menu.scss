@@ -7,9 +7,9 @@
     color: $black;
 
     animation: fadeInDown;
-	-webkit-animation: fadeInDown;
-	-moz-animation: fadeInDown;
-	animation-duration: 1s;
+    -webkit-animation: fadeInDown;
+    -moz-animation: fadeInDown;
+    animation-duration: 1s;
 
     &-icon {
         font-size: 28px;
@@ -26,7 +26,6 @@
 
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(8px);
-    // opacity: 0.3;
 
     .item {
         margin: 5%;
@@ -42,8 +41,7 @@
         color: white;
 
         &:hover {
-            padding-bottom: 15px;
-            font-size: $font-xxl;
+            padding-bottom: 8px;
         }
     }
 

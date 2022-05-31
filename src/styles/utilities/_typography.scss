@@ -46,7 +46,7 @@
     color: $grey
 }
 
-.color-grey {
+.color-dark-grey {
     color: $dark-grey
 }
 
@@ -84,6 +84,10 @@
 
 .italic {
     font-style: italic;
+}
+
+.uppercase {
+    text-transform: uppercase;
 }
 
 // -------------------------------------------------------------------
