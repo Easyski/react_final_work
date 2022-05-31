@@ -10,7 +10,6 @@ import Menu from "./Menu/Menu";
 import Mode from "./Mode/Mode";
 import ModeItem from "./ModeItem/ModeItem";
 import Navigation from "./Navigation/Navigation";
-import Popup from "./Popup/Popup";
 import SearchResults from "./SearchResults/SearchResults";
 import Sidebar from "./Sidebar/Sidebar";
 import Topbar from "./Topbar/Topbar";
@@ -28,7 +27,6 @@ export {
 	Mode,
 	ModeItem,
 	Navigation,
-	Popup,
 	SearchResults,
 	Sidebar,
 	Topbar,

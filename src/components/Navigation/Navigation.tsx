@@ -1,13 +1,12 @@
 import { FC, useEffect, useCallback, useRef, useState } from "react";
-import { useSelector, useDispatch, batch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import mapboxgl, { Map } from "mapbox-gl";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 
 import { setNewMarkers } from "../../store/slices";
 import { ICoordinates } from "../types";
 import { INavigationTypes } from "./Navigation.types";
-
-import { IPopup } from "../Popup/Popup.types";
-import { Popup } from "..";
+import { toast } from "react-toastify";
 
 export const Navigation: FC<INavigationTypes> = () => {
 	const dispatch = useDispatch();
@@ -22,7 +21,6 @@ export const Navigation: FC<INavigationTypes> = () => {
 	const mapContainer = useRef<HTMLDivElement | null>(null);
 	const [newMarkerCoordinates, setNewMarkerCoordinates] =
 		useState<ICoordinates>();
-	const [popup, setPopup] = useState<IPopup>();
 
 	/**
 	 * Initialise map with set parameters
@@ -115,16 +113,16 @@ export const Navigation: FC<INavigationTypes> = () => {
 			.addTo(map.current)
 			.getPopup();
 
-		batch(() => {
-			setPopup({ preload: "markerSucces" });
-			setNewMarkerCoordinates({ lat, lng });
+		setNewMarkerCoordinates({ lat, lng });
+		toast("Your marker has been set!", {
+			icon: <HiOutlineLocationMarker />,
+			progressStyle: { backgroundColor: "red" },
 		});
 	};
 
 	return (
 		<div>
 			<div ref={mapContainer} className="navigation" />
-			{popup && <Popup preload={popup.preload} />}
 		</div>
 	);
 };

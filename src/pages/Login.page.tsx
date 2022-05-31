@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch, batch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import cn from "classnames";
 
@@ -7,6 +7,7 @@ import logo from "../assets/logo.svg";
 import { signIn, signInWithGoogle, signUp } from "../hooks";
 import { setLoggedIn, setUid, setEmail } from "../store/slices";
 import { Divider, FormInput, Link, Loading } from "../components";
+import { toast } from "react-toastify";
 
 interface IState {
 	value: string;
@@ -60,12 +61,21 @@ const Login: FC = () => {
 	const handleLoginSubmit = async (e?: any) => {
 		e && e.preventDefault();
 
+		let formError: boolean = false;
+
 		// Email or password are empty strings
 		if (!emailState.value) {
 			setEmailState({ value: "", error: true });
-			return;
-		} else if (!passwordState.value) {
-			setEmailState({ value: emailState.value, error: false });
+			toast.error("A valid email is required!", { autoClose: 5000 });
+			formError = true;
+		}
+		if (!passwordState.value) {
+			setPasswordState({ value: "", error: true });
+			toast.error("A valid password is required!", { autoClose: 5000 });
+			formError = true;
+		}
+
+		if (formError) {
 			setPasswordState({ value: "", error: true });
 			return;
 		}
@@ -83,14 +93,17 @@ const Login: FC = () => {
 		if (signedIn && user) {
 			dispatch(setUid(user.uid));
 			dispatch(setEmail(user.email));
+			toast.success("Welcome, you are logged in!");
 		}
 
 		if (error && error.code === 1) {
 			setEmailState({ value: emailState.value, error: true });
 			setPasswordState({ value: "", error: false });
+			toast.error("This email doesn't seem to exist!", { autoClose: 5000 });
 		} else if (error && error.code === 2) {
 			setEmailState({ value: emailState.value, error: false });
 			setPasswordState({ value: "", error: true });
+			toast.error("This password is incorrect!", { autoClose: 5000 });
 		}
 
 		setIsLoading(false);
@@ -104,51 +117,52 @@ const Login: FC = () => {
 	 */
 	const handleRegisterSubmit = async (e?: any) => {
 		e && e.preventDefault();
+		let formError = false;
 
 		// Check if any field is empty
 		if (!nameState.value) {
 			setNameState({ value: "", error: true });
-			return;
-		} else if (!emailState.value) {
-			setNameState({ value: nameState.value, error: false });
+			toast.error("A username is required!", { autoClose: 5000 });
+			formError = true;
+		}
+		if (!emailState.value) {
 			setEmailState({ value: "", error: true });
-			return;
-		} else if (!emailConfirmState.value) {
-			setNameState({ value: nameState.value, error: false });
-			setEmailState({ value: emailState.value, error: false });
+			toast.error("A valid email is required!", { autoClose: 5000 });
+			formError = true;
+		}
+		if (!emailConfirmState.value) {
 			setEmailConfirmState({ value: "", error: true });
-			return;
-		} else if (!passwordState.value) {
-			setNameState({ value: nameState.value, error: false });
-			setEmailState({ value: emailState.value, error: false });
-			setEmailConfirmState({ value: emailConfirmState.value, error: false });
+			toast.error("Email adresses do not match!", { autoClose: 5000 });
+			formError = true;
+		}
+		if (!passwordState.value) {
 			setPasswordState({ value: "", error: true });
-			return;
-		} else if (!passwordConfirmState.value) {
-			setNameState({ value: nameState.value, error: false });
-			setEmailState({ value: emailState.value, error: false });
-			setEmailConfirmState({ value: emailConfirmState.value, error: false });
-			setPasswordState({ value: "", error: false });
+			toast.error("A valid password is required!", { autoClose: 5000 });
+			formError = true;
+		}
+		if (!passwordConfirmState.value) {
+			setPasswordConfirmState({ value: "", error: true });
+			toast.error("Passwords do not match!", { autoClose: 5000 });
+			formError = true;
+		}
+		if (emailState.value !== emailConfirmState.value) {
+			setEmailConfirmState({ value: emailConfirmState.value, error: true });
+			toast.error("Email adresses do not match!", { autoClose: 5000 });
+			formError = true;
+		}
+		if (passwordState.value !== passwordConfirmState.value) {
+			setPasswordConfirmState({ value: "", error: true });
+			toast.error("Passwords do not match!", { autoClose: 5000 });
+			formError = true;
+		}
+
+		if (formError) {
+			setPasswordState({ value: "", error: true });
 			setPasswordConfirmState({ value: "", error: true });
 			return;
 		}
 
 		setIsLoading(true);
-
-		if (emailState.value !== emailConfirmState.value) {
-			setEmailConfirmState({ value: emailConfirmState.value, error: true });
-			setPasswordState({ value: "", error: false });
-			setPasswordConfirmState({ value: "", error: false });
-			setIsLoading(false);
-			return;
-		}
-
-		if (passwordState.value !== passwordConfirmState.value) {
-			setPasswordState({ value: "", error: false });
-			setPasswordConfirmState({ value: "", error: true });
-			setIsLoading(false);
-			return;
-		}
 
 		// Register user
 		const { signedIn, user, error } = await signUp(
@@ -160,9 +174,9 @@ const Login: FC = () => {
 		dispatch(setLoggedIn(signedIn));
 
 		if (error) {
-			// TODO: alert user of a Firebase error
 			setPasswordState({ value: "", error: false });
 			setPasswordConfirmState({ value: "", error: false });
+			toast.error("An error occured! Please try again.", { autoClose: 5000 });
 			setIsLoading(false);
 			return;
 		}
@@ -170,6 +184,7 @@ const Login: FC = () => {
 		if (user) {
 			dispatch(setUid(user.uid));
 			dispatch(setEmail(user.email));
+			toast.success("Welcome, your account has been created!");
 			setIsLoading(false);
 		}
 	};
@@ -200,14 +215,13 @@ const Login: FC = () => {
 		setIsLoading(true);
 		const { signedIn, user } = await signInWithGoogle();
 
-		batch(() => {
-			dispatch(setLoggedIn(signedIn));
-			if (user) {
-				dispatch(setUid(user.uid));
-				dispatch(setEmail(user.email));
-			}
-			setIsLoading(false);
-		});
+		dispatch(setLoggedIn(signedIn));
+		if (user) {
+			dispatch(setUid(user.uid));
+			dispatch(setEmail(user.email));
+			toast.success("Welcome, you are logged in!");
+		}
+		setIsLoading(false);
 	};
 
 	return (
@@ -310,7 +324,7 @@ const Login: FC = () => {
 							content="Google"
 							type="google"
 							onClick={handleGoogleLogin}
-							extraStyle="google flex flex-h align-center"
+							extraStyle="google border-box flex flex-h align-center"
 						/>
 						<Divider text="or" extraStyle="margin-lg" />
 						<Link
