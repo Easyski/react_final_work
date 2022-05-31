@@ -1,7 +1,6 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch, batch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { BsGoogle } from "react-icons/bs";
 import cn from "classnames";
 
 import logo from "../assets/logo.svg";
