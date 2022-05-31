@@ -1,17 +1,19 @@
 import { FC, useEffect } from "react";
-import { useDispatch, batch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+
 import { setEmail, setLoggedIn, setUid } from "../store/slices";
 
 const Logout: FC = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		batch(() => {
-			dispatch(setLoggedIn(false));
-			dispatch(setUid(undefined));
-			dispatch(setEmail(undefined));
-		});
-	});
+		dispatch(setLoggedIn(false));
+		dispatch(setUid(undefined));
+		dispatch(setEmail(undefined));
+		toast.info("You have been logged out!");
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<div className="flex all-center full-view-width-heigth">
