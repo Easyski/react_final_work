@@ -16,6 +16,8 @@ import { AuthRoute, Menu } from "./components";
 import "./styles/main.scss";
 import "animate.css";
 import "mapbox-gl/dist/mapbox-gl.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY as string;
 
@@ -35,6 +37,7 @@ export const App: FC = () => {
 					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>
 			</Router>
+			<ToastContainer pauseOnHover={false} autoClose={2000} />
 		</Provider>
 	);
 };
