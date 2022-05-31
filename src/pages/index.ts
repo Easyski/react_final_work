@@ -1,5 +1,6 @@
-import Map from "./Map.page";
 import Login from "./Login.page";
+import Logout from "./Logout.page";
+import Map from "./Map.page";
 import Profile from "./Profile.page";
 
-export { Map, Login, Profile };
+export { Login, Logout, Map, Profile };
