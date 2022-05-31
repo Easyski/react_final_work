@@ -6,4 +6,5 @@ export interface IFormInput {
 	required?: true;
 	extraStyle?: string;
 	value?: string;
+	onChange: (value: string) => void;
 }

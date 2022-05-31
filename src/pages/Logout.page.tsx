@@ -1,13 +1,16 @@
 import { FC, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setLoggedIn } from "../../store/slices";
+import { useDispatch, batch } from "react-redux";
+import { setEmail, setLoggedIn, setUid } from "../store/slices";
 
 const Logout: FC = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		console.log("LOGOUT");
-		dispatch(setLoggedIn(false));
+		batch(() => {
+			dispatch(setLoggedIn(false));
+			dispatch(setUid(undefined));
+			dispatch(setEmail(undefined));
+		});
 	});
 
 	return (

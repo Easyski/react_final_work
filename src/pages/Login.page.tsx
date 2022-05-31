@@ -8,31 +8,43 @@ import { signIn, signInWithGoogle, signUp } from "../hooks";
 import { setLoggedIn, setUid, setEmail } from "../store/slices";
 import { Divider, FormInput, Link, Loading } from "../components";
 
+interface IState {
+	value: string;
+	error: boolean;
+}
+
 const Login: FC = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const isLoggedIn = useSelector((state: any) => state.user.loggedIn);
 
-	// STATES FOR INPUT FIELDS
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [registerToggle, setRegisterToggle] = useState<boolean>(false);
-	const [nameError, setNameError] = useState<boolean>(false);
-	const [mailError, setMailError] = useState<boolean>(false);
-	const [passError, setPassError] = useState<boolean>(false);
-	const [inputData, setInputData] = useState<{
-		email?: string;
-		name?: string;
-	}>({ email: undefined, name: undefined });
 
 	// REF FOR FORM
 	const formRef = useRef<HTMLFormElement>(null);
-	// REFS FOR INPUT FIELDS
-	const nameRef = useRef<HTMLInputElement>(null);
-	const mailRef = useRef<HTMLInputElement>(null);
-	const mailConfirmRef = useRef<HTMLInputElement>(null);
-	const passRef = useRef<HTMLInputElement>(null);
-	const passConfirmRef = useRef<HTMLInputElement>(null);
+	// STATE FOR INPUT FIELDS
+	const [nameState, setNameState] = useState<IState>({
+		value: "",
+		error: false,
+	});
+	const [emailState, setEmailState] = useState<IState>({
+		value: "",
+		error: false,
+	});
+	const [emailConfirmState, setEmailConfirmState] = useState<IState>({
+		value: "",
+		error: false,
+	});
+	const [passwordState, setPasswordState] = useState<IState>({
+		value: "",
+		error: false,
+	});
+	const [passwordConfirmState, setPasswordConfirmState] = useState<IState>({
+		value: "",
+		error: false,
+	});
 
 	useEffect(() => {
 		isLoggedIn && navigate("/map", { replace: true });
@@ -48,37 +60,40 @@ const Login: FC = () => {
 	const handleLoginSubmit = async (e?: any) => {
 		e && e.preventDefault();
 
-		if (!mailRef.current || !passRef.current) return;
+		// Email or password are empty strings
+		if (!emailState.value) {
+			setEmailState({ value: "", error: true });
+			return;
+		} else if (!passwordState.value) {
+			setEmailState({ value: emailState.value, error: false });
+			setPasswordState({ value: "", error: true });
+			return;
+		}
 
 		setIsLoading(true);
-		setInputData({
-			email: mailRef.current.value,
-		});
 
+		// Attempt to log user in
 		const { signedIn, user, error } = await signIn(
-			mailRef.current.value,
-			passRef.current.value
+			emailState.value,
+			passwordState.value
 		);
 
-		batch(() => {
-			dispatch(setLoggedIn(signedIn));
+		dispatch(setLoggedIn(signedIn));
 
-			if (signedIn && user) {
-				dispatch(setUid(user.uid));
-				dispatch(setEmail(user.email));
-			}
+		if (signedIn && user) {
+			dispatch(setUid(user.uid));
+			dispatch(setEmail(user.email));
+		}
 
-			if (error && error.code === 1) {
-				setMailError(true);
-				setPassError(false);
-				setInputData({ email: undefined });
-			} else if (error && error.code === 2) {
-				setMailError(false);
-				setPassError(true);
-			}
+		if (error && error.code === 1) {
+			setEmailState({ value: emailState.value, error: true });
+			setPasswordState({ value: "", error: false });
+		} else if (error && error.code === 2) {
+			setEmailState({ value: emailState.value, error: false });
+			setPasswordState({ value: "", error: true });
+		}
 
-			setIsLoading(false);
-		});
+		setIsLoading(false);
 	};
 	/**
 	 * Allows for new users to be created. First it checks if the
@@ -90,76 +105,82 @@ const Login: FC = () => {
 	const handleRegisterSubmit = async (e?: any) => {
 		e && e.preventDefault();
 
-		if (
-			!mailRef.current ||
-			!mailConfirmRef.current ||
-			!passRef.current ||
-			!passConfirmRef.current ||
-			!nameRef.current
-		)
+		// Check if any field is empty
+		if (!nameState.value) {
+			setNameState({ value: "", error: true });
 			return;
+		} else if (!emailState.value) {
+			setNameState({ value: nameState.value, error: false });
+			setEmailState({ value: "", error: true });
+			return;
+		} else if (!emailConfirmState.value) {
+			setNameState({ value: nameState.value, error: false });
+			setEmailState({ value: emailState.value, error: false });
+			setEmailConfirmState({ value: "", error: true });
+			return;
+		} else if (!passwordState.value) {
+			setNameState({ value: nameState.value, error: false });
+			setEmailState({ value: emailState.value, error: false });
+			setEmailConfirmState({ value: emailConfirmState.value, error: false });
+			setPasswordState({ value: "", error: true });
+			return;
+		} else if (!passwordConfirmState.value) {
+			setNameState({ value: nameState.value, error: false });
+			setEmailState({ value: emailState.value, error: false });
+			setEmailConfirmState({ value: emailConfirmState.value, error: false });
+			setPasswordState({ value: "", error: false });
+			setPasswordConfirmState({ value: "", error: true });
+			return;
+		}
 
 		setIsLoading(true);
 
-		if (!nameRef.current.value) {
-			return batch(() => {
-				setNameError(true);
-				setIsLoading(false);
-			});
+		if (emailState.value !== emailConfirmState.value) {
+			setEmailConfirmState({ value: emailConfirmState.value, error: true });
+			setPasswordState({ value: "", error: false });
+			setPasswordConfirmState({ value: "", error: false });
+			setIsLoading(false);
+			return;
 		}
 
-		if (
-			!mailRef.current.value ||
-			mailRef.current.value !== mailConfirmRef.current.value
-		)
-			return batch(() => {
-				setNameError(false);
-				setMailError(true);
-				setPassError(false);
-				setIsLoading(false);
-			});
+		if (passwordState.value !== passwordConfirmState.value) {
+			setPasswordState({ value: "", error: false });
+			setPasswordConfirmState({ value: "", error: true });
+			setIsLoading(false);
+			return;
+		}
 
-		if (passRef.current.value !== passConfirmRef.current.value)
-			return batch(() => {
-				setNameError(false);
-				setMailError(false);
-				setPassError(true);
-				setInputData({ email: mailConfirmRef.current!.value });
-				setIsLoading(false);
-			});
-
+		// Register user
 		const { signedIn, user, error } = await signUp(
-			nameRef.current.value,
-			mailConfirmRef.current.value,
-			passConfirmRef.current.value
+			nameState.value,
+			emailConfirmState.value,
+			passwordConfirmState.value
 		);
 
+		dispatch(setLoggedIn(signedIn));
+
 		if (error) {
-			return batch(() => {
-				dispatch(setLoggedIn(signedIn));
-				setIsLoading(false);
-			});
+			// TODO: alert user of a Firebase error
+			setPasswordState({ value: "", error: false });
+			setPasswordConfirmState({ value: "", error: false });
+			setIsLoading(false);
+			return;
 		}
 
-		return batch(() => {
-			dispatch(setLoggedIn(signedIn));
-
-			if (user) {
-				dispatch(setUid(user.uid));
-				dispatch(setEmail(user.email));
-			}
+		if (user) {
+			dispatch(setUid(user.uid));
+			dispatch(setEmail(user.email));
 			setIsLoading(false);
-		});
+		}
 	};
 
 	/**
-	 * Sets the toggle for login or register form.
+	 * Sets the toggle for login or register form. Clear the password
+	 * values.
 	 */
 	const handleRegisterClick = () => {
-		setInputData({
-			email: undefined,
-			name: undefined,
-		});
+		setPasswordState({ value: "", error: false });
+		setPasswordConfirmState({ value: "", error: false });
 		setRegisterToggle(!registerToggle);
 	};
 
@@ -212,33 +233,41 @@ const Login: FC = () => {
 								<FormInput
 									title="Username"
 									type="text"
-									ref={nameRef}
-									extraStyle={cn({ invalid: nameError })}
-									value={inputData.name}
+									extraStyle={cn({ invalid: nameState.error })}
+									value={nameState.value}
+									onChange={(value) => setNameState({ value, error: false })}
 								/>
 								<FormInput
 									title="Email"
 									type="email"
-									ref={mailRef}
-									extraStyle={cn({ invalid: mailError })}
-									value={inputData.email}
+									extraStyle={cn({ invalid: emailState.error })}
+									value={emailState.value}
+									onChange={(value) => setEmailState({ value, error: false })}
 								/>
 								<FormInput
 									title="Confirm email"
 									type="email"
-									ref={mailConfirmRef}
-									value={inputData.email}
+									extraStyle={cn({ invalid: emailConfirmState.error })}
+									value={emailConfirmState.value}
+									onChange={(value) =>
+										setEmailConfirmState({ value, error: false })
+									}
 								/>
 								<FormInput
 									title="Password"
 									type="password"
-									ref={passRef}
-									extraStyle={cn({ invalid: passError })}
+									extraStyle={cn({ invalid: passwordState.error })}
+									onChange={(value) =>
+										setPasswordState({ value, error: false })
+									}
 								/>
 								<FormInput
 									title="Repeat password"
 									type="password"
-									ref={passConfirmRef}
+									extraStyle={cn({ invalid: passwordConfirmState.error })}
+									onChange={(value) =>
+										setPasswordConfirmState({ value, error: false })
+									}
 								/>
 								<Link
 									content="Login"
@@ -256,18 +285,17 @@ const Login: FC = () => {
 								<FormInput
 									title="Email or username"
 									type="text"
-									ref={mailRef}
-									extraStyle={cn(
-										{ invalid: mailError },
-										{ valid: inputData.email }
-									)}
-									value={inputData.email}
+									extraStyle={cn({ invalid: emailState.error })}
+									value={emailState.value}
+									onChange={(value) => setEmailState({ value, error: false })}
 								/>
 								<FormInput
 									title="Password"
 									type="password"
-									ref={passRef}
-									extraStyle={cn({ invalid: passError })}
+									extraStyle={cn({ invalid: passwordState.error })}
+									onChange={(value) =>
+										setPasswordState({ value, error: false })
+									}
 								/>
 								<Link
 									content="Login"
@@ -278,7 +306,13 @@ const Login: FC = () => {
 							</form>
 						)}
 						<Divider text="or" extraStyle="margin-lg" />
-						<button onClick={handleGoogleLogin}>Google</button>
+						<Link
+							content="Google"
+							type="google"
+							onClick={handleGoogleLogin}
+							extraStyle="google flex flex-h align-center"
+						/>
+						<Divider text="or" extraStyle="margin-lg" />
 						<Link
 							content="Help"
 							type="help"

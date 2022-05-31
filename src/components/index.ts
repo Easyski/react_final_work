@@ -5,7 +5,6 @@ import GeoSearch from "./GeoSearch/GeoSearch";
 import FormInput from "./FormInput/FormInput";
 import Link from "./Link/Link";
 import Loading from "./Loading/Loading";
-import Logout from "./Logout/Logout";
 import MarkerOption from "./MarkerOption/MarkerOption";
 import Menu from "./Menu/Menu";
 import Mode from "./Mode/Mode";
@@ -24,7 +23,6 @@ export {
 	FormInput,
 	Link,
 	Loading,
-	Logout,
 	MarkerOption,
 	Menu,
 	Mode,
