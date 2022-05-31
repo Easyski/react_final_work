@@ -1,36 +1,35 @@
-import { forwardRef, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import cn from "classnames";
 
 import { IFormInput } from "./FormInput.types";
 
-const FormInput = forwardRef<HTMLInputElement, IFormInput>(
-	({ type, title, required, extraStyle, value }, ref) => {
-		const [inputValue, setInputValue] = useState<string>("");
-		const [typing, setTyping] = useState<boolean>(false);
+const FormInput: FC<IFormInput> = ({
+	type,
+	title,
+	required,
+	extraStyle,
+	value,
+	onChange,
+}) => {
+	const [typing, setTyping] = useState<boolean>(false);
 
-		const handleOnChange = (e: any) => {
-			!typing && setTyping(true);
-			setInputValue(e.target.value);
-		};
+	const handleOnChange = (e: any) => {
+		!typing && setTyping(true);
+		onChange(e.target.value);
+	};
 
-		useEffect(() => {
-			value && setInputValue(value);
-		}, [value]);
-
-		return (
-			<input
-				type={type}
-				placeholder={title}
-				className={cn("input input-form", extraStyle, {
-					invalid: typing && !inputValue,
-				})}
-				ref={ref}
-				required={required}
-				onChange={handleOnChange}
-				value={inputValue}
-			/>
-		);
-	}
-);
+	return (
+		<input
+			type={type}
+			placeholder={title}
+			className={cn("input input-form", extraStyle, {
+				invalid: typing && !value,
+			})}
+			required={required}
+			onChange={handleOnChange}
+			value={value}
+		/>
+	);
+};
 
 export default FormInput;
