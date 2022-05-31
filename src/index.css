@@ -3,6 +3,10 @@
 	margin: 0;
 }
 
+*::placeholder {
+	color: grey;
+}
+
 body {
 	margin: 0;
 	font-family: "Poppins", sans-serif;
