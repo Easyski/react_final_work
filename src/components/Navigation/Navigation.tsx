@@ -1,24 +1,28 @@
 import { FC, useEffect, useCallback, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, batch } from "react-redux";
 import mapboxgl, { Map } from "mapbox-gl";
 
 import { setNewMarkers } from "../../store/slices";
-import { Coordinates } from "../types";
+import { ICoordinates } from "../types";
 import { INavigationTypes } from "./Navigation.types";
 
-import "mapbox-gl/dist/mapbox-gl.css";
+import { IPopup } from "../Popup/Popup.types";
+import { Popup } from "..";
 
 export const Navigation: FC<INavigationTypes> = () => {
 	const dispatch = useDispatch();
 	const zoom = useSelector((state: any) => state.map.zoom);
-	const center = useSelector((state: any) => state.map.centerCoordinates);
+	const center: ICoordinates = useSelector(
+		(state: any) => state.map.centerCoordinates
+	);
 	const editorMode = useSelector((state: any) => state.topbar.mode);
-	const newMarkers = useSelector((state: any) => state.editor.newMarkers);
+	const newMarkers = useSelector((state: any) => state.sidebar.newMarkers);
 
 	const map = useRef<Map>();
 	const mapContainer = useRef<HTMLDivElement | null>(null);
 	const [newMarkerCoordinates, setNewMarkerCoordinates] =
-		useState<Coordinates>();
+		useState<ICoordinates>();
+	const [popup, setPopup] = useState<IPopup>();
 
 	/**
 	 * Initialise map with set parameters
@@ -47,7 +51,7 @@ export const Navigation: FC<INavigationTypes> = () => {
 		map.current.flyTo({
 			center,
 			duration: 1500,
-			zoom: zoom,
+			zoom,
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [center]);
@@ -103,16 +107,24 @@ export const Navigation: FC<INavigationTypes> = () => {
 	const handleMapClick = (evt: mapboxgl.MapMouseEvent) => {
 		if (!map.current) return;
 		const { lng, lat } = evt.lngLat;
-		new mapboxgl.Marker({ color: "rgb(221, 147, 147)" })
-			.setLngLat([lng, lat])
-			.addTo(map.current);
+		const markerEl = document.createElement("div");
+		markerEl.className = "marker";
 
-		setNewMarkerCoordinates([lng, lat]);
+		new mapboxgl.Marker(markerEl)
+			.setLngLat([lng, lat])
+			.addTo(map.current)
+			.getPopup();
+
+		batch(() => {
+			setPopup({ preload: "markerSucces" });
+			setNewMarkerCoordinates({ lat, lng });
+		});
 	};
 
 	return (
 		<div>
 			<div ref={mapContainer} className="navigation" />
+			{popup && <Popup preload={popup.preload} />}
 		</div>
 	);
 };

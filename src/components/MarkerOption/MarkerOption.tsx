@@ -4,9 +4,9 @@ import mapboxgl, { Map } from "mapbox-gl";
 import { ToggleSlider } from "react-toggle-slider";
 
 import { setCenterCoordinates, setZoom } from "../../store/slices";
-import { Coordinates } from "../types";
+import { ICoordinates } from "../types";
 
-const MarkerOption: FC<{ center: Coordinates }> = ({ center }) => {
+const MarkerOption: FC<{ coordinates: ICoordinates }> = ({ coordinates }) => {
 	const dispatch = useDispatch();
 
 	const [isGuide, setIsGuide] = useState<boolean>(false);
@@ -22,20 +22,20 @@ const MarkerOption: FC<{ center: Coordinates }> = ({ center }) => {
 		map.current = new mapboxgl.Map({
 			container: smallMapContainer.current,
 			style: "mapbox://styles/mapbox/streets-v9",
-			center: center,
+			center: coordinates,
 			zoom: 15,
 			interactive: false,
 		});
 
-		new mapboxgl.Marker({ color: "rgb(221, 147, 147)" })
-			.setLngLat(center)
+		new mapboxgl.Marker({ color: "rgba(221, 147, 147, 0.5)" })
+			.setLngLat(coordinates)
 			.addTo(map.current);
 	});
 
 	const handleMapClicked = () => {
 		batch(() => {
-			dispatch(setZoom(11.5));
-			dispatch(setCenterCoordinates(center));
+			dispatch(setZoom(14));
+			dispatch(setCenterCoordinates(coordinates));
 		});
 	};
 
@@ -44,7 +44,7 @@ const MarkerOption: FC<{ center: Coordinates }> = ({ center }) => {
 	};
 
 	return (
-		<div className="marker-option grid animate__fadeInLeft font-md">
+		<div className="marker-option grid font-md">
 			<input
 				className="input italic"
 				type="text"
@@ -73,15 +73,15 @@ const MarkerOption: FC<{ center: Coordinates }> = ({ center }) => {
 			</div>
 			<p>
 				<span className="bold">Longitude: </span>
-				{(center[0] as number).toFixed(4)}
+				{coordinates.lng.toFixed(4)}
 			</p>
 			<p>
 				<span className="bold">Latitude: </span>
-				{(center[1] as number).toFixed(4)}
+				{coordinates.lat.toFixed(4)}
 			</p>
 			<p>
 				<span className="bold">Altitude: </span>
-				{(center[1] as number).toFixed(4)}
+				{coordinates.alt ? coordinates.alt.toFixed(4) : 0}
 			</p>
 			<div className="flex flex-h justify-evenly">
 				<button

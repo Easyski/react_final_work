@@ -1,13 +1,11 @@
-@use "../variables" as v;
-
 .sidebar {
 	position: absolute;
-	left: v.$spacer-md;
-	top: v.$spacer-md;
-	bottom: v.$spacer-md;
-	z-index: v.$overlay;
+	left: $spacer-md;
+	top: $spacer-md;
+	bottom: $spacer-md;
+	z-index: $overlay;
 	width: 375px;
-	padding: v.$spacer-md v.$spacer-lg;
+	padding: $spacer-md $spacer-lg;
 
 	animation: fadeInLeft;
 	-webkit-animation: fadeInLeft;
@@ -15,10 +13,10 @@
 	animation-duration: 1s;
 
 	.scroll-container {
-		margin-top: v.$spacer-md;
+		margin-top: $spacer-md;
 		overflow-x: hidden;
 		overflow-y: scroll;
-		height: calc(100% - v.$spacer-md * 3);
-
+		height: calc(100% - $spacer-md * 3);
+		scroll-behavior: smooth;
 	}
 }

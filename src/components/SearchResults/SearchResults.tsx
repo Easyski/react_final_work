@@ -7,7 +7,7 @@ import {
 	setLocations,
 	setLocationName,
 } from "../../store/slices";
-import { Coordinates, ILocation } from "../types";
+import { ICoordinates, ILocation } from "../types";
 import { ISearchResults } from "./SearchResults.types";
 
 const SearchResults: FC<ISearchResults> = () => {
@@ -19,7 +19,7 @@ const SearchResults: FC<ISearchResults> = () => {
 	 * tell te store to set the new center and clear the results of the search.
 	 * @param center The coordinates the map needs to move to.
 	 */
-	const handleResultClick = (center: Coordinates, name: string) => {
+	const handleResultClick = (center: ICoordinates, name: string) => {
 		batch(() => {
 			dispatch(setCenterCoordinates(center));
 			dispatch(setLocationName(name));
@@ -38,11 +38,13 @@ const SearchResults: FC<ISearchResults> = () => {
 			return (
 				<p
 					onClick={() =>
-						handleResultClick(element.center, element.detailedName)
+						handleResultClick(element.coordinates, element.detailedName)
 					}
 					key={index}
+					className="result"
 				>
-					<b>{element.name}</b>, {element.detailedName}
+					<span className="bold">{element.name}</span>,
+					{" " + element.detailedName}
 				</p>
 			);
 		});
@@ -53,7 +55,7 @@ const SearchResults: FC<ISearchResults> = () => {
 	return (
 		<div>
 			{!!locations.length && (
-				<div className="searchResultsContainer">{setElements()}</div>
+				<div className="search-results border-box">{setElements()}</div>
 			)}
 		</div>
 	);

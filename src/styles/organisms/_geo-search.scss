@@ -1,21 +1,13 @@
-.geoSearchContainer {
+.geo-search {
 	flex-grow: 9;
-	
-	.searchInput {
-		border: none;
-		text-decoration: none;
+	padding-right: $spacer-sm;
+
+	.search-input {
 		height: 40px;
 		flex-grow: 9;
-		
-		
-		&:focus {
-			border: none;
-			outline: none;
-		}
-		
-		&::placeholder {
-			color: grey;
-			font-style: italic;
+
+		&:placeholder-shown {
+			text-overflow: ellipsis;
 		}
 	}
 

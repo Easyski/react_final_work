@@ -1,11 +1,21 @@
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
 import { MarkerOption } from "..";
+import { ICoordinates } from "../types";
 
 const Sidebar: FC = () => {
 	const mode = useSelector((store: any) => store.topbar.mode);
-	const markersToBeAdded = useSelector((store: any) => store.editor.newMarkers);
+	const markersToBeAdded = useSelector(
+		(store: any) => store.sidebar.newMarkers
+	);
+
+	const scrollElement = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (!scrollElement.current) return;
+		scrollElement.current.scrollTop = scrollElement.current.scrollHeight;
+	}, [markersToBeAdded]);
 
 	const handleMarkersAdded = () => {
 		if (!markersToBeAdded[0])
@@ -15,8 +25,8 @@ const Sidebar: FC = () => {
 				</p>
 			);
 		const markersAsElements = markersToBeAdded.map(
-			(marker: any, index: number) => {
-				return <MarkerOption center={marker} key={index} />;
+			(coordinates: ICoordinates, index: number) => {
+				return <MarkerOption coordinates={coordinates} key={index} />;
 			}
 		);
 
@@ -26,7 +36,9 @@ const Sidebar: FC = () => {
 	return (
 		<div className="sidebar container border-box">
 			<p className="bold text-center">Markers to be placed</p>
-			<div className="scroll-container">{handleMarkersAdded()}</div>
+			<div className="scroll-container" ref={scrollElement}>
+				{handleMarkersAdded()}
+			</div>
 		</div>
 	);
 };

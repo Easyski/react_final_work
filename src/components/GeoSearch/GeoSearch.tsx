@@ -3,7 +3,7 @@ import { useDispatch, useSelector, batch } from "react-redux";
 import { GiCancel } from "react-icons/gi";
 
 import { setLocations } from "../../store/slices";
-import { Coordinates, ILocation } from "../types";
+import { ILocation } from "../types";
 import { IGeoSearchTypes } from "./GeoSearch.types";
 
 const GeoSearch: FC<IGeoSearchTypes> = () => {
@@ -69,7 +69,10 @@ const GeoSearch: FC<IGeoSearchTypes> = () => {
 				return {
 					name: element.text as string,
 					detailedName: element.place_name as string,
-					center: element.center as Coordinates,
+					coordinates: {
+						lng: element.center[0],
+						lat: element.center[1],
+					},
 				};
 			}
 		);
@@ -83,10 +86,10 @@ const GeoSearch: FC<IGeoSearchTypes> = () => {
 	};
 
 	return (
-		<div className="geoSearchContainer flex-h">
+		<div className="geo-search flex flex-h border-box">
 			<input
 				type="text"
-				className="searchInput"
+				className="input search-input"
 				placeholder="Find your destination"
 				onChange={handleSearchInput}
 				ref={inputRef}

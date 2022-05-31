@@ -7,17 +7,19 @@
 }
 
 .flex-h {
-    display: flex;
     flex-direction: row;
 }
 
 .flex-v {
-    display: flex;
     flex-direction: column;
 }
 
 .align-center {
     align-items: center;
+}
+
+.align-start {
+    align-items: flex-start;
 }
 
 .justify-center {
@@ -41,8 +43,16 @@
     align-self: center;
 }
 
+.self-align-top {
+    align-self: flex-start;
+}
+
 .self-justify-center {
     justify-self: center;
+}
+
+.self-justify-left {
+    justify-self: flex-start;
 }
 
 .self-all-center{

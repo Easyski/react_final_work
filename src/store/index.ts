@@ -1,6 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { mapReducer, editorReducer, topbarReducer } from "./slices";
+import {
+	mapReducer,
+	sidebarReducer,
+	topbarReducer,
+	userReducer,
+} from "./slices";
 
 // const composeEnhancers =
 // 	(window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -8,7 +13,8 @@ import { mapReducer, editorReducer, topbarReducer } from "./slices";
 export default configureStore({
 	reducer: {
 		map: mapReducer,
-		editor: editorReducer,
+		sidebar: sidebarReducer,
 		topbar: topbarReducer,
+		user: userReducer,
 	},
 });

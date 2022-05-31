@@ -1,0 +1,17 @@
+.background {
+    background-image: url("../../assets/background.png");
+    background-size: cover;
+}
+
+.login {
+    width: 500px;
+
+    &-form {
+        align-items: center;
+    }
+
+    &-button {
+        width: 40%;
+        padding: $spacer-sm;
+    }
+}
