@@ -1,7 +1,10 @@
 import AuthRoute from "./AuthRoute/AuthRoute";
 import Bottombar from "./Bottombar/Bottombar";
+import Divider from "./Divider/Divider";
 import GeoSearch from "./GeoSearch/GeoSearch";
+import FormInput from "./FormInput/FormInput";
 import Link from "./Link/Link";
+import Loading from "./Loading/Loading";
 import Logout from "./Logout/Logout";
 import MarkerOption from "./MarkerOption/MarkerOption";
 import Menu from "./Menu/Menu";
@@ -16,8 +19,11 @@ import Topbar from "./Topbar/Topbar";
 export {
 	AuthRoute,
 	Bottombar,
+	Divider,
 	GeoSearch,
+	FormInput,
 	Link,
+	Loading,
 	Logout,
 	MarkerOption,
 	Menu,
