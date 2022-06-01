@@ -5,9 +5,16 @@ import cn from "classnames";
 
 import logo from "../assets/logo.svg";
 import { signIn, signInWithGoogle, signUp } from "../hooks";
-import { setLoggedIn, setUid, setEmail } from "../store/slices";
+import {
+	setLoggedIn,
+	setUid,
+	setEmail,
+	setImage,
+	setName,
+} from "../store/slices";
 import { Divider, FormInput, Link, Loading } from "../components";
 import { toast } from "react-toastify";
+import { auth } from "../utils/firebase.config";
 
 interface IState {
 	value: string;
@@ -26,6 +33,7 @@ const Login: FC = () => {
 	// REF FOR FORM
 	const formRef = useRef<HTMLFormElement>(null);
 	// STATE FOR INPUT FIELDS
+	//#region
 	const [nameState, setNameState] = useState<IState>({
 		value: "",
 		error: false,
@@ -45,6 +53,17 @@ const Login: FC = () => {
 	const [passwordConfirmState, setPasswordConfirmState] = useState<IState>({
 		value: "",
 		error: false,
+	});
+	// #endregion
+
+	useEffect(() => {
+		auth.onAuthStateChanged((value) => {
+			if (value) {
+				console.log("login", value);
+				toast.success("You are signed in!");
+				return;
+			}
+		});
 	});
 
 	useEffect(() => {
@@ -93,7 +112,6 @@ const Login: FC = () => {
 		if (signedIn && user) {
 			dispatch(setUid(user.uid));
 			dispatch(setEmail(user.email));
-			toast.success("Welcome, you are logged in!");
 		}
 
 		if (error && error.code === 1) {
@@ -219,7 +237,9 @@ const Login: FC = () => {
 		if (user) {
 			dispatch(setUid(user.uid));
 			dispatch(setEmail(user.email));
+			dispatch(setName(user.name));
 			toast.success("Welcome, you are logged in!");
+			user.image && dispatch(setImage(user.image));
 		}
 		setIsLoading(false);
 	};
