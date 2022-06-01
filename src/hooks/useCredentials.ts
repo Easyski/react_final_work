@@ -4,6 +4,8 @@ import {
 	signInWithEmailAndPassword,
 	GoogleAuthProvider,
 	signInWithPopup,
+	signOut,
+	User,
 } from "firebase/auth";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import db from "../utils/firebase.config";
@@ -11,8 +13,15 @@ import db from "../utils/firebase.config";
 const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
 
+let currentUser: User | null = null;
+
 interface IUser {
-	user: { uid: string; email: string } | null;
+	user: {
+		uid: string;
+		email: string;
+		name: string;
+		image?: string;
+	} | null;
 	signedIn: boolean;
 	error?: IFBError;
 }
@@ -47,6 +56,7 @@ const signIn = async (email: string, password: string): Promise<IUser> => {
 		const user = {
 			uid: userCredential.user.uid,
 			email: userCredential.user.email as string,
+			name: userCredential.user.displayName as string,
 		};
 
 		return { user, signedIn: true };
@@ -91,7 +101,7 @@ const signUp = async (
 
 		return {
 			signedIn: true,
-			user: { email, uid: newUser.uid },
+			user: { email, name, uid: newUser.uid },
 		};
 	} catch (error: any) {
 		console.error(
@@ -125,11 +135,26 @@ const signInWithGoogle = async (): Promise<IUser> => {
 				name: user.displayName,
 				authProvider: "google",
 				email: user.email,
+				image: user.photoURL,
 			});
 		}
 
+		if (user.photoURL)
+			return {
+				user: {
+					uid: user.uid,
+					email: user.email as string,
+					image: user.photoURL,
+					name: user.displayName as string,
+				},
+				signedIn: true,
+			};
 		return {
-			user: { uid: user.uid, email: user.email as string },
+			user: {
+				uid: user.uid,
+				email: user.email as string,
+				name: user.displayName as string,
+			},
 			signedIn: true,
 		};
 	} catch (error: any) {
@@ -146,4 +171,34 @@ const signInWithGoogle = async (): Promise<IUser> => {
 	}
 };
 
-export { signIn, signUp, signInWithGoogle };
+/**
+ * Log the current user out.
+ */
+const logout = async (): Promise<boolean> => {
+	try {
+		await signOut(auth);
+		return true;
+	} catch (error) {
+		console.error("An error occured while trying to log out!", error);
+		return false;
+	}
+};
+
+/**
+ * Get all available user data.
+ */
+const getUser = (): IUser => {
+	console.log("getUser", currentUser);
+	if (!currentUser) return { signedIn: false, user: null };
+	return {
+		signedIn: true,
+		user: {
+			email: currentUser.email as string,
+			name: currentUser.displayName as string,
+			uid: currentUser.uid,
+			image: currentUser.photoURL ? currentUser.photoURL : undefined,
+		},
+	};
+};
+
+export { signIn, signUp, signInWithGoogle, logout, getUser };
