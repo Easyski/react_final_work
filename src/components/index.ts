@@ -2,6 +2,7 @@ import AuthRoute from "./AuthRoute/AuthRoute";
 import Bottombar from "./Bottombar/Bottombar";
 import Divider from "./Divider/Divider";
 import GeoSearch from "./GeoSearch/GeoSearch";
+import Input from "./Input/Input";
 import FormInput from "./FormInput/FormInput";
 import Link from "./Link/Link";
 import Loading from "./Loading/Loading";
@@ -19,6 +20,7 @@ export {
 	Bottombar,
 	Divider,
 	GeoSearch,
+	Input,
 	FormInput,
 	Link,
 	Loading,
