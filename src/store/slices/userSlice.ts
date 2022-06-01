@@ -4,10 +4,14 @@ interface IInitialState {
 	uid?: string;
 	email?: string;
 	loggedIn: boolean;
+	name?: string;
+	image?: string;
+	user: any | null;
 }
 
 const initialState: IInitialState = {
 	loggedIn: false,
+	user: null,
 };
 
 export const userSlice = createSlice({
@@ -20,12 +24,22 @@ export const userSlice = createSlice({
 		setUid: (state, action) => {
 			state.uid = action.payload;
 		},
+		setImage: (state, action) => {
+			state.image = action.payload;
+		},
+		setName: (state, action) => {
+			state.name = action.payload;
+		},
 		setLoggedIn: (state, action) => {
 			state.loggedIn = action.payload;
+		},
+		setUser: (state, action) => {
+			state.user = action.payload;
 		},
 	},
 });
 
-export const { setEmail, setUid, setLoggedIn } = userSlice.actions;
+export const { setEmail, setUid, setImage, setName, setLoggedIn, setUser } =
+	userSlice.actions;
 
 export default userSlice.reducer;
