@@ -5,16 +5,9 @@ import cn from "classnames";
 
 import logo from "../assets/logo.svg";
 import { signIn, signInWithGoogle, signUp } from "../hooks";
-import {
-	setLoggedIn,
-	setUid,
-	setEmail,
-	setImage,
-	setName,
-} from "../store/slices";
+import { setLoggedIn } from "../store/slices";
 import { Divider, FormInput, Link, Loading } from "../components";
 import { toast } from "react-toastify";
-import { auth } from "../utils/firebase.config";
 
 interface IState {
 	value: string;
@@ -57,16 +50,6 @@ const Login: FC = () => {
 	// #endregion
 
 	useEffect(() => {
-		auth.onAuthStateChanged((value) => {
-			if (value) {
-				console.log("login", value);
-				toast.success("You are signed in!");
-				return;
-			}
-		});
-	});
-
-	useEffect(() => {
 		isLoggedIn && navigate("/map", { replace: true });
 	}, [isLoggedIn, navigate]);
 
@@ -85,12 +68,12 @@ const Login: FC = () => {
 		// Email or password are empty strings
 		if (!emailState.value) {
 			setEmailState({ value: "", error: true });
-			toast.error("A valid email is required!", { autoClose: 5000 });
+			toast.error("A valid email is required!");
 			formError = true;
 		}
 		if (!passwordState.value) {
 			setPasswordState({ value: "", error: true });
-			toast.error("A valid password is required!", { autoClose: 5000 });
+			toast.error("A valid password is required!");
 			formError = true;
 		}
 
@@ -102,26 +85,23 @@ const Login: FC = () => {
 		setIsLoading(true);
 
 		// Attempt to log user in
-		const { signedIn, user, error } = await signIn(
+		const { signedIn, error } = await signIn(
 			emailState.value,
 			passwordState.value
 		);
 
 		dispatch(setLoggedIn(signedIn));
 
-		if (signedIn && user) {
-			dispatch(setUid(user.uid));
-			dispatch(setEmail(user.email));
-		}
-
-		if (error && error.code === 1) {
+		if (error && (error.code === 1 || error.code === 4)) {
 			setEmailState({ value: emailState.value, error: true });
 			setPasswordState({ value: "", error: false });
-			toast.error("This email doesn't seem to exist!", { autoClose: 5000 });
+			toast.error("This email doesn't seem to exist!");
 		} else if (error && error.code === 2) {
 			setEmailState({ value: emailState.value, error: false });
 			setPasswordState({ value: "", error: true });
-			toast.error("This password is incorrect!", { autoClose: 5000 });
+			toast.error("This password is incorrect!");
+		} else {
+			toast.success("Welcome back, you have been signed in!");
 		}
 
 		setIsLoading(false);
@@ -138,52 +118,53 @@ const Login: FC = () => {
 		let formError = false;
 
 		// Check if any field is empty
+		// #region
 		if (!nameState.value) {
 			setNameState({ value: "", error: true });
-			toast.error("A username is required!", { autoClose: 5000 });
+			toast.error("A username is required!");
 			formError = true;
 		}
 		if (!emailState.value) {
 			setEmailState({ value: "", error: true });
-			toast.error("A valid email is required!", { autoClose: 5000 });
+			toast.error("A valid email is required!");
 			formError = true;
 		}
 		if (!emailConfirmState.value) {
 			setEmailConfirmState({ value: "", error: true });
-			toast.error("Email adresses do not match!", { autoClose: 5000 });
+			toast.error("Email adresses do not match!");
 			formError = true;
 		}
 		if (!passwordState.value) {
 			setPasswordState({ value: "", error: true });
-			toast.error("A valid password is required!", { autoClose: 5000 });
+			toast.error("A valid password is required!");
 			formError = true;
 		}
 		if (!passwordConfirmState.value) {
 			setPasswordConfirmState({ value: "", error: true });
-			toast.error("Passwords do not match!", { autoClose: 5000 });
+			toast.error("Passwords do not match!");
 			formError = true;
 		}
 		if (emailState.value !== emailConfirmState.value) {
 			setEmailConfirmState({ value: emailConfirmState.value, error: true });
-			toast.error("Email adresses do not match!", { autoClose: 5000 });
+			toast.error("Email adresses do not match!");
 			formError = true;
 		}
 		if (passwordState.value !== passwordConfirmState.value) {
 			setPasswordConfirmState({ value: "", error: true });
-			toast.error("Passwords do not match!", { autoClose: 5000 });
+			toast.error("Passwords do not match!");
 			formError = true;
 		}
-
 		if (formError) {
 			setPasswordState({ value: "", error: true });
 			setPasswordConfirmState({ value: "", error: true });
 			return;
 		}
+		// #endregion
 
 		setIsLoading(true);
 
 		// Register user
-		const { signedIn, user, error } = await signUp(
+		const { signedIn, error } = await signUp(
 			nameState.value,
 			emailConfirmState.value,
 			passwordConfirmState.value
@@ -194,17 +175,27 @@ const Login: FC = () => {
 		if (error) {
 			setPasswordState({ value: "", error: false });
 			setPasswordConfirmState({ value: "", error: false });
-			toast.error("An error occured! Please try again.", { autoClose: 5000 });
-			setIsLoading(false);
-			return;
+			toast.error("An error occured! Please try again.");
+		} else {
+			toast.success("Welcome, your account has been created!");
 		}
 
-		if (user) {
-			dispatch(setUid(user.uid));
-			dispatch(setEmail(user.email));
-			toast.success("Welcome, your account has been created!");
-			setIsLoading(false);
-		}
+		setIsLoading(false);
+	};
+
+	/**
+	 * Allows the user to sign in with Google. Upon succesful
+	 * login, the user is redirected to the app.
+	 */
+	const handleGoogleLogin = async () => {
+		setIsLoading(true);
+		const { signedIn, user } = await signInWithGoogle();
+
+		dispatch(setLoggedIn(signedIn));
+		if (user) toast.success("Welcome, you are logged in!");
+		else toast.error("Oops, that's an error. Please try again!");
+
+		setIsLoading(false);
 	};
 
 	/**
@@ -223,25 +214,6 @@ const Login: FC = () => {
 	 */
 	const handleGuideClick = () => {
 		navigate("/guide");
-	};
-
-	/**
-	 * Allows the user to sign in with Google. Upon succesful
-	 * login, the user is redirected to the app.
-	 */
-	const handleGoogleLogin = async () => {
-		setIsLoading(true);
-		const { signedIn, user } = await signInWithGoogle();
-
-		dispatch(setLoggedIn(signedIn));
-		if (user) {
-			dispatch(setUid(user.uid));
-			dispatch(setEmail(user.email));
-			dispatch(setName(user.name));
-			toast.success("Welcome, you are logged in!");
-			user.image && dispatch(setImage(user.image));
-		}
-		setIsLoading(false);
 	};
 
 	return (
