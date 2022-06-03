@@ -6,8 +6,18 @@ import {
 	signInWithPopup,
 	signOut,
 	User,
+	EmailAuthProvider,
+	reauthenticateWithCredential,
+	deleteUser,
 } from "firebase/auth";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import {
+	addDoc,
+	collection,
+	getDocs,
+	query,
+	where,
+	deleteDoc,
+} from "firebase/firestore";
 import db from "../utils/firebase.config";
 
 const auth = getAuth();
@@ -36,6 +46,7 @@ const errorCodes = {
 	mail: { code: 1, type: "mail" },
 	password: { code: 2, type: "pass" },
 	google: { code: 3, type: "google" },
+	user: { code: 4, type: "user" },
 };
 
 /**
@@ -65,6 +76,7 @@ const signIn = async (email: string, password: string): Promise<IUser> => {
 
 		const errorCode = () => {
 			if (code === "auth/invalid-email") return errorCodes.mail;
+			else if (code === "auth/user-not-found") return errorCodes.user;
 			return errorCodes.password;
 		};
 
@@ -90,7 +102,6 @@ const signUp = async (
 ): Promise<IUser> => {
 	try {
 		const res = await createUserWithEmailAndPassword(auth, email, password);
-		console.log(res);
 		const newUser = res.user;
 		await addDoc(collection(db, "users"), {
 			uid: newUser.uid,
@@ -188,7 +199,6 @@ const logout = async (): Promise<boolean> => {
  * Get all available user data.
  */
 const getUser = (): IUser => {
-	console.log("getUser", currentUser);
 	if (!currentUser) return { signedIn: false, user: null };
 	return {
 		signedIn: true,
@@ -200,5 +210,43 @@ const getUser = (): IUser => {
 		},
 	};
 };
+/**
+ * Get all available user data.
+ */
+const deleteSignedUser = async (
+	password: string
+): Promise<{ error: boolean }> => {
+	if (!auth.currentUser) return { error: true };
+	try {
+		const credential = EmailAuthProvider.credential(
+			auth.currentUser.email as string,
+			password
+		);
 
-export { signIn, signUp, signInWithGoogle, logout, getUser };
+		const result = await reauthenticateWithCredential(
+			auth.currentUser,
+			credential
+		);
+
+		// REMOVE USER FROM USERS IN FIREBASE
+		const q = query(
+			collection(db, "users"),
+			where("uid", "==", auth.currentUser.uid)
+		);
+		// const pointSnapshot = await getDocs(pointsCol);
+		// const userList = pointSnapshot.docs.map((doc) => doc.data());
+
+		// console.log(userList);
+
+		// await deleteDoc(docs.docs[0]);
+
+		console.log("user", result.user);
+		// Pass result.user here
+		// await deleteUser(result.user);
+		return { error: false };
+	} catch (error: any) {
+		return { error: true };
+	}
+};
+
+export { signIn, signUp, signInWithGoogle, logout, getUser, deleteSignedUser };
