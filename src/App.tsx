@@ -29,8 +29,7 @@ export const App: FC = () => {
 				<Routes>
 					<Route path="/" element={<Login />} />
 					<Route path="/about" element={<p>ABOUT THIS PROJECT</p>} />
-					{/* <Route path="/profile" element={<AuthRoute route={<Profile />} />} /> */}
-					<Route path="/profile" element={<Profile />} />
+					<Route path="/profile" element={<AuthRoute route={<Profile />} />} />
 					<Route path="/map" element={<AuthRoute route={<Map />} />} />
 					<Route path="/guide" element={<p>HOW TO USE</p>} />
 					<Route path="/logout" element={<AuthRoute route={<Logout />} />} />
