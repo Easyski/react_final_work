@@ -12,6 +12,7 @@ import Mode from "./Mode/Mode";
 import ModeItem from "./ModeItem/ModeItem";
 import Navigation from "./Navigation/Navigation";
 import SearchResults from "./SearchResults/SearchResults";
+import Setting from "./Setting/Setting";
 import Sidebar from "./Sidebar/Sidebar";
 import Topbar from "./Topbar/Topbar";
 
@@ -30,6 +31,7 @@ export {
 	ModeItem,
 	Navigation,
 	SearchResults,
+	Setting,
 	Sidebar,
 	Topbar,
 };
