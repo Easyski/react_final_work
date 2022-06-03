@@ -1,6 +1,6 @@
 .profile {
     .left {
-        border-right: $border-md $grey;
+        border-right: $border-sm $grey;
         height: 70%;
 
         .image {
@@ -27,6 +27,18 @@
                 margin-right: 40px
             }
         }
+
+        .deleteForm {
+            width: 260px;
+
+            .deleteInput {
+                margin-bottom: 0;
+            }
+        }
+
+        .loading {
+            text-align: center;
+        }
     }
 
     &-button {
@@ -36,7 +48,10 @@
     }
 
     .right {
-        height: 100%;
+        height: 70%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
     }
 
     &-input {

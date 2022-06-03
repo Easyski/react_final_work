@@ -30,6 +30,10 @@
     justify-content: space-evenly;
 }
 
+.justify-between {
+    justify-content: space-between;
+}
+
 .all-center {
     align-items: center;
     justify-content: center;
@@ -39,23 +43,27 @@
 // :: CHILDREN
 // -------------------------------------------------------------------
 
-.self-align-center {
+.align-self-center {
     align-self: center;
 }
 
-.self-align-top {
+.align-self-start {
     align-self: flex-start;
 }
 
-.self-justify-center {
+.justify-self-center {
     justify-self: center;
 }
 
-.self-justify-left {
+.justify-self-start {
     justify-self: flex-start;
 }
 
-.self-all-center{
+.justify-self-end {
+    justify-self: flex-end;
+}
+
+.all-self-center {
     align-self: center;
     justify-self: center;
 }
