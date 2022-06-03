@@ -13,7 +13,7 @@ export {
 	setImage,
 	setName,
 	setLoggedIn,
-	setUser,
+	setUserData,
 	default as userReducer,
 } from "./userSlice";
 

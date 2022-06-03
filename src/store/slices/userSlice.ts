@@ -6,12 +6,12 @@ interface IInitialState {
 	loggedIn: boolean;
 	name?: string;
 	image?: string;
-	user: any | null;
+	userData: any | null;
 }
 
 const initialState: IInitialState = {
 	loggedIn: false,
-	user: null,
+	userData: null,
 };
 
 export const userSlice = createSlice({
@@ -33,13 +33,13 @@ export const userSlice = createSlice({
 		setLoggedIn: (state, action) => {
 			state.loggedIn = action.payload;
 		},
-		setUser: (state, action) => {
-			state.user = action.payload;
+		setUserData: (state, action) => {
+			state.userData = action.payload;
 		},
 	},
 });
 
-export const { setEmail, setUid, setImage, setName, setLoggedIn, setUser } =
+export const { setEmail, setUid, setImage, setName, setLoggedIn, setUserData } =
 	userSlice.actions;
 
 export default userSlice.reducer;
