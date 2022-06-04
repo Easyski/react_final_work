@@ -37,7 +37,11 @@ export const App: FC = () => {
 					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>
 			</Router>
-			<ToastContainer pauseOnHover={false} autoClose={2000} />
+			<ToastContainer
+				pauseOnHover={false}
+				autoClose={2000}
+				pauseOnFocusLoss={false}
+			/>
 		</Provider>
 	);
 };

@@ -1,0 +1,67 @@
+.profile {
+    .left {
+        border-right: $border-sm $grey;
+        height: 70%;
+
+        .image {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            overflow: hidden;
+            border: none;
+        }
+
+        .data {
+            margin: 10% auto 5%;
+            height: 25%;
+            width: 70%;
+            grid-template-columns: repeat(2, 50%);
+            grid-template-rows: repeat(2, 50px);
+            row-gap: 20px;
+        }
+
+        .label {
+
+            &:first-of-type,
+            &:nth-of-type(3) {
+                margin-right: 40px
+            }
+        }
+
+        .deleteForm {
+            width: 260px;
+
+            .deleteInput {
+                margin-bottom: 0;
+            }
+        }
+
+        .loading {
+            text-align: center;
+        }
+    }
+
+    &-button {
+        width: fit-content;
+        text-align: start;
+        padding-right: 10px;
+    }
+
+    .right {
+        height: 70%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+    }
+
+    &-input {
+        padding-top: $spacer-xs;
+        overflow-x: visible;
+        width: 100%;
+    }
+
+    .underline {
+        border-bottom: $border-sm $grey;
+        padding-bottom: $spacer-sm;
+    }
+}

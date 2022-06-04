@@ -4,15 +4,34 @@ import {
 	signInWithEmailAndPassword,
 	GoogleAuthProvider,
 	signInWithPopup,
+	signOut,
+	User,
+	EmailAuthProvider,
+	reauthenticateWithCredential,
+	deleteUser,
 } from "firebase/auth";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import {
+	addDoc,
+	collection,
+	getDocs,
+	query,
+	where,
+	deleteDoc,
+} from "firebase/firestore";
 import db from "../utils/firebase.config";
 
 const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
 
+let currentUser: User | null = null;
+
 interface IUser {
-	user: { uid: string; email: string } | null;
+	user: {
+		uid: string;
+		email: string;
+		name: string;
+		image?: string;
+	} | null;
 	signedIn: boolean;
 	error?: IFBError;
 }
@@ -27,6 +46,7 @@ const errorCodes = {
 	mail: { code: 1, type: "mail" },
 	password: { code: 2, type: "pass" },
 	google: { code: 3, type: "google" },
+	user: { code: 4, type: "user" },
 };
 
 /**
@@ -47,6 +67,7 @@ const signIn = async (email: string, password: string): Promise<IUser> => {
 		const user = {
 			uid: userCredential.user.uid,
 			email: userCredential.user.email as string,
+			name: userCredential.user.displayName as string,
 		};
 
 		return { user, signedIn: true };
@@ -55,6 +76,7 @@ const signIn = async (email: string, password: string): Promise<IUser> => {
 
 		const errorCode = () => {
 			if (code === "auth/invalid-email") return errorCodes.mail;
+			else if (code === "auth/user-not-found") return errorCodes.user;
 			return errorCodes.password;
 		};
 
@@ -80,7 +102,6 @@ const signUp = async (
 ): Promise<IUser> => {
 	try {
 		const res = await createUserWithEmailAndPassword(auth, email, password);
-		console.log(res);
 		const newUser = res.user;
 		await addDoc(collection(db, "users"), {
 			uid: newUser.uid,
@@ -91,7 +112,7 @@ const signUp = async (
 
 		return {
 			signedIn: true,
-			user: { email, uid: newUser.uid },
+			user: { email, name, uid: newUser.uid },
 		};
 	} catch (error: any) {
 		console.error(
@@ -125,11 +146,26 @@ const signInWithGoogle = async (): Promise<IUser> => {
 				name: user.displayName,
 				authProvider: "google",
 				email: user.email,
+				image: user.photoURL,
 			});
 		}
 
+		if (user.photoURL)
+			return {
+				user: {
+					uid: user.uid,
+					email: user.email as string,
+					image: user.photoURL,
+					name: user.displayName as string,
+				},
+				signedIn: true,
+			};
 		return {
-			user: { uid: user.uid, email: user.email as string },
+			user: {
+				uid: user.uid,
+				email: user.email as string,
+				name: user.displayName as string,
+			},
 			signedIn: true,
 		};
 	} catch (error: any) {
@@ -146,4 +182,71 @@ const signInWithGoogle = async (): Promise<IUser> => {
 	}
 };
 
-export { signIn, signUp, signInWithGoogle };
+/**
+ * Log the current user out.
+ */
+const logout = async (): Promise<boolean> => {
+	try {
+		await signOut(auth);
+		return true;
+	} catch (error) {
+		console.error("An error occured while trying to log out!", error);
+		return false;
+	}
+};
+
+/**
+ * Get all available user data.
+ */
+const getUser = (): IUser => {
+	if (!currentUser) return { signedIn: false, user: null };
+	return {
+		signedIn: true,
+		user: {
+			email: currentUser.email as string,
+			name: currentUser.displayName as string,
+			uid: currentUser.uid,
+			image: currentUser.photoURL ? currentUser.photoURL : undefined,
+		},
+	};
+};
+/**
+ * Get all available user data.
+ */
+const deleteSignedUser = async (
+	password: string
+): Promise<{ error: boolean }> => {
+	if (!auth.currentUser) return { error: true };
+	try {
+		const credential = EmailAuthProvider.credential(
+			auth.currentUser.email as string,
+			password
+		);
+
+		const result = await reauthenticateWithCredential(
+			auth.currentUser,
+			credential
+		);
+
+		// REMOVE USER FROM USERS IN FIREBASE
+		const q = query(
+			collection(db, "users"),
+			where("uid", "==", auth.currentUser.uid)
+		);
+		// const pointSnapshot = await getDocs(pointsCol);
+		// const userList = pointSnapshot.docs.map((doc) => doc.data());
+
+		// console.log(userList);
+
+		// await deleteDoc(docs.docs[0]);
+
+		console.log("user", result.user);
+		// Pass result.user here
+		// await deleteUser(result.user);
+		return { error: false };
+	} catch (error: any) {
+		return { error: true };
+	}
+};
+
+export { signIn, signUp, signInWithGoogle, logout, getUser, deleteSignedUser };

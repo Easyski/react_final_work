@@ -10,7 +10,10 @@ export {
 export {
 	setEmail,
 	setUid,
+	setImage,
+	setName,
 	setLoggedIn,
+	setUserData,
 	default as userReducer,
 } from "./userSlice";
 

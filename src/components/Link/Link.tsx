@@ -1,6 +1,11 @@
 import { FC } from "react";
 import cn from "classnames";
-import { BiChevronLeft, BiChevronRight, BiHelpCircle } from "react-icons/bi";
+import {
+	BiChevronLeft,
+	BiChevronRight,
+	BiHelpCircle,
+	BiTrash,
+} from "react-icons/bi";
 import { BsGoogle } from "react-icons/bs";
 
 import { ILink } from "./Link.styles";
@@ -16,6 +21,8 @@ const Link: FC<ILink> = ({ content, type, extraStyle, textStyle, onClick }) => {
 				return <BiChevronLeft className={cn("link-icon", textStyle)} />;
 			case "google":
 				return <BsGoogle className={cn("link-icon", textStyle)} />;
+			case "delete":
+				return <BiTrash className={cn("link-icon", textStyle)} />;
 		}
 	};
 
@@ -28,7 +35,10 @@ const Link: FC<ILink> = ({ content, type, extraStyle, textStyle, onClick }) => {
 		<>
 			{type === "submit" || type === "google" ? (
 				<button
-					className={cn("submit color-white bold uppercase", extraStyle)}
+					className={cn(
+						"submit color-white bold uppercase flex flex-h all-center",
+						extraStyle
+					)}
 					type="submit"
 					onClick={handleOnClick}
 				>

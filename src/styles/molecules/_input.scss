@@ -3,6 +3,7 @@
     font-size: $font-md;
     height: 20px;
     text-overflow: ellipsis;
+    font-family: $font-family;
 
     &:focus {
         outline: none;
