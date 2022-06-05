@@ -20,12 +20,10 @@ const SearchResults: FC<ISearchResults> = () => {
 	 * @param center The coordinates the map needs to move to.
 	 */
 	const handleResultClick = (center: ICoordinates, name: string) => {
-		batch(() => {
-			dispatch(setCenterCoordinates(center));
-			dispatch(setLocationName(name));
-			dispatch(setLocations([]));
-			dispatch(setZoom(13));
-		});
+		dispatch(setCenterCoordinates(center));
+		dispatch(setLocationName(name));
+		dispatch(setLocations([]));
+		dispatch(setZoom(13));
 	};
 
 	/**
