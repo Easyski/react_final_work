@@ -1,18 +1,18 @@
 .topbar {
-	position: absolute;
+	grid-row: 1;
+	grid-column: 2;
 	z-index: $overlay;
-	top: $spacer-md;
-	left: 40%;
-	width: 40%;
+	width: 80%;
 	min-width: 375px;
 	max-width: 570px;
-
 	flex-flow: wrap;
+	align-self: center;
+	transform: translateX(-35px);
 
-	animation: fadeInDown;
-	-webkit-animation: fadeInDown;
-	-moz-animation: fadeInDown;
-	animation-duration: 1s;
+	animation: fadeIn;
+	-webkit-animation: fadeIn;
+	-moz-animation: fadeIn;
+	animation-duration: 2s;
 
 	.searchIcon {
 		align-self: center;

@@ -1,20 +1,34 @@
 .marker-option {
-	grid-template-columns: 65% 35%;
-	grid-template-rows: repeat(6, 30px);
-	background-color: $white;
+	position: relative;
 	margin-bottom: 8px;
 	animation: fadeInLeft;
 	animation-duration: .3s;
+	border-bottom: $border-sm $light-grey;
 
-	.input {
-		grid-column: span 2;
+	&>* {
+		padding: 5px 0;
 	}
 
-	.small-map {
-		width: 100%;
-		grid-row: 2 / span 5;
-		grid-column: 2;
-		margin-right: 15px;
+	.icon {
+		position: absolute;
+		font-size: 20px;
+
+		&-close {
+			right: 0;
+			top: 0;
+		}
+
+		&-exit {
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+
+		&-delete {
+			right: 0;
+			bottom: 0;
+			color: $red;
+		}
 	}
 
 	.marker-button {
@@ -36,5 +50,3 @@
 }
 
 /* -------------------- */
-
-
