@@ -11,12 +11,12 @@ const Map: FC = () => {
 	});
 
 	return (
-		<>
+		<div className="map grid full-view-width-heigth">
 			<Navigation />
 			<Topbar />
 			<Sidebar />
 			{/* <Bottombar /> */}
-		</>
+		</div>
 	);
 };
 
