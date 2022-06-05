@@ -2,11 +2,12 @@ import { FC, useEffect, useCallback, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import mapboxgl, { Map } from "mapbox-gl";
 import { HiOutlineLocationMarker } from "react-icons/hi";
+import { toast } from "react-toastify";
 
-import { setNewMarkers } from "../../store/slices";
+import { setMarkerList, setSelectedMarkerIndex } from "../../store/slices";
 import { ICoordinates } from "../types";
 import { INavigationTypes } from "./Navigation.types";
-import { toast } from "react-toastify";
+import { getAltitude, findMarkerInList } from "../../hooks";
 
 export const Navigation: FC<INavigationTypes> = () => {
 	const dispatch = useDispatch();
@@ -15,10 +16,13 @@ export const Navigation: FC<INavigationTypes> = () => {
 		(state: any) => state.map.centerCoordinates
 	);
 	const editorMode = useSelector((state: any) => state.topbar.mode);
-	const newMarkers = useSelector((state: any) => state.sidebar.newMarkers);
+	const markerList: ICoordinates[] = useSelector(
+		(state: any) => state.sidebar.markerList
+	);
 
 	const map = useRef<Map>();
 	const mapContainer = useRef<HTMLDivElement | null>(null);
+	const [markerClicked, setMarkerClicked] = useState<ICoordinates>();
 	const [newMarkerCoordinates, setNewMarkerCoordinates] =
 		useState<ICoordinates>();
 
@@ -37,7 +41,6 @@ export const Navigation: FC<INavigationTypes> = () => {
 			doubleClickZoom: false,
 			pitchWithRotate: false,
 			dragRotate: false,
-			logoPosition: "bottom-right",
 		});
 	});
 
@@ -71,19 +74,32 @@ export const Navigation: FC<INavigationTypes> = () => {
 
 	/**
 	 * This function is called whenver a new marker is placed on the map. It
-	 * adds the coordinates to the @param newMarkers array in the store. This
+	 * adds the coordinates to the @param markerList array in the store. This
 	 * cannot be done in the @function handleMapClick because it is memoised
 	 * and therefor unable to retrieve the previous markers.
 	 */
 	useEffect(() => {
-		if (newMarkers[0]) {
-			dispatch(setNewMarkers([...newMarkers, newMarkerCoordinates]));
+		if (markerList[0]) {
+			dispatch(setMarkerList([...markerList, newMarkerCoordinates]));
 			return;
 		}
-		dispatch(setNewMarkers([newMarkerCoordinates]));
+		dispatch(setMarkerList([newMarkerCoordinates]));
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [newMarkerCoordinates]);
+
+	useEffect(() => {
+		if (!markerClicked) return;
+		const index = findMarkerInList(markerClicked, markerList);
+		console.log(index);
+		if (index !== null) {
+			toast.info("This marker is already in the list");
+			dispatch(setSelectedMarkerIndex(index));
+			return;
+		}
+		dispatch(setMarkerList([...markerList, markerClicked]));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [markerClicked]);
 
 	/**
 	 * Memoised function without dependencies, which means every reload it
@@ -102,26 +118,33 @@ export const Navigation: FC<INavigationTypes> = () => {
 	 * @param evt The Mapbox GL mouse-event from which we get the lat- and
 	 * longtitude.
 	 */
-	const handleMapClick = (evt: mapboxgl.MapMouseEvent) => {
+	const handleMapClick = async (evt: mapboxgl.MapMouseEvent) => {
 		if (!map.current) return;
 		const { lng, lat } = evt.lngLat;
+		const alt = await getAltitude(lat, lng);
+
+		// MARKER
 		const markerEl = document.createElement("div");
 		markerEl.className = "marker";
-
-		new mapboxgl.Marker(markerEl)
+		const marker = new mapboxgl.Marker(markerEl)
 			.setLngLat([lng, lat])
-			.addTo(map.current)
-			.getPopup();
+			.addTo(map.current);
 
-		setNewMarkerCoordinates({ lat, lng });
+		marker
+			.getElement()
+			.addEventListener("click", () => setMarkerClicked({ lat, lng, alt }));
+
+		// COORDINATES
+		setNewMarkerCoordinates({ lat, lng, alt });
+		// TOAST
 		toast("Your marker has been set!", {
 			icon: <HiOutlineLocationMarker />,
-			progressStyle: { backgroundColor: "red" },
+			progressClassName: "marker-toast",
 		});
 	};
 
 	return (
-		<div>
+		<div className="navigation-container">
 			<div ref={mapContainer} className="navigation" />
 		</div>
 	);
