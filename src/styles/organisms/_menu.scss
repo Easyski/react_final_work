@@ -6,10 +6,10 @@
     color: $black;
     color: $black;
 
-    animation: fadeInDown;
-    -webkit-animation: fadeInDown;
-    -moz-animation: fadeInDown;
-    animation-duration: 1s;
+    animation: fadeIn;
+    -webkit-animation: fadeIn;
+    -moz-animation: fadeIn;
+    animation-duration: 2s;
 
     &-icon {
         font-size: 28px;

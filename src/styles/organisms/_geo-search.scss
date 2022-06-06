@@ -1,6 +1,7 @@
 .geo-search {
 	flex-grow: 9;
-	padding-right: $spacer-sm;
+	margin-right: $spacer-md;
+	border-bottom: $border-sm $dark-blue;
 
 	.search-input {
 		height: 40px;

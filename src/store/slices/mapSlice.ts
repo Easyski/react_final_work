@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ICoordinates } from "../../components/types";
+import { ICoordinates } from "@/components/types";
 
 interface IInitialState {
 	centerCoordinates: ICoordinates;

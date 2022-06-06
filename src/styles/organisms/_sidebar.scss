@@ -1,16 +1,18 @@
 .sidebar {
-	position: absolute;
-	left: $spacer-md;
-	top: $spacer-md;
-	bottom: $spacer-md;
+	grid-row: 1 / span 2;
+	grid-column: 1;
 	z-index: $overlay;
-	width: 375px;
 	padding: $spacer-md $spacer-lg;
+	overflow-y: scroll;
 
-	animation: fadeInLeft;
-	-webkit-animation: fadeInLeft;
-	-moz-animation: fadeInLeft;
-	animation-duration: 1s;
+	animation: fadeIn;
+	-webkit-animation: fadeIn;
+	-moz-animation: fadeIn;
+	animation-duration: 2s;
+
+	.title {
+		border-bottom: $border-sm $light-blue;
+	}
 
 	.scroll-container {
 		margin-top: $spacer-md;

@@ -1,9 +1,9 @@
 import { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { logout } from "../hooks/useCredentials";
 
-import { setLoggedIn } from "../store/slices";
+import { logout } from "@/hooks/useCredentials";
+import { setLoggedIn } from "@/store/slices";
 
 const Logout: FC = () => {
 	const dispatch = useDispatch();

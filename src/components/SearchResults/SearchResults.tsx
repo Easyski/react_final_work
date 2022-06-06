@@ -1,16 +1,15 @@
 import { FC } from "react";
-import { useDispatch, useSelector, batch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
 	setCenterCoordinates,
 	setZoom,
 	setLocations,
 	setLocationName,
-} from "../../store/slices";
-import { ICoordinates, ILocation } from "../types";
-import { ISearchResults } from "./SearchResults.types";
+} from "@/store/slices";
+import { ICoordinates, ILocation } from "@/components/types";
 
-const SearchResults: FC<ISearchResults> = () => {
+const SearchResults: FC = () => {
 	const dispatch = useDispatch();
 	const locations = useSelector((state: any) => state.topbar.locations);
 
@@ -20,12 +19,10 @@ const SearchResults: FC<ISearchResults> = () => {
 	 * @param center The coordinates the map needs to move to.
 	 */
 	const handleResultClick = (center: ICoordinates, name: string) => {
-		batch(() => {
-			dispatch(setCenterCoordinates(center));
-			dispatch(setLocationName(name));
-			dispatch(setLocations([]));
-			dispatch(setZoom(13));
-		});
+		dispatch(setCenterCoordinates(center));
+		dispatch(setLocationName(name));
+		dispatch(setLocations([]));
+		dispatch(setZoom(13));
 	};
 
 	/**
@@ -52,13 +49,14 @@ const SearchResults: FC<ISearchResults> = () => {
 		return elements;
 	};
 
-	return (
-		<div>
-			{!!locations.length && (
-				<div className="search-results border-box">{setElements()}</div>
-			)}
-		</div>
-	);
+	if (!!locations.length)
+		return (
+			<div className="search-results border-box absolute top">
+				{setElements()}
+			</div>
+		);
+
+	return null;
 };
 
 export default SearchResults;

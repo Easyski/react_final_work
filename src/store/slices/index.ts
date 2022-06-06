@@ -1,4 +1,8 @@
-export { setNewMarkers, default as sidebarReducer } from "./sidebarSlice";
+export {
+	setMarkerList,
+	setSelectedMarkerIndex,
+	default as sidebarReducer,
+} from "./sidebarSlice";
 
 export {
 	setCenterCoordinates,
@@ -7,14 +11,6 @@ export {
 	default as mapReducer,
 } from "./mapSlice";
 
-export {
-	setEmail,
-	setUid,
-	setImage,
-	setName,
-	setLoggedIn,
-	setUserData,
-	default as userReducer,
-} from "./userSlice";
+export { setLoggedIn, setUserData, default as userReducer } from "./userSlice";
 
 export { setLocations, setMode, default as topbarReducer } from "./topbarSlice";

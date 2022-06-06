@@ -1,19 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ICoordinates } from "@/components/types";
 
-const initialState = {
-	newMarkers: [],
+interface IInitialState {
+	markerList: ICoordinates[];
+	selectedMarkerIndex?: ICoordinates;
+}
+
+const initialState: IInitialState = {
+	markerList: [],
 };
 
 export const sidebarSlice = createSlice({
 	name: "sidebarSlice",
 	initialState,
 	reducers: {
-		setNewMarkers: (state, action) => {
-			state.newMarkers = action.payload;
+		setMarkerList: (state, action) => {
+			state.markerList = action.payload;
+		},
+		setSelectedMarkerIndex: (state, action) => {
+			state.selectedMarkerIndex = action.payload;
 		},
 	},
 });
 
-export const { setNewMarkers } = sidebarSlice.actions;
+export const { setMarkerList, setSelectedMarkerIndex } = sidebarSlice.actions;
 
 export default sidebarSlice.reducer;

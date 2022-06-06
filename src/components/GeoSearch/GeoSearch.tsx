@@ -1,12 +1,11 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector, batch } from "react-redux";
-import { GiCancel } from "react-icons/gi";
+import { BiX } from "react-icons/bi";
 
-import { setLocations } from "../../store/slices";
-import { ILocation } from "../types";
-import { IGeoSearchTypes } from "./GeoSearch.types";
+import { setLocations } from "@/store/slices";
+import { ILocation } from "@/components/types";
 
-const GeoSearch: FC<IGeoSearchTypes> = () => {
+const GeoSearch: FC = () => {
 	const dispatch = useDispatch();
 	const locationName = useSelector((state: any) => state.map.locationName);
 
@@ -95,7 +94,7 @@ const GeoSearch: FC<IGeoSearchTypes> = () => {
 				ref={inputRef}
 			/>
 			{!isEmpty && (
-				<GiCancel className="searchCancel" onClick={handleClearButtonClick} />
+				<BiX className="searchCancel" onClick={handleClearButtonClick} />
 			)}
 		</div>
 	);

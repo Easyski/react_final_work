@@ -8,15 +8,12 @@ import {
 } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
 
-import { Map, Login, Profile, Logout } from "./pages";
-import store from "./store";
+import { Map, Login, Profile, Logout } from "@/pages";
+import store from "@/store";
+import { AuthRoute, Menu } from "@/components";
 
-import { AuthRoute, Menu } from "./components";
+import "@/styles/main.scss";
 
-import "./styles/main.scss";
-import "animate.css";
-import "mapbox-gl/dist/mapbox-gl.css";
-import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY as string;

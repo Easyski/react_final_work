@@ -1,5 +1,5 @@
 import { collection, getDocs } from "firebase/firestore";
-import db from "../utils/firebase.config";
+import db from "@/utils/firebase.config";
 
 const getPoints = async () => {
 	const pointsCol = collection(db, "points");

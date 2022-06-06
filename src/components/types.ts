@@ -9,4 +9,3 @@ export interface ICoordinates {
 	lng: number;
 	alt?: number;
 }
-export type LatLng = [number, number];

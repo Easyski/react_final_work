@@ -1,60 +1,70 @@
-import { FC, useEffect, useRef, useState } from "react";
-import { useDispatch, batch } from "react-redux";
-import mapboxgl, { Map } from "mapbox-gl";
+import { FC, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ToggleSlider } from "react-toggle-slider";
+import { BiTrash, BiX, BiExit } from "react-icons/bi";
+import { toast } from "react-toastify";
+import cn from "classnames";
 
-import { setCenterCoordinates, setZoom } from "../../store/slices";
-import { ICoordinates } from "../types";
+import { setCenterCoordinates, setMarkerList, setZoom } from "@/store/slices";
+import { ICoordinates } from "@/components/types";
+import { removeMarkerFromList } from "@/hooks";
 
-const MarkerOption: FC<{ coordinates: ICoordinates }> = ({ coordinates }) => {
+interface IMarkerOption {
+	coordinates: ICoordinates;
+	indexInList: number;
+}
+
+const MarkerOption: FC<IMarkerOption> = ({ coordinates, indexInList }) => {
 	const dispatch = useDispatch();
+	const markerList: any[] = useSelector(
+		(state: any) => state.sidebar.markerList
+	);
+	const selectedMarkerIndex = useSelector(
+		(state: any) => state.sidebar.selectedMarkerIndex
+	);
 
 	const [isGuide, setIsGuide] = useState<boolean>(false);
-	const map = useRef<Map>();
-	const smallMapContainer = useRef<HTMLDivElement | null>(null);
+	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-	/**
-	 * Initialise map with set parameters
-	 * ( Executed on startup )
-	 */
 	useEffect(() => {
-		if (map.current || !smallMapContainer.current) return; // initialize map only once
-		map.current = new mapboxgl.Map({
-			container: smallMapContainer.current,
-			style: "mapbox://styles/mapbox/streets-v9",
-			center: coordinates,
-			zoom: 15,
-			interactive: false,
-		});
+		if (indexInList === selectedMarkerIndex) {
+			setIsPlaying(true);
+		}
+	}, [indexInList, selectedMarkerIndex]);
 
-		new mapboxgl.Marker({ color: "rgba(221, 147, 147, 0.5)" })
-			.setLngLat(coordinates)
-			.addTo(map.current);
-	});
-
-	const handleMapClicked = () => {
-		batch(() => {
-			dispatch(setZoom(14));
-			dispatch(setCenterCoordinates(coordinates));
-		});
+	useEffect(() => {
+		console.log("isPlaying", isPlaying);
+		if (isPlaying) setIsPlaying(false);
+	}, [isPlaying]);
+	/**
+	 * Zooms in on the selected marker.
+	 */
+	const handleMarkerListClicked = () => {
+		dispatch(setZoom(14));
+		dispatch(setCenterCoordinates(coordinates));
 	};
 
-	const handleButtonClicked = (accept: boolean) => {
-		console.log(accept);
+	const handleCloseMarker = () => {
+		const newMarkerList = removeMarkerFromList(coordinates, markerList);
+		if (!newMarkerList) toast.error("The marker could not be removed!");
+		dispatch(setMarkerList(newMarkerList));
+	};
+
+	const handleDeleteMarker = () => {
+		console.log("Delete");
 	};
 
 	return (
-		<div className="marker-option grid font-md">
+		<div
+			className={cn("marker-option font-md", {
+				"animate__animated animate__flash": isPlaying,
+			})}
+		>
 			<input
 				className="input italic"
 				type="text"
 				placeholder="Name (optional)"
 				autoComplete="off"
-			/>
-			<div
-				ref={smallMapContainer}
-				className="small-map"
-				onClick={handleMapClicked}
 			/>
 			<div className="flex flex-h">
 				<p>
@@ -83,20 +93,15 @@ const MarkerOption: FC<{ coordinates: ICoordinates }> = ({ coordinates }) => {
 				<span className="bold">Altitude: </span>
 				{coordinates.alt ? coordinates.alt.toFixed(4) : 0}
 			</p>
-			<div className="flex flex-h justify-evenly">
-				<button
-					onClick={() => handleButtonClicked(true)}
-					className="marker-button bold border"
-				>
-					<p>Save</p>
-				</button>
-				<button
-					onClick={() => handleButtonClicked(false)}
-					className="marker-button"
-				>
-					<p>Delete</p>
-				</button>
-			</div>
+			<BiX className="icon icon-close pointer" onClick={handleCloseMarker} />
+			<BiExit
+				className="icon icon-exit pointer"
+				onClick={handleMarkerListClicked}
+			/>
+			<BiTrash
+				className="icon icon-delete pointer"
+				onClick={handleDeleteMarker}
+			/>
 		</div>
 	);
 };

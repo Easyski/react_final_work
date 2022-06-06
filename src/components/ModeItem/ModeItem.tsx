@@ -3,10 +3,8 @@ import { useDispatch } from "react-redux";
 import cn from "classnames";
 import Tippy from "@tippyjs/react";
 
+import { setMode } from "@/store/slices";
 import { IModeItemTypes } from "./ModeItem.types";
-import { setMode } from "../../store/slices";
-
-import "tippy.js/dist/tippy.css"; // optional
 
 const ModeItem: FC<IModeItemTypes> = ({ mode, selectedMode, children }) => {
 	const dispatch = useDispatch();
