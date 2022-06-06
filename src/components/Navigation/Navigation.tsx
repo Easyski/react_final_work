@@ -4,12 +4,11 @@ import mapboxgl, { Map } from "mapbox-gl";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { toast } from "react-toastify";
 
-import { setMarkerList, setSelectedMarkerIndex } from "../../store/slices";
-import { ICoordinates } from "../types";
-import { INavigationTypes } from "./Navigation.types";
-import { getAltitude, findMarkerInList } from "../../hooks";
+import { setMarkerList, setSelectedMarkerIndex } from "@/store/slices";
+import { ICoordinates } from "@/components/types";
+import { getAltitude, findMarkerInList } from "@/hooks";
 
-export const Navigation: FC<INavigationTypes> = () => {
+export const Navigation: FC = () => {
 	const dispatch = useDispatch();
 	const zoom = useSelector((state: any) => state.map.zoom);
 	const center: ICoordinates = useSelector(

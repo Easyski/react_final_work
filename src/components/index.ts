@@ -1,37 +1,17 @@
-import AuthRoute from "./AuthRoute/AuthRoute";
-import Bottombar from "./Bottombar/Bottombar";
-import Divider from "./Divider/Divider";
-import GeoSearch from "./GeoSearch/GeoSearch";
-import Input from "./Input/Input";
-import FormInput from "./FormInput/FormInput";
-import Link from "./Link/Link";
-import Loading from "./Loading/Loading";
-import MarkerOption from "./MarkerOption/MarkerOption";
-import Menu from "./Menu/Menu";
-import Mode from "./Mode/Mode";
-import ModeItem from "./ModeItem/ModeItem";
-import Navigation from "./Navigation/Navigation";
-import SearchResults from "./SearchResults/SearchResults";
-import Setting from "./Setting/Setting";
-import Sidebar from "./Sidebar/Sidebar";
-import Topbar from "./Topbar/Topbar";
-
-export {
-	AuthRoute,
-	Bottombar,
-	Divider,
-	GeoSearch,
-	Input,
-	FormInput,
-	Link,
-	Loading,
-	MarkerOption,
-	Menu,
-	Mode,
-	ModeItem,
-	Navigation,
-	SearchResults,
-	Setting,
-	Sidebar,
-	Topbar,
-};
+export { default as AuthRoute } from "./AuthRoute/AuthRoute";
+export { default as Bottombar } from "./Bottombar/Bottombar";
+export { default as Divider } from "./Divider/Divider";
+export { default as GeoSearch } from "./GeoSearch/GeoSearch";
+export { default as Input } from "./Input/Input";
+export { default as FormInput } from "./FormInput/FormInput";
+export { default as Link } from "./Link/Link";
+export { default as Loading } from "./Loading/Loading";
+export { default as MarkerOption } from "./MarkerOption/MarkerOption";
+export { default as Menu } from "./Menu/Menu";
+export { default as Mode } from "./Mode/Mode";
+export { default as ModeItem } from "./ModeItem/ModeItem";
+export { default as Navigation } from "./Navigation/Navigation";
+export { default as SearchResults } from "./SearchResults/SearchResults";
+export { default as Setting } from "./Setting/Setting";
+export { default as Sidebar } from "./Sidebar/Sidebar";
+export { default as Topbar } from "./Topbar/Topbar";

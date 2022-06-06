@@ -1,5 +1,4 @@
 import { FC } from "react";
-
 import { SpinnerRoundOutlined } from "spinners-react";
 
 const Loading: FC = () => {

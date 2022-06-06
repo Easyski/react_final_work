@@ -8,7 +8,7 @@ import {
 	User,
 	EmailAuthProvider,
 	reauthenticateWithCredential,
-	deleteUser,
+	// deleteUser,
 } from "firebase/auth";
 import {
 	addDoc,
@@ -16,7 +16,7 @@ import {
 	getDocs,
 	query,
 	where,
-	deleteDoc,
+	// deleteDoc,
 } from "firebase/firestore";
 import db from "../utils/firebase.config";
 
@@ -229,10 +229,10 @@ const deleteSignedUser = async (
 		);
 
 		// REMOVE USER FROM USERS IN FIREBASE
-		const q = query(
-			collection(db, "users"),
-			where("uid", "==", auth.currentUser.uid)
-		);
+		// const q = query(
+		// 	collection(db, "users"),
+		// 	where("uid", "==", auth.currentUser.uid)
+		// );
 		// const pointSnapshot = await getDocs(pointsCol);
 		// const userList = pointSnapshot.docs.map((doc) => doc.data());
 

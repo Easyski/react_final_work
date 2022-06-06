@@ -2,8 +2,8 @@ import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { setUserData, setLoggedIn } from "../../store/slices";
-import { auth } from "../../utils/firebase.config";
+import { setUserData, setLoggedIn } from "@/store/slices";
+import { auth } from "@/utils/firebase.config";
 
 const AuthRoute: FC<{ route: JSX.Element }> = ({ route }) => {
 	const navigate = useNavigate();

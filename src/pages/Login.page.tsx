@@ -1,13 +1,13 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import cn from "classnames";
 
-import logo from "../assets/logo.svg";
-import { signIn, signInWithGoogle, signUp } from "../hooks";
-import { setLoggedIn } from "../store/slices";
-import { Divider, FormInput, Link, Loading } from "../components";
-import { toast } from "react-toastify";
+import logo from "@assets/logo.svg";
+import { Divider, FormInput, Link, Loading } from "@/components";
+import { signIn, signInWithGoogle, signUp } from "@/hooks";
+import { setLoggedIn } from "@/store/slices";
 
 interface IState {
 	value: string;

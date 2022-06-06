@@ -1,4 +1,4 @@
-import { ICoordinates } from "../components/types";
+import { ICoordinates } from "@/components/types";
 
 /**
  * Find the provided marker in the provided list. It compares both the

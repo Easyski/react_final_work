@@ -2,11 +2,10 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector, batch } from "react-redux";
 import { GiCancel } from "react-icons/gi";
 
-import { setLocations } from "../../store/slices";
-import { ILocation } from "../types";
-import { IGeoSearchTypes } from "./GeoSearch.types";
+import { setLocations } from "@/store/slices";
+import { ILocation } from "@/components/types";
 
-const GeoSearch: FC<IGeoSearchTypes> = () => {
+const GeoSearch: FC = () => {
 	const dispatch = useDispatch();
 	const locationName = useSelector((state: any) => state.map.locationName);
 

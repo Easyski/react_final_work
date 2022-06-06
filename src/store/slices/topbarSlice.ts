@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ILocation } from "../../components/types";
+import { ILocation } from "@/components/types";
 
 interface IInitialState {
 	locations: ILocation[] | [];
