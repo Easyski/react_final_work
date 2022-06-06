@@ -49,13 +49,14 @@ const SearchResults: FC = () => {
 		return elements;
 	};
 
-	return (
-		<div>
-			{!!locations.length && (
-				<div className="search-results border-box">{setElements()}</div>
-			)}
-		</div>
-	);
+	if (!!locations.length)
+		return (
+			<div className="search-results border-box absolute top">
+				{setElements()}
+			</div>
+		);
+
+	return null;
 };
 
 export default SearchResults;
