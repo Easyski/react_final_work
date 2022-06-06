@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useDispatch } from "react-redux";
-import { setZoom } from "../../store/slices";
+
+import { setZoom } from "@/store/slices";
 
 const Bottombar: FC = () => {
 	const dispatch = useDispatch();

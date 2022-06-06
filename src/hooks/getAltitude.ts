@@ -4,7 +4,7 @@ const getAltitude = async (lat: number, lng: number): Promise<number> => {
 	// );
 	// const res = await req.json();
 	// console.log(res);
-	return (Math.random() * 5000000) / 1000;
+	return Math.floor(Math.random() * 50000000) / 10000;
 };
 
 export { getAltitude };

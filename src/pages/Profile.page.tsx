@@ -1,15 +1,15 @@
 import { FC, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import cn from "classnames";
-
-import { Input, Link, Loading, Setting } from "../components";
-import fallbackImage from "../assets/fallback.png";
-import { deleteSignedUser } from "../hooks/useCredentials";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import cn from "classnames";
+// import { useNavigate } from "react-router-dom";
+
+import fallbackImage from "@/assets/fallback.png";
+import { Input, Link, Loading, Setting } from "@/components";
+import { deleteSignedUser } from "@/hooks/useCredentials";
 
 const Profile: FC = () => {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	const user = useSelector((store: any) => store.user.userData);
 
 	const formRef = useRef<HTMLFormElement>(null);

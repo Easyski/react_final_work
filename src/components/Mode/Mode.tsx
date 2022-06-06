@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { BiLocationPlus, BiTrip } from "react-icons/bi";
 import { RiGuideLine } from "react-icons/ri";
 
-import ModeItem from "../ModeItem/ModeItem";
+import { ModeItem } from "@/components";
 
 const Mode: FC = () => {
 	const selectedMode = useSelector((state: any) => state.topbar.mode);

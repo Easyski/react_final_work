@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
+import { ToggleSlider } from "react-toggle-slider";
 
 import { ISetting } from "./Setting.types";
-import { ToggleSlider } from "react-toggle-slider";
 
 const Setting: FC<ISetting> = ({ title, content, defaultValue }) => {
 	const [value, setValue] = useState<boolean>(defaultValue);

@@ -1,10 +1,9 @@
 import { FC } from "react";
-
-import { GeoSearch, SearchResults, Mode } from "../";
-import { ITopbar } from "./Topbar.types";
 import { GoSearch } from "react-icons/go";
 
-const Topbar: FC<ITopbar> = () => {
+import { GeoSearch, SearchResults, Mode } from "@/components";
+
+const Topbar: FC = () => {
 	return (
 		<div className="full-width-height flex all-center">
 			<div className="topbar flex">

@@ -5,13 +5,9 @@ import { BiTrash, BiX, BiExit } from "react-icons/bi";
 import { toast } from "react-toastify";
 import cn from "classnames";
 
-import {
-	setCenterCoordinates,
-	setMarkerList,
-	setZoom,
-} from "../../store/slices";
-import { ICoordinates } from "../types";
-import { removeMarkerFromList } from "../../hooks";
+import { setCenterCoordinates, setMarkerList, setZoom } from "@/store/slices";
+import { ICoordinates } from "@/components/types";
+import { removeMarkerFromList } from "@/hooks";
 
 interface IMarkerOption {
 	coordinates: ICoordinates;

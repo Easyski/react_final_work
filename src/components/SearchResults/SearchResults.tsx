@@ -1,16 +1,15 @@
 import { FC } from "react";
-import { useDispatch, useSelector, batch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
 	setCenterCoordinates,
 	setZoom,
 	setLocations,
 	setLocationName,
-} from "../../store/slices";
-import { ICoordinates, ILocation } from "../types";
-import { ISearchResults } from "./SearchResults.types";
+} from "@/store/slices";
+import { ICoordinates, ILocation } from "@/components/types";
 
-const SearchResults: FC<ISearchResults> = () => {
+const SearchResults: FC = () => {
 	const dispatch = useDispatch();
 	const locations = useSelector((state: any) => state.topbar.locations);
 

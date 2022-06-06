@@ -1,11 +1,11 @@
 import { FC, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
-import { MarkerOption } from "..";
-import { ICoordinates } from "../types";
+import { MarkerOption } from "@/components";
+import { ICoordinates } from "@/components/types";
 
 const Sidebar: FC = () => {
-	const mode = useSelector((store: any) => store.topbar.mode);
+	// const mode = useSelector((store: any) => store.topbar.mode);
 	const markersToBeAdded = useSelector(
 		(store: any) => store.sidebar.markerList
 	);
