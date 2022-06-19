@@ -1,20 +1,23 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToggleSlider } from "react-toggle-slider";
-import { BiTrash, BiX, BiExit } from "react-icons/bi";
+import { BiTrash, BiX, BiMapPin } from "react-icons/bi";
 import { toast } from "react-toastify";
-import cn from "classnames";
 
-import { setCenterCoordinates, setMarkerList, setZoom } from "@/store/slices";
-import { ICoordinates } from "@/components/types";
+import {
+	setCenterCoordinates,
+	setOverrideMarkerList,
+	setZoom,
+} from "@/store/slices";
+import { IMarker } from "@/components/types";
 import { removeMarkerFromList } from "@/hooks";
 
 interface IMarkerOption {
-	coordinates: ICoordinates;
+	marker: IMarker;
 	indexInList: number;
 }
 
-const MarkerOption: FC<IMarkerOption> = ({ coordinates, indexInList }) => {
+const MarkerOption: FC<IMarkerOption> = ({ marker, indexInList }) => {
 	const dispatch = useDispatch();
 	const markerList: any[] = useSelector(
 		(state: any) => state.sidebar.markerList
@@ -24,30 +27,19 @@ const MarkerOption: FC<IMarkerOption> = ({ coordinates, indexInList }) => {
 	);
 
 	const [isGuide, setIsGuide] = useState<boolean>(false);
-	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-	useEffect(() => {
-		if (indexInList === selectedMarkerIndex) {
-			setIsPlaying(true);
-		}
-	}, [indexInList, selectedMarkerIndex]);
-
-	useEffect(() => {
-		console.log("isPlaying", isPlaying);
-		if (isPlaying) setIsPlaying(false);
-	}, [isPlaying]);
 	/**
 	 * Zooms in on the selected marker.
 	 */
 	const handleMarkerListClicked = () => {
 		dispatch(setZoom(14));
-		dispatch(setCenterCoordinates(coordinates));
+		dispatch(setCenterCoordinates(marker.coordinates));
 	};
 
 	const handleCloseMarker = () => {
-		const newMarkerList = removeMarkerFromList(coordinates, markerList);
+		const newMarkerList = removeMarkerFromList(marker, markerList);
 		if (!newMarkerList) toast.error("The marker could not be removed!");
-		dispatch(setMarkerList(newMarkerList));
+		dispatch(setOverrideMarkerList(newMarkerList));
 	};
 
 	const handleDeleteMarker = () => {
@@ -55,11 +47,7 @@ const MarkerOption: FC<IMarkerOption> = ({ coordinates, indexInList }) => {
 	};
 
 	return (
-		<div
-			className={cn("marker-option font-md", {
-				"animate__animated animate__flash": isPlaying,
-			})}
-		>
+		<div className="marker-option font-md">
 			<input
 				className="input italic"
 				type="text"
@@ -83,23 +71,26 @@ const MarkerOption: FC<IMarkerOption> = ({ coordinates, indexInList }) => {
 			</div>
 			<p>
 				<span className="bold">Longitude: </span>
-				{coordinates.lng.toFixed(4)}
+				{marker.coordinates.lng.toFixed(4)}
 			</p>
 			<p>
 				<span className="bold">Latitude: </span>
-				{coordinates.lat.toFixed(4)}
+				{marker.coordinates.lat.toFixed(4)}
 			</p>
 			<p>
 				<span className="bold">Altitude: </span>
-				{coordinates.alt ? coordinates.alt.toFixed(4) : 0}
+				{marker.coordinates.alt ? marker.coordinates.alt : 0}
 			</p>
-			<BiX className="icon icon-close pointer" onClick={handleCloseMarker} />
-			<BiExit
-				className="icon icon-exit pointer"
+			<BiX
+				className="icon-sidebar icon-sidebar-top pointer"
+				onClick={handleCloseMarker}
+			/>
+			<BiMapPin
+				className="icon-sidebar icon-sidebar-middle pointer"
 				onClick={handleMarkerListClicked}
 			/>
 			<BiTrash
-				className="icon icon-delete pointer"
+				className="icon-sidebar icon-sidebar-bottom pointer"
 				onClick={handleDeleteMarker}
 			/>
 		</div>
