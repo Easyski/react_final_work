@@ -1,10 +1,10 @@
 import { FC, useEffect } from "react";
 
 import { Navigation, Topbar, Sidebar } from "@/components";
-import { usePointsCollection } from "@/hooks";
+import { usePoints } from "@/hooks";
 
 const Map: FC = () => {
-	const points = usePointsCollection();
+	const points = usePoints();
 
 	useEffect(() => {
 		points.then((points) => console.log(points));
