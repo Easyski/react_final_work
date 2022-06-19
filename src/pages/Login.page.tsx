@@ -323,7 +323,8 @@ const Login: FC = () => {
 							content="Help"
 							type="help"
 							onClick={handleGuideClick}
-							textStyle="color-grey margin-bottom-lg font-sm"
+							textStyle="color-grey font-sm"
+							extraStyle="margin-bottom-lg"
 						/>
 					</>
 				)}

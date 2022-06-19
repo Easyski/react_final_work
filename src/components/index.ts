@@ -15,3 +15,4 @@ export { default as SearchResults } from "./SearchResults/SearchResults";
 export { default as Setting } from "./Setting/Setting";
 export { default as Sidebar } from "./Sidebar/Sidebar";
 export { default as Topbar } from "./Topbar/Topbar";
+export { default as TrackOption } from "./TrackOption/TrackOption";

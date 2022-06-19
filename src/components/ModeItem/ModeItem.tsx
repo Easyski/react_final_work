@@ -4,12 +4,13 @@ import cn from "classnames";
 import Tippy from "@tippyjs/react";
 
 import { setMode } from "@/store/slices";
+import { IMode } from "@/components/types";
 import { IModeItemTypes } from "./ModeItem.types";
 
 const ModeItem: FC<IModeItemTypes> = ({ mode, selectedMode, children }) => {
 	const dispatch = useDispatch();
 
-	const handleSelectorClick = (mode: "points" | "tracks" | "routes") => {
+	const handleSelectorClick = (mode: IMode) => {
 		if (mode !== selectedMode) return dispatch(setMode(mode));
 		dispatch(setMode(null));
 	};

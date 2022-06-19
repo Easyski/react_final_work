@@ -3,7 +3,7 @@
 	grid-column: 1;
 	z-index: $overlay;
 	padding: $spacer-md $spacer-lg;
-	overflow-y: scroll;
+	overflow-y: hidden;
 
 	animation: fadeIn;
 	-webkit-animation: fadeIn;

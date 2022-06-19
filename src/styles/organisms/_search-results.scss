@@ -6,7 +6,13 @@
 	border-bottom-left-radius: $border-radius-md;
 	border-bottom-right-radius: $border-radius-md;
 
+
 	.result {
 		padding: $spacer-xs;
+		border-radius: $border-radius-xs;
+
+		&:hover {
+			background-color: $light-grey;
+		}
 	}
 }

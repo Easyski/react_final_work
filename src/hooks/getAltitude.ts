@@ -1,10 +1,11 @@
 const getAltitude = async (lat: number, lng: number): Promise<number> => {
-	// const req = await fetch(
-	// 	`https://api.opentopodata.org/v1/aster30m?locations=${lat},${lng}`
-	// );
-	// const res = await req.json();
-	// console.log(res);
-	return Math.floor(Math.random() * 50000000) / 10000;
+	try {
+		const req = await fetch(`http://localhost:3001/alt?lat=${lat}&lng=${lng}`);
+		const { alt } = await req.json();
+		return alt as number;
+	} catch (error: any) {
+		return -1;
+	}
 };
 
 export { getAltitude };

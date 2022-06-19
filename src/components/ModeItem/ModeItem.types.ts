@@ -1,9 +1,8 @@
 import { ReactNode } from "react";
+import { IMode } from "../types";
 
 export interface IModeItemTypes {
 	children: ReactNode;
-	mode: modes;
-	selectedMode: modes | null;
+	mode: IMode;
+	selectedMode: IMode;
 }
-
-type modes = "points" | "tracks" | "routes";

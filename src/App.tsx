@@ -28,7 +28,6 @@ export const App: FC = () => {
 					<Route path="/about" element={<p>ABOUT THIS PROJECT</p>} />
 					<Route path="/profile" element={<AuthRoute route={<Profile />} />} />
 					<Route path="/map" element={<AuthRoute route={<Map />} />} />
-					<Route path="/guide" element={<p>HOW TO USE</p>} />
 					<Route path="/logout" element={<AuthRoute route={<Logout />} />} />
 
 					<Route path="*" element={<Navigate to="/" />} />
@@ -38,6 +37,7 @@ export const App: FC = () => {
 				pauseOnHover={false}
 				autoClose={2000}
 				pauseOnFocusLoss={false}
+				className="toast-container"
 			/>
 		</Provider>
 	);
