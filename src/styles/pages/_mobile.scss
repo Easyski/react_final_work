@@ -1,0 +1,30 @@
+.mobile {
+
+    height: 80vh;
+    margin-top: 10vh;
+
+    .logo {
+        width: 60%;
+        margin-bottom: $spacer-lg;
+    }
+
+    .text {
+        margin: $spacer-lg 0;
+        text-align: center;
+        max-width: 70vw;
+
+        &:last-of-type {
+            margin-bottom: 10vh;
+        }
+    }
+
+    .store {
+        width: 40vw;
+        margin: $spacer-sm 0;
+
+        &:last-of-type {
+            margin-bottom: 10vh;
+        }
+    }
+
+}
