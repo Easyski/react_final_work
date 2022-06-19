@@ -5,6 +5,7 @@
 
 .login {
     width: 500px;
+    z-index: $overlay;
 
     &-form {
         align-items: center;

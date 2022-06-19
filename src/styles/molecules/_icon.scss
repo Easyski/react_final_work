@@ -3,3 +3,25 @@
     width: 20px;
     margin: 0 10px;
 }
+
+.icon-sidebar {
+    position: absolute;
+    font-size: 20px;
+
+    &-top {
+        right: 0;
+        top: 0;
+    }
+
+    &-middle {
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &-bottom {
+        right: 0;
+        bottom: 0;
+        color: $red;
+    }
+}

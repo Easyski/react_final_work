@@ -9,44 +9,11 @@
 		padding: 5px 0;
 	}
 
-	.icon {
-		position: absolute;
-		font-size: 20px;
-
-		&-close {
-			right: 0;
-			top: 0;
-		}
-
-		&-exit {
-			right: 0;
-			top: 50%;
-			transform: translateY(-50%);
-		}
-
-		&-delete {
-			right: 0;
-			bottom: 0;
-			color: $red;
-		}
-	}
-
-	.marker-button {
-		width: 40%;
-		background-color: $light-grey;
-		border: none;
-		border-radius: 2px;
-		box-shadow: $box-shadow;
-		cursor: pointer;
-
-		&:active {
-			margin-top: 2px;
-		}
-	}
-
 	.border {
 		border: 2px solid $green;
 	}
 }
 
-/* -------------------- */
+.marker-name {
+	padding: 0 10px;
+}

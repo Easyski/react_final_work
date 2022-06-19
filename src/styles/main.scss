@@ -44,6 +44,7 @@
 @import "organisms/setting";
 @import "organisms/sidebar";
 @import "organisms/topbar";
+@import "organisms/track-option";
 
 // -------------------------------------------------------------------
 // :: PAGES
@@ -56,6 +57,6 @@
 // -------------------------------------------------------------------
 
 @import "animate.css";
+@import "tippy.js/dist/tippy.css";
 @import "mapbox-gl/dist/mapbox-gl.css";
 @import "react-toastify/dist/ReactToastify.css";
-@import "tippy.js/dist/tippy.css";
