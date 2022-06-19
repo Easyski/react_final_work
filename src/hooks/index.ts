@@ -1,14 +1,10 @@
-import usePointsCollection from "./getPointsCollection";
-import { removeMarkerFromList, findMarkerInList } from "./useMarkers";
-import { signIn, signUp, signInWithGoogle } from "./useCredentials";
-import { getAltitude } from "./getAltitude";
-
+export { usePoints } from "./usePoints";
 export {
-	usePointsCollection,
-	removeMarkerFromList,
-	findMarkerInList,
-	getAltitude,
-	signIn,
-	signUp,
-	signInWithGoogle,
-};
+	removeFromList,
+	findInList,
+	findRouteIndex,
+	findMarkerIndex,
+	findTrackIndex,
+} from "./useOperators";
+export { signIn, signUp, signInWithGoogle } from "./useCredentials";
+export { getAltitude } from "./getAltitude";
