@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ILocation } from "@/components/types";
+import { IMode } from "@/components/types";
 
 interface IInitialState {
 	locations: ILocation[] | [];
-	mode: null | "points" | "tracks" | "routes";
+	mode: IMode;
 }
 
 const initialState: IInitialState = {
