@@ -5,9 +5,10 @@ import { BiLocationPlus, BiTrip } from "react-icons/bi";
 import { RiGuideLine } from "react-icons/ri";
 
 import { ModeItem } from "@/components";
+import { IMode } from "@/components/types";
 
 const Mode: FC = () => {
-	const selectedMode = useSelector((state: any) => state.topbar.mode);
+	const selectedMode: IMode = useSelector((state: any) => state.topbar.mode);
 
 	return (
 		<div className="mode flex flex-h">
