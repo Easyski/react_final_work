@@ -22,13 +22,11 @@ const Menu: FC = () => {
 					{ name: "Profile", slug: "profile" },
 					{ name: "Map", slug: "map" },
 					{ name: "About This Project", slug: "about" },
-					{ name: "How To Use", slug: "guide" },
 					{ name: "Logout", slug: "logout" },
 				];
 			return [
 				{ name: "Login", slug: "" },
 				{ name: "About This Project", slug: "about" },
-				{ name: "How To Use", slug: "guide" },
 			];
 		};
 
