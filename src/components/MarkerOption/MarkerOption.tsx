@@ -10,7 +10,7 @@ import {
 	setZoom,
 } from "@/store/slices";
 import { IMarker } from "@/components/types";
-import { removeMarkerFromList } from "@/hooks";
+import { removeFromList } from "@/hooks";
 
 interface IMarkerOption {
 	marker: IMarker;
@@ -21,9 +21,6 @@ const MarkerOption: FC<IMarkerOption> = ({ marker, indexInList }) => {
 	const dispatch = useDispatch();
 	const markerList: any[] = useSelector(
 		(state: any) => state.sidebar.markerList
-	);
-	const selectedMarkerIndex = useSelector(
-		(state: any) => state.sidebar.selectedMarkerIndex
 	);
 
 	const [isGuide, setIsGuide] = useState<boolean>(false);
@@ -37,9 +34,9 @@ const MarkerOption: FC<IMarkerOption> = ({ marker, indexInList }) => {
 	};
 
 	const handleCloseMarker = () => {
-		const newMarkerList = removeMarkerFromList(marker, markerList);
+		const newMarkerList = removeFromList(marker, markerList, "marker");
 		if (!newMarkerList) toast.error("The marker could not be removed!");
-		dispatch(setOverrideMarkerList(newMarkerList));
+		else dispatch(setOverrideMarkerList(newMarkerList));
 	};
 
 	const handleDeleteMarker = () => {
