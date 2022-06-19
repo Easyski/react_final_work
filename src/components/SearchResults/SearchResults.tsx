@@ -38,7 +38,7 @@ const SearchResults: FC = () => {
 						handleResultClick(element.coordinates, element.detailedName)
 					}
 					key={index}
-					className="result"
+					className="result pointer"
 				>
 					<span className="bold">{element.name}</span>,
 					{" " + element.detailedName}
