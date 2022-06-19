@@ -7,18 +7,19 @@ import {
 	Navigate,
 } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
+import { ToastContainer } from "react-toastify";
+import { isMobile } from "react-device-detect";
 
-import { Map, Login, Profile, Logout } from "@/pages";
-import store from "@/store";
 import { AuthRoute, Menu } from "@/components";
+import { Map, Login, Profile, Logout, Mobile } from "@/pages";
+import store from "@/store";
 
 import "@/styles/main.scss";
-
-import { ToastContainer } from "react-toastify";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY as string;
 
 export const App: FC = () => {
+	if (isMobile) return <Mobile />;
 	return (
 		<Provider store={store}>
 			<Router>
