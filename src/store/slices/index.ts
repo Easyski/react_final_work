@@ -1,6 +1,29 @@
 export {
-	setMarkerList,
+	// -----------
+	// MARKERS
+	// -----------
+	setAddMarkerList,
+	setClearMarkerList,
+	setOverrideMarkerList,
 	setSelectedMarkerIndex,
+	// -----------
+	// TRACKS
+	// -----------
+	setAddTrackList,
+	setClearTrackList,
+	setOverrideTrackList,
+	setSelectedTrackIndex,
+	// -----------
+	// ROUTES
+	// -----------
+	setAddRouteList,
+	setClearRouteList,
+	setOverrideRouteList,
+	setSelectedRouteIndex,
+	// -----------
+	// VARIA
+	// -----------
+	setExplanation,
 	default as sidebarReducer,
 } from "./sidebarSlice";
 
