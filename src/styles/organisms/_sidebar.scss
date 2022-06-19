@@ -1,0 +1,24 @@
+.sidebar {
+	grid-row: 1 / span 2;
+	grid-column: 1;
+	z-index: $overlay;
+	padding: $spacer-md $spacer-lg;
+	overflow-y: hidden;
+
+	animation: fadeIn;
+	-webkit-animation: fadeIn;
+	-moz-animation: fadeIn;
+	animation-duration: 2s;
+
+	.title {
+		border-bottom: $border-sm $light-blue;
+	}
+
+	.scroll-container {
+		margin-top: $spacer-md;
+		overflow-x: hidden;
+		overflow-y: scroll;
+		height: calc(100% - $spacer-md * 3);
+		scroll-behavior: smooth;
+	}
+}

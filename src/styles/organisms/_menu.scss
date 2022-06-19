@@ -1,0 +1,52 @@
+.menu {
+    position: absolute;
+    top: $spacer-md;
+    right: $spacer-md;
+    z-index: $top;
+    color: $black;
+    color: $black;
+
+    animation: fadeIn;
+    -webkit-animation: fadeIn;
+    -moz-animation: fadeIn;
+    animation-duration: 2s;
+
+    &-icon {
+        font-size: 28px;
+    }
+}
+
+.menu-overlay {
+    position: absolute;
+    z-index: $menu;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+
+    .item {
+        margin: 5%;
+        text-align: center;
+        box-sizing: border-box;
+
+        animation: fadeInDown;
+        -webkit-animation: fadeInDown;
+        -moz-animation: fadeInDown;
+        animation-duration: 1s;
+
+        text-decoration: none;
+        color: white;
+
+        &:hover {
+            padding-bottom: 8px;
+        }
+    }
+
+    .selected {
+        padding-bottom: 3px;
+        text-decoration: underline;
+    }
+}

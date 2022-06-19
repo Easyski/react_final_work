@@ -1,0 +1,69 @@
+// -------------------------------------------------------------------
+// :: CONTAINER
+// -------------------------------------------------------------------
+
+.flex {
+    display: flex;
+}
+
+.flex-h {
+    flex-direction: row;
+}
+
+.flex-v {
+    flex-direction: column;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.align-start {
+    align-items: flex-start;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-evenly {
+    justify-content: space-evenly;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.all-center {
+    align-items: center;
+    justify-content: center;
+}
+
+// -------------------------------------------------------------------
+// :: CHILDREN
+// -------------------------------------------------------------------
+
+.align-self-center {
+    align-self: center;
+}
+
+.align-self-start {
+    align-self: flex-start;
+}
+
+.justify-self-center {
+    justify-self: center;
+}
+
+.justify-self-start {
+    justify-self: flex-start;
+}
+
+.justify-self-end {
+    justify-self: flex-end;
+}
+
+.all-self-center {
+    align-self: center;
+    justify-self: center;
+}

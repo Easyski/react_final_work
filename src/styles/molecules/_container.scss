@@ -1,0 +1,18 @@
+.container {
+    background-color: $white;
+    border-radius: $border-radius-md;
+    box-shadow: $box-shadow;
+    border: none;
+}
+
+.border-box {
+    box-sizing: border-box;
+}
+
+.circle {
+    border-radius: 100%;
+}
+
+.toast-container {
+    top: 70px;
+}

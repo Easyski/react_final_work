@@ -1,0 +1,19 @@
+.modeItem {
+	width: 50px;
+	height: 100%;
+	border-right: 1px solid rgb(239, 239, 239);
+	align-items: center;
+	justify-content: center;
+
+	&:first-child {
+		border-left: 1px solid rgb(239, 239, 239);
+	}
+
+	&:last-child {
+		border: none;
+	}
+
+	&--selected {
+		background-color: rgb(231, 231, 231);
+	}
+}

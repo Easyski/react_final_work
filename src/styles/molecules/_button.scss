@@ -1,0 +1,28 @@
+.btn-as-text {
+    border: none;
+    background: transparent;
+}
+
+.submit {
+    width: 100%;
+    padding: $spacer-sm 0;
+    margin-top: $spacer-lg;
+    border: none;
+    border-radius: $border-radius-xs;
+    background-color: $light-blue;
+    box-shadow: $box-shadow;
+
+    &:active {
+        // background-color: $dark-blue;
+        box-shadow: none;
+    }
+}
+
+.google {
+    width: 47%;
+    margin-top: 0;
+    background-color: $white;
+    border: $border-md;
+    border-color: $light-blue;
+    color: $light-blue;
+}

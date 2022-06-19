@@ -1,0 +1,10 @@
+.bottombar {
+    position: absolute;
+    bottom: $spacer-md;
+    left: 55%;
+    z-index: $overlay;
+    animation: fadeInUp;
+    animation-duration: 1s;
+
+    padding: 5px 15px;
+}

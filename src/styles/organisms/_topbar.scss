@@ -1,0 +1,22 @@
+.topbar {
+	grid-row: 1;
+	grid-column: 2;
+	z-index: $overlay;
+	width: 80%;
+	min-width: 375px;
+	max-width: 570px;
+	flex-flow: wrap;
+	align-self: center;
+	transform: translateX(-35px);
+
+	animation: fadeIn;
+	-webkit-animation: fadeIn;
+	-moz-animation: fadeIn;
+	animation-duration: 2s;
+
+	.searchIcon {
+		align-self: center;
+		padding: 0 5px;
+		flex-grow: 1;
+	}
+}

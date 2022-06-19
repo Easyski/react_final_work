@@ -1,0 +1,30 @@
+.divider {
+    width: 50%;
+    overflow-x: hidden;
+
+    &-text {
+        text-align: center;
+        color: $dark-grey;
+
+        &:before,
+        &:after {
+            background-color: $light-grey;
+            content: "";
+            display: inline-block;
+            height: 1px;
+            position: relative;
+            vertical-align: middle;
+            width: 50%;
+        }
+
+        &:before {
+            right: 0.5em;
+            margin-left: -50%;
+        }
+
+        &:after {
+            left: 0.5em;
+            margin-right: -50%;
+        }
+    }
+}

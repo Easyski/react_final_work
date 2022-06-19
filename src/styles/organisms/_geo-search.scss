@@ -1,0 +1,19 @@
+.geo-search {
+	flex-grow: 9;
+	margin-right: $spacer-md;
+	border-bottom: $border-sm $dark-blue;
+
+	.search-input {
+		height: 40px;
+		flex-grow: 9;
+
+		&:placeholder-shown {
+			text-overflow: ellipsis;
+		}
+	}
+
+	.searchCancel {
+		flex-grow: 1;
+		align-self: center;
+	}
+}

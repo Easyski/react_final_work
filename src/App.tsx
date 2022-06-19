@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC } from "react";
+import { Provider } from "react-redux";
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate,
+} from "react-router-dom";
+import mapboxgl from "mapbox-gl";
+import { ToastContainer } from "react-toastify";
+import { isMobile } from "react-device-detect";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { AuthRoute, Menu } from "@/components";
+import { Map, Login, Profile, Logout, Mobile } from "@/pages";
+import store from "@/store";
 
-export default App;
+import "@/styles/main.scss";
+
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY as string;
+
+export const App: FC = () => {
+	if (isMobile) return <Mobile />;
+	return (
+		<Provider store={store}>
+			<Router>
+				<Menu />
+				<Routes>
+					<Route path="/" element={<Login />} />
+					<Route path="/about" element={<p>ABOUT THIS PROJECT</p>} />
+					<Route path="/profile" element={<AuthRoute route={<Profile />} />} />
+					<Route path="/map" element={<AuthRoute route={<Map />} />} />
+					<Route path="/logout" element={<AuthRoute route={<Logout />} />} />
+
+					<Route path="*" element={<Navigate to="/" />} />
+				</Routes>
+			</Router>
+			<ToastContainer
+				pauseOnHover={false}
+				autoClose={2000}
+				pauseOnFocusLoss={false}
+				className="toast-container"
+			/>
+		</Provider>
+	);
+};

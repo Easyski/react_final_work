@@ -1,0 +1,111 @@
+// -------------------------------------------------------------------
+// :: FONT SIZE
+// -------------------------------------------------------------------
+
+.font-xs {
+    font-size: $font-xs;
+}
+
+.font-sm {
+    font-size: $font-sm;
+}
+
+.font-md {
+    font-size: $font-md;
+}
+
+.font-lg {
+    font-size: $font-lg;
+}
+
+.font-xl {
+    font-size: $font-xl;
+}
+
+.font-xxl {
+    font-size: $font-xxl;
+}
+
+// -------------------------------------------------------------------
+// :: COLOR
+// -------------------------------------------------------------------
+
+.color-white {
+    color: $white;
+}
+
+.color-red {
+    color: $red;
+}
+
+.color-black {
+    color: $black
+}
+
+.color-light-grey {
+    color: $light-grey;
+}
+
+.color-grey {
+    color: $grey;
+}
+
+.color-dark-grey {
+    color: $dark-grey;
+}
+
+.color-blue {
+    color: $dark-blue;
+}
+
+// -------------------------------------------------------------------
+// :: WEIGHT
+// -------------------------------------------------------------------
+
+.thin {
+    font-weight: $font-thin;
+}
+
+.light {
+    font-weight: $font-light;
+}
+
+.regular {
+    font-weight: $font-regular;
+}
+
+.bold {
+    font-weight: $font-bold;
+}
+
+.bolder {
+    font-weight: $font-bolder;
+}
+
+.black {
+    font-weight: $font-bold;
+}
+
+.xblack {
+    color: $font-xblack;
+}
+
+// -------------------------------------------------------------------
+// :: DECORATION
+// -------------------------------------------------------------------
+
+.italic {
+    font-style: italic;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+// -------------------------------------------------------------------
+// :: TEXT STYLES
+// -------------------------------------------------------------------
+
+.text-center {
+    text-align: center;
+}

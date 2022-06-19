@@ -1,0 +1,19 @@
+.marker-option {
+	position: relative;
+	margin-bottom: 8px;
+	animation: fadeInLeft;
+	animation-duration: .3s;
+	border-bottom: $border-sm $light-grey;
+
+	&>* {
+		padding: 5px 0;
+	}
+
+	.border {
+		border: 2px solid $green;
+	}
+}
+
+.marker-name {
+	padding: 0 10px;
+}

@@ -1,43 +1,67 @@
 {
-  "name": "easyski",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.13",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.4.2",
-    "web-vitals": "^2.1.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+	"name": "easyski",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@craco/craco": "6.4.3",
+		"@reduxjs/toolkit": "1.8.1",
+		"@testing-library/jest-dom": "5.14.1",
+		"@testing-library/react": "13.0.0",
+		"@testing-library/user-event": "13.2.1",
+		"@tippyjs/react": "4.2.6",
+		"animate.css": "4.1.1",
+		"classnames": "2.3.1",
+		"firebase": "9.8.1",
+		"mapbox-gl": "2.8.2",
+		"react": "18.1.0",
+		"react-device-detect": "2.2.2",
+		"react-dom": "18.1.0",
+		"react-icons": "4.3.1",
+		"react-redux": "8.0.1",
+		"react-router-dom": "6",
+		"react-scripts": "5.0.1",
+		"react-toastify": "9.0.2",
+		"react-toggle-slider": "0.4.0",
+		"react-tsparticles": "2.0.6",
+		"sass": "1.52.1",
+		"spinners-react": "1.0.7",
+		"tsparticles": "2.0.6",
+		"typescript": "4.6.4",
+		"web-vitals": "2.1.0"
+	},
+	"devDependencies": {
+		"@types/jest": "27.0.1",
+		"@types/mapbox-gl": "2.7.1",
+		"@types/node": "16.7.13",
+		"@types/react": "18.0.0",
+		"@types/react-dom": "18.0.0",
+		"@types/react-redux": "7.1.24",
+		"tsconfig-paths-webpack-plugin": "3.5.2",
+		"tslint": "6.1.3"
+	},
+	"scripts": {
+		"start": "craco start",
+		"build": "craco build",
+		"test": "craco test",
+		"eject": "craco eject",
+		"lint": "src/**/*{.ts,.tsx}"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 }

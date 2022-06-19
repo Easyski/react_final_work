@@ -1,0 +1,18 @@
+.background {
+    background-image: url("../../assets/background.png");
+    background-size: cover;
+}
+
+.login {
+    width: 500px;
+    z-index: $overlay;
+
+    &-form {
+        align-items: center;
+    }
+
+    &-button {
+        width: 40%;
+        padding: $spacer-sm;
+    }
+}
