@@ -11,7 +11,7 @@ import {
 	setAddTrackList,
 } from "@/store/slices";
 import { ICoordinates, IMarker, IMode, ITrack } from "@/components/types";
-import { getAltitude, findMarkerInList } from "@/hooks";
+import { getAltitude, findInList } from "@/hooks";
 import { RiGuideLine } from "react-icons/ri";
 
 export const Navigation: FC = () => {
@@ -124,7 +124,7 @@ export const Navigation: FC = () => {
 		if (!markerClicked) return;
 		switch (mode) {
 			case "points": {
-				const index = findMarkerInList(markerClicked, markerList);
+				const index = findInList(markerClicked, markerList, "marker");
 				if (index !== null) {
 					toast.info("This marker is already in the list");
 					dispatch(setSelectedMarkerIndex(index));
@@ -211,6 +211,12 @@ export const Navigation: FC = () => {
 		if (!map.current) return;
 		const { lng, lat } = evt.lngLat;
 		const alt = await getAltitude(lat, lng);
+		if (alt === -1) {
+			toast.error(
+				"The altitude API did not respond. Your marker was not placed."
+			);
+			return;
+		}
 
 		const newMarkerObj: IMarker = {
 			name: "",
