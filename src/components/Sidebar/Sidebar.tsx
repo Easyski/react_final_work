@@ -2,7 +2,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { MarkerOption, TrackOption } from "@/components";
-import { ICoordinates, IMarker, IMode, ITrack } from "@/components/types";
+import { IMarker, IMode, ITrack } from "@/components/types";
 import { setExplanation } from "@/store/slices";
 
 const Sidebar: FC = () => {
