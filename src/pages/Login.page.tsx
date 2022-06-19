@@ -2,6 +2,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { loadFull } from "tsparticles";
 import cn from "classnames";
 
 import logo from "@assets/logo.svg";
@@ -323,7 +324,8 @@ const Login: FC = () => {
 							content="Help"
 							type="help"
 							onClick={handleGuideClick}
-							textStyle="color-grey margin-bottom-lg font-sm"
+							textStyle="color-grey font-sm"
+							extraStyle="margin-bottom-lg"
 						/>
 					</>
 				)}
