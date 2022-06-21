@@ -21,7 +21,7 @@ interface IMarkerOption {
 const MarkerOption: FC<IMarkerOption> = ({ marker, indexInList }) => {
 	const dispatch = useDispatch();
 	const markerList: any[] = useSelector(
-		(state: any) => state.sidebar.markerList
+		(state: any) => state.marker.markerList
 	);
 
 	const [isGuide, setIsGuide] = useState<boolean>(false);
