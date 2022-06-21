@@ -6,6 +6,7 @@ export {
 	setClearMarkerList,
 	setOverrideMarkerList,
 	setSelectedMarkerIndex,
+	setUpdateMarker,
 	// -----------
 	// TRACKS
 	// -----------

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IRoute, ITrack, IMarker } from "@/components/types";
 
 interface IInitialState {
-	markerList: { marker: mapboxgl.Marker; data: IMarker }[];
+	markerList: IMarker[];
 	selectedMarkerIndex?: number;
 	trackList: ITrack[];
 	selectedTrackIndex?: number;
@@ -37,6 +37,10 @@ export const sidebarSlice = createSlice({
 		setSelectedMarkerIndex: (state, action) => {
 			state.selectedMarkerIndex = action.payload;
 		},
+		setUpdateMarker: (state, action) => {
+			// ACTION : [MARKER, INDEX]
+			state.markerList[action.payload[1]] = action.payload[0];
+		},
 		// -----------
 		// :: TRACKS
 		// -----------
@@ -51,6 +55,10 @@ export const sidebarSlice = createSlice({
 		},
 		setSelectedTrackIndex: (state, action) => {
 			state.selectedTrackIndex = action.payload;
+		},
+		setUpdateTrack: (state, action) => {
+			// ACTION : [track, INDEX]
+			state.trackList[action.payload[1]] = action.payload[0];
 		},
 		// -----------
 		// :: ROUTES
@@ -84,6 +92,7 @@ export const {
 	setClearMarkerList,
 	setOverrideMarkerList,
 	setSelectedMarkerIndex,
+	setUpdateMarker,
 	// -----------
 	// TRACKS
 	// -----------
@@ -91,6 +100,7 @@ export const {
 	setClearTrackList,
 	setOverrideTrackList,
 	setSelectedTrackIndex,
+	setUpdateTrack,
 	// -----------
 	// ROUTES
 	// -----------
