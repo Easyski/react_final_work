@@ -7,10 +7,11 @@ import { toast } from "react-toastify";
 import {
 	setCenterCoordinates,
 	setOverrideMarkerList,
+	setUpdateMarker,
 	setZoom,
 } from "@/store/slices";
 import { IMarker } from "@/components/types";
-import { removeFromList } from "@/hooks";
+import { findInList, removeFromList } from "@/hooks";
 
 interface IMarkerOption {
 	marker: IMarker;
@@ -33,6 +34,13 @@ const MarkerOption: FC<IMarkerOption> = ({ marker, indexInList }) => {
 		dispatch(setCenterCoordinates(marker.coordinates));
 	};
 
+	const handleNameInput = (e: any) => {
+		const tempMarker = { ...marker };
+		tempMarker.name = e.target.value;
+		const index = findInList(marker, markerList, "marker");
+		if (index !== null) dispatch(setUpdateMarker([tempMarker, index]));
+	};
+
 	const handleCloseMarker = () => {
 		const newMarkerList = removeFromList(marker, markerList, "marker");
 		if (!newMarkerList) toast.error("The marker could not be removed!");
@@ -46,10 +54,12 @@ const MarkerOption: FC<IMarkerOption> = ({ marker, indexInList }) => {
 	return (
 		<div className="marker-option font-md">
 			<input
-				className="input italic"
+				className="input"
 				type="text"
 				placeholder="Name (optional)"
 				autoComplete="off"
+				onChange={handleNameInput}
+				value={marker.name}
 			/>
 			<div className="flex flex-h">
 				<p>
