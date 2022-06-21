@@ -11,10 +11,10 @@ const Sidebar: FC = () => {
 	const mode: IMode = useSelector((store: any) => store.topbar.mode);
 	const explanation = useSelector((store: any) => store.sidebar.explanation);
 	const markerList: IMarker[] = useSelector(
-		(store: any) => store.sidebar.markerList
+		(store: any) => store.marker.markerList
 	);
 	const trackList: ITrack[] = useSelector(
-		(store: any) => store.sidebar.trackList
+		(store: any) => store.track.trackList
 	);
 
 	const [modeToUse, setModeToUse] = useState<IMode>(null);

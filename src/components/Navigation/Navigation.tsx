@@ -19,10 +19,10 @@ export const Navigation: FC = () => {
 	const zoom = useSelector((state: any) => state.map.zoom);
 	const mode: IMode = useSelector((state: any) => state.topbar.mode);
 	const markerList: IMarker[] = useSelector(
-		(state: any) => state.sidebar.markerList
+		(state: any) => state.marker.markerList
 	);
 	const trackList: ITrack[] = useSelector(
-		(state: any) => state.sidebar.trackList
+		(state: any) => state.track.trackList
 	);
 	const center: ICoordinates = useSelector(
 		(state: any) => state.map.centerCoordinates

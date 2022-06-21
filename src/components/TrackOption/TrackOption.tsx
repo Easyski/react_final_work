@@ -21,10 +21,10 @@ const TrackOption: FC<{
 }> = ({ track, indexInList }) => {
 	const dispatch = useDispatch();
 	const markerList: IMarker[] = useSelector(
-		(state: any) => state.sidebar.markerList
+		(state: any) => state.marker.markerList
 	);
 	const trackList: ITrack[] = useSelector(
-		(state: any) => state.sidebar.trackList
+		(state: any) => state.track.trackList
 	);
 
 	const [markers, setMarkers] = useState<IMarker[]>();
