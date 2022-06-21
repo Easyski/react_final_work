@@ -1,10 +1,4 @@
-export { usePoints } from "./usePoints";
-export {
-	removeFromList,
-	findInList,
-	findRouteIndex,
-	findMarkerIndex,
-	findTrackIndex,
-} from "./useOperators";
-export { signIn, signUp, signInWithGoogle } from "./useCredentials";
-export { getAltitude } from "./getAltitude";
+export * from "./usePoints";
+export * from "./useOperators";
+export * from "./useCredentials";
+export * from "./getAltitude";
