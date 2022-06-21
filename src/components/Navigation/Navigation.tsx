@@ -45,7 +45,7 @@ export const Navigation: FC = () => {
 			container: mapContainer.current,
 			style: "mapbox://styles/mapbox/streets-v9",
 			center: center,
-			maxZoom: 15,
+			maxZoom: 17,
 			minZoom: 4,
 			doubleClickZoom: false,
 			pitchWithRotate: false,
@@ -65,12 +65,13 @@ export const Navigation: FC = () => {
 				type: "line",
 				source: "tracks",
 				layout: {
-					"line-join": "round",
 					"line-cap": "round",
+					"line-join": "round",
 				},
 				paint: {
-					"line-color": "#888",
-					"line-width": 8,
+					"line-width": 6,
+					"line-dasharray": [0.1, 2],
+					"line-color": "#009DDC",
 				},
 			});
 		});
@@ -156,6 +157,7 @@ export const Navigation: FC = () => {
 			toast("First marker selected!", {
 				autoClose: 1000,
 				icon: <RiGuideLine />,
+				progressClassName: "marker-toast",
 			});
 			return;
 		}
@@ -185,8 +187,13 @@ export const Navigation: FC = () => {
 			dispatch(
 				setAddTrackList({ name: "", isUsed: false, coordinates: track })
 			);
+			toast.success("Track has succesfully been added!", {
+				autoClose: 1000,
+				icon: <RiGuideLine />,
+			});
+
+			setTrackMarkers([]);
 		}
-		setTrackMarkers([]);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [trackMarkers]);
 
@@ -242,9 +249,9 @@ export const Navigation: FC = () => {
 		// SET NEW MARKER
 		setNewMarker(newMarkerObj);
 		// TOAST
-		toast("Your marker has been set!", {
+		toast.success("Marker added to the map", {
 			icon: <HiOutlineLocationMarker />,
-			progressClassName: "marker-toast",
+			autoClose: 1000,
 		});
 	};
 
