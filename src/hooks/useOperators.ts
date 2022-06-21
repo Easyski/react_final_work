@@ -89,10 +89,27 @@ const findRouteIndex = (route: IRoute, routeList: IRoute[]): number | null => {
 	return 0;
 };
 
+// -------------------------------------------------------------------
+// :: FIND ROUTE INDEX
+// -------------------------------------------------------------------
+
+const findMarkersByTrack = (track: ITrack, markerList: IMarker[]) => {
+	let marker1!: IMarker;
+	let marker2!: IMarker;
+	for (let marker of markerList) {
+		if (marker.coordinates.lng === track.coordinates[0][0]) marker1 = marker;
+		if (marker.coordinates.lng === track.coordinates[1][0]) marker2 = marker;
+		if (marker1 && marker2) break;
+	}
+
+	return [marker1, marker2];
+};
+
 export {
 	removeFromList,
 	findInList,
 	findMarkerIndex,
 	findTrackIndex,
 	findRouteIndex,
+	findMarkersByTrack,
 };
