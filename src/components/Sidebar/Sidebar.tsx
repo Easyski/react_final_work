@@ -1,5 +1,6 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { ReactSortable } from "react-sortablejs";
 
 import { MarkerOption, TrackOption } from "@/components";
 import { IMarker, IMode, ITrack } from "@/components/types";
@@ -19,6 +20,7 @@ const Sidebar: FC = () => {
 	const [modeToUse, setModeToUse] = useState<IMode>(null);
 	const [title, setTitle] = useState<string>("");
 	const [subtitle, setSubtitle] = useState<string>("");
+	const [trackListWithId, setTrackListWithId] = useState<any[]>();
 
 	const scrollElement = useRef<HTMLDivElement>(null);
 
@@ -26,6 +28,17 @@ const Sidebar: FC = () => {
 		if (!scrollElement.current) return;
 		scrollElement.current.scrollTop = scrollElement.current.scrollHeight;
 	}, [markerList]);
+
+	useEffect(() => {
+		if (!trackList.length) return;
+		const newListWithId = (trackList as any[]).map((track, i) => {
+			return {
+				...track,
+				id: i + 1,
+			};
+		});
+		setTrackListWithId(newListWithId);
+	}, [trackList]);
 
 	/**
 	 * Determine which mode is selected and change the title and subtitle
@@ -106,6 +119,22 @@ const Sidebar: FC = () => {
 		return tracksAsElements;
 	};
 
+	const handleRoutes = (): JSX.Element[] | JSX.Element => {
+		if (!trackListWithId || !trackListWithId.length)
+			return (
+				<p className="light italic font-md text-center margin-top-lg">
+					Click a track to view its stats or add one via the control panel.
+				</p>
+			);
+		return (
+			<ReactSortable list={trackListWithId} setList={setTrackListWithId}>
+				{trackListWithId.map((item) => (
+					<p key={item.id}>{item.name}</p>
+				))}
+			</ReactSortable>
+		);
+	};
+
 	/**
 	 * This is the first function to be called. It determins what should be
 	 * rendered based on the mode that is selected via the control panel.
@@ -118,7 +147,7 @@ const Sidebar: FC = () => {
 			case "tracks":
 				return handleTracks();
 			case "routes":
-				return handleTracks();
+				return handleRoutes();
 			default:
 				return handleDefault();
 		}
