@@ -14,6 +14,7 @@ export {
 	setClearTrackList,
 	setOverrideTrackList,
 	setSelectedTrackIndex,
+	setUpdateTrack,
 	// -----------
 	// ROUTES
 	// -----------
