@@ -1,5 +1,6 @@
 .sidebar {
 	grid-row: 1 / span 2;
+	width: 100%;
 	grid-column: 1;
 	z-index: $overlay;
 	padding: $spacer-md $spacer-lg;
@@ -15,10 +16,57 @@
 	}
 
 	.scroll-container {
+		position: relative;
 		margin-top: $spacer-md;
 		overflow-x: hidden;
 		overflow-y: scroll;
 		height: calc(100% - $spacer-md * 3);
 		scroll-behavior: smooth;
+	}
+
+	.download {
+		position: absolute;
+		bottom: $spacer-md;
+		border-top: $border-sm;
+		border-color: $dark-blue;
+		padding-top: $spacer-md;
+		left: 50%;
+		bottom: 0;
+		transform: translateX(-50%);
+		white-space: nowrap;
+
+		.icon-sidebar {
+			margin-left: $spacer-md;
+		}
+	}
+
+	.logo {
+		width: 50%;
+		height: auto;
+		margin: 0;
+	}
+}
+
+.route {
+	animation: fadeInLeft;
+	-webkit-animation: fadeInLeft;
+	-moz-animation: fadeInLeft;
+	animation-duration: .3s;
+
+	.input {
+		text-align: center;
+		display: block;
+		width: 100%;
+
+		margin: {
+			top: $spacer-md;
+			bottom: $spacer-lg;
+		}
+
+		&::placeholder {
+			font-weight: lighter;
+			font-style: italic;
+			color: $red;
+		}
 	}
 }

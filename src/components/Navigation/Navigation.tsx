@@ -1,6 +1,7 @@
 import { FC, useEffect, useCallback, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import mapboxgl, { GeoJSONSource, Map } from "mapbox-gl";
+
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { Position } from "geojson";
@@ -14,15 +15,19 @@ import { ICoordinates, IMarker, IMode, ITrack } from "@/components/types";
 import { getAltitude, findInList } from "@/hooks";
 import { RiGuideLine } from "react-icons/ri";
 
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
+
 export const Navigation: FC = () => {
 	const dispatch = useDispatch();
 	const zoom = useSelector((state: any) => state.map.zoom);
 	const mode: IMode = useSelector((state: any) => state.topbar.mode);
 	const markerList: IMarker[] = useSelector(
-		(state: any) => state.sidebar.markerList
+		(state: any) => state.marker.markerList
 	);
 	const trackList: ITrack[] = useSelector(
-		(state: any) => state.sidebar.trackList
+		(state: any) => state.track.trackList
 	);
 	const center: ICoordinates = useSelector(
 		(state: any) => state.map.centerCoordinates
@@ -45,7 +50,7 @@ export const Navigation: FC = () => {
 			container: mapContainer.current,
 			style: "mapbox://styles/mapbox/streets-v9",
 			center: center,
-			maxZoom: 15,
+			maxZoom: 17,
 			minZoom: 4,
 			doubleClickZoom: false,
 			pitchWithRotate: false,
@@ -65,12 +70,13 @@ export const Navigation: FC = () => {
 				type: "line",
 				source: "tracks",
 				layout: {
-					"line-join": "round",
 					"line-cap": "round",
+					"line-join": "round",
 				},
 				paint: {
-					"line-color": "#888",
-					"line-width": 8,
+					"line-width": 6,
+					"line-dasharray": [0.1, 2],
+					"line-color": "#009DDC",
 				},
 			});
 		});
@@ -154,8 +160,8 @@ export const Navigation: FC = () => {
 	useEffect(() => {
 		if (trackMarkers.length === 1) {
 			toast("First marker selected!", {
-				autoClose: 1000,
 				icon: <RiGuideLine />,
+				progressClassName: "marker-toast",
 			});
 			return;
 		}
@@ -185,8 +191,12 @@ export const Navigation: FC = () => {
 			dispatch(
 				setAddTrackList({ name: "", isUsed: false, coordinates: track })
 			);
+			toast.success("Track has succesfully been added!", {
+				icon: <RiGuideLine />,
+			});
+
+			setTrackMarkers([trackMarkers[1]]);
 		}
-		setTrackMarkers([]);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [trackMarkers]);
 
@@ -242,9 +252,8 @@ export const Navigation: FC = () => {
 		// SET NEW MARKER
 		setNewMarker(newMarkerObj);
 		// TOAST
-		toast("Your marker has been set!", {
+		toast.success("Marker added to the map", {
 			icon: <HiOutlineLocationMarker />,
-			progressClassName: "marker-toast",
 		});
 	};
 

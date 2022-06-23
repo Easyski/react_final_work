@@ -1,15 +1,23 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { BiMenu, BiX } from "react-icons/bi";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import cn from "classnames";
 
 import { IMenuItems } from "./Menu.types";
 
 const Menu: FC = () => {
 	const isLoggedIn = useSelector((state: any) => state.user.loggedIn);
+	const location = useLocation();
 
 	const [isMenuToggled, setMenuToggle] = useState<boolean>(false);
+	const [isHome, setIsHome] = useState<boolean>(false);
+
+	useEffect(() => {
+		if (location.pathname === "/") return setIsHome(true);
+		setIsHome(false);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [location.pathname]);
 
 	const handleMenuToggle = () => {
 		setMenuToggle(!isMenuToggled);
@@ -45,6 +53,8 @@ const Menu: FC = () => {
 			);
 		});
 	};
+
+	if (isHome) return null;
 
 	return (
 		<>

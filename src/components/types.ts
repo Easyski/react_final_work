@@ -25,6 +25,10 @@ export interface ITrack {
 	coordinates: Position[];
 }
 
+export interface ITrackWithId extends ITrack {
+	id: number;
+}
+
 export interface IRoute {
 	name: string;
 	isUsed: boolean;
