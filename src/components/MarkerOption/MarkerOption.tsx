@@ -30,7 +30,7 @@ const MarkerOption: FC<IMarkerOption> = ({ marker, indexInList }) => {
 	 * Zooms in on the selected marker.
 	 */
 	const handleMarkerListClicked = () => {
-		dispatch(setZoom(14));
+		dispatch(setZoom(16));
 		dispatch(setCenterCoordinates(marker.coordinates));
 	};
 

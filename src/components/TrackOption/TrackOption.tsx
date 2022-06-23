@@ -41,7 +41,7 @@ const TrackOption: FC<{
 			lat: track.coordinates[index][1],
 		};
 		dispatch(setCenterCoordinates(centerCoords));
-		dispatch(setZoom(13));
+		dispatch(setZoom(17));
 	};
 
 	const handleCloseMarker = () => {
@@ -63,10 +63,11 @@ const TrackOption: FC<{
 			<input
 				className="input italic"
 				type="text"
-				placeholder="Name"
+				placeholder="Name (required)"
 				autoComplete="off"
 				onChange={handleInputChange}
 				value={track.name}
+				autoFocus
 			/>
 			<p className="flex flex-h align-center">
 				From{" "}
