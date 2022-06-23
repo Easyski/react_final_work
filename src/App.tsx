@@ -36,7 +36,7 @@ export const App: FC = () => {
 			</Router>
 			<ToastContainer
 				pauseOnHover={false}
-				autoClose={2000}
+				autoClose={1000}
 				pauseOnFocusLoss={false}
 				className="toast-container"
 			/>
