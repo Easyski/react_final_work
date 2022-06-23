@@ -7,7 +7,7 @@ const Map: FC = () => {
 	const points = usePoints();
 
 	useEffect(() => {
-		points.then((points) => console.log(points));
+		points.then((points) => console.log("POINTS", points));
 	});
 
 	return (

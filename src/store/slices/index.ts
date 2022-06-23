@@ -1,31 +1,31 @@
+export { setExplanation, default as sidebarReducer } from "./sidebarSlice";
+
 export {
-	// -----------
-	// MARKERS
-	// -----------
 	setAddMarkerList,
 	setClearMarkerList,
 	setOverrideMarkerList,
 	setSelectedMarkerIndex,
-	// -----------
-	// TRACKS
-	// -----------
+	setUpdateMarker,
+	default as markerReducer,
+} from "./markerSlice";
+
+export {
 	setAddTrackList,
 	setClearTrackList,
 	setOverrideTrackList,
 	setSelectedTrackIndex,
-	// -----------
-	// ROUTES
-	// -----------
+	setUpdateTrack,
+	default as trackReducer,
+} from "./trackSlice";
+
+export {
 	setAddRouteList,
 	setClearRouteList,
 	setOverrideRouteList,
 	setSelectedRouteIndex,
-	// -----------
-	// VARIA
-	// -----------
-	setExplanation,
-	default as sidebarReducer,
-} from "./sidebarSlice";
+	setUpdateRoute,
+	default as routeReducer,
+} from "./routeSlice";
 
 export {
 	setCenterCoordinates,

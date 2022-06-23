@@ -1,0 +1,21 @@
+.route-option {
+    position: relative;
+    margin-bottom: 8px;
+    border-bottom: $border-sm $light-grey;
+
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+
+    &>* {
+        padding: 10px 0;
+    }
+}
+
+.sort-placeholder {
+    background-color: $light-grey;
+    border-radius: $border-radius-xs;
+    padding-left: $spacer-sm;
+
+}

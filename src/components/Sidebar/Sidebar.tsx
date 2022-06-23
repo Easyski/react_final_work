@@ -1,69 +1,85 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { BiDownload } from "react-icons/bi";
+import { ReactSortable } from "react-sortablejs";
+import downloasjs from "downloadjs";
 
-import { MarkerOption, TrackOption } from "@/components";
-import { IMarker, IMode, ITrack } from "@/components/types";
+import { MarkerOption, RouteOption, TrackOption } from "@/components";
+import { IMarker, IMode, ITrack, ITrackWithId } from "@/components/types";
+import { Logo } from "@/assets";
 import { setExplanation } from "@/store/slices";
+import { toast } from "react-toastify";
 
 const Sidebar: FC = () => {
 	const dispatch = useDispatch();
+
+	// -------------------------------------------------------------------
+	// :: VARIABLES
+	// -------------------------------------------------------------------
+
 	const mode: IMode = useSelector((store: any) => store.topbar.mode);
 	const explanation = useSelector((store: any) => store.sidebar.explanation);
 	const markerList: IMarker[] = useSelector(
-		(store: any) => store.sidebar.markerList
+		(store: any) => store.marker.markerList
 	);
 	const trackList: ITrack[] = useSelector(
-		(store: any) => store.sidebar.trackList
+		(store: any) => store.track.trackList
 	);
 
+	// -------------------------------------------------------------------
+	// :: STATES
+	// -------------------------------------------------------------------
+
+	const [routeName, setRouteName] = useState<string>("");
 	const [modeToUse, setModeToUse] = useState<IMode>(null);
-	const [title, setTitle] = useState<string>("");
-	const [subtitle, setSubtitle] = useState<string>("");
+	const [trackListWithId, setTrackListWithId] = useState<ITrackWithId[]>();
 
 	const scrollElement = useRef<HTMLDivElement>(null);
+
+	// -------------------------------------------------------------------
+	// :: EFFECTS
+	// -------------------------------------------------------------------
 
 	useEffect(() => {
 		if (!scrollElement.current) return;
 		scrollElement.current.scrollTop = scrollElement.current.scrollHeight;
 	}, [markerList]);
 
-	/**
-	 * Determine which mode is selected and change the title and subtitle
-	 * accordingly.
-	 */
+	useEffect(() => {
+		if (!trackList.length) return;
+		const newListWithId: ITrackWithId[] = trackList.map((track, i) => {
+			return {
+				...track,
+				id: i + 1,
+			};
+		});
+		setTrackListWithId(newListWithId);
+	}, [trackList]);
+
 	useEffect(() => {
 		switch (mode) {
 			case "points": {
-				setTitle("Markers");
-				setSubtitle("Click a marker in the list to focus");
 				setModeToUse("points");
 				explanation && dispatch(setExplanation(false));
 				break;
 			}
 			case "tracks": {
-				setTitle("Tracks");
-				setSubtitle("Click a track in the list to focus");
 				setModeToUse("tracks");
 				explanation && dispatch(setExplanation(false));
 				break;
 			}
 			case "routes": {
-				setTitle("Routes");
-				setSubtitle("Click a route in the list to display");
 				setModeToUse("routes");
 				explanation && dispatch(setExplanation(false));
 				break;
 			}
-			default: {
-				if (explanation) {
-					setTitle("How To Use?");
-					setSubtitle("");
-					break;
-				}
-			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [mode]);
+
+	// -------------------------------------------------------------------
+	// :: MARKERS
+	// -------------------------------------------------------------------
 
 	/**
 	 * This is the function that handles the addition of markers in the sidebar.
@@ -86,6 +102,10 @@ const Sidebar: FC = () => {
 		return markersAsElements;
 	};
 
+	// -------------------------------------------------------------------
+	// :: TRACKS
+	// -------------------------------------------------------------------
+
 	/**
 	 * This is the function that handles the addition of tracks in the sidebar.
 	 * It gets triggered every time the @param tracksToBeAdded is updated.
@@ -106,6 +126,94 @@ const Sidebar: FC = () => {
 		return tracksAsElements;
 	};
 
+	// -------------------------------------------------------------------
+	// :: ROUTES
+	// -------------------------------------------------------------------
+
+	const handleRoutes = (): JSX.Element[] | JSX.Element => {
+		if (!trackListWithId || !trackListWithId.length)
+			return (
+				<p className="light italic font-md text-center margin-top-lg">
+					Click a track to view its stats or add one via the control panel.
+				</p>
+			);
+		return (
+			<>
+				<div className="route">
+					<input
+						className="input bold color-blue"
+						type="text"
+						placeholder="Name (required)"
+						autoComplete="off"
+						autoFocus
+						value={routeName}
+						onChange={(e) => setRouteName(e.target.value)}
+					/>
+					<ReactSortable
+						list={trackListWithId}
+						setList={setTrackListWithId}
+						ghostClass="sort-placeholder"
+						disabled={false}
+						animation={200}
+						swapThreshold={0.35}
+					>
+						{trackListWithId.map((track) => (
+							<RouteOption key={track.id} track={track} />
+						))}
+					</ReactSortable>
+				</div>
+				<div
+					className="download flex flex-h align-center pointer"
+					onClick={handleDownloadClick}
+				>
+					<p className="color-blue bolder inline">Generate .gpx file</p>
+					<BiDownload className="icon-download color-blue" />
+				</div>
+			</>
+		);
+	};
+
+	const handleDownloadClick = async () => {
+		if (!trackListWithId) return;
+		const coordsArray = trackListWithId.map((el) => {
+			return el.coordinates;
+		});
+
+		if (routeName.trim() === "") {
+			toast.error("Your route needs a name!");
+			return;
+		}
+
+		const geoJson: any = {
+			type: "Feature",
+			properties: {},
+			geometry: {
+				type: "MultiLineString",
+				coordinates: coordsArray,
+			},
+		};
+		const fileName = routeName.trim();
+		const res = await fetch(
+			`https://easyski-api-final-work.herokuapp.com/gpx`,
+			{
+				headers: {
+					"Content-type": "application/json",
+				},
+				method: "POST",
+				body: JSON.stringify({
+					geoJson,
+					name: fileName,
+				}),
+			}
+		);
+		const file = await res.blob();
+		downloasjs(file, `${fileName}.gpx`);
+	};
+
+	// -------------------------------------------------------------------
+	// :: RENDER
+	// -------------------------------------------------------------------
+
 	/**
 	 * This is the first function to be called. It determins what should be
 	 * rendered based on the mode that is selected via the control panel.
@@ -118,7 +226,7 @@ const Sidebar: FC = () => {
 			case "tracks":
 				return handleTracks();
 			case "routes":
-				return handleTracks();
+				return handleRoutes();
 			default:
 				return handleDefault();
 		}
@@ -140,9 +248,8 @@ const Sidebar: FC = () => {
 	);
 
 	return (
-		<div className="sidebar border-box">
-			<h3 className="title bold font-xl text-center">{title}</h3>
-			<p className="subtitle thin italic font-sm text-center">{subtitle}</p>
+		<div className="sidebar border-box flex flex-v">
+			<img src={Logo} alt="Easyski Logo" className="logo align-self-center" />
 			<div className="scroll-container" id="scrollElement" ref={scrollElement}>
 				{renderContent()}
 			</div>

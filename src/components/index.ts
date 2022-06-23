@@ -11,6 +11,7 @@ export { default as Menu } from "./Menu/Menu";
 export { default as Mode } from "./Mode/Mode";
 export { default as ModeItem } from "./ModeItem/ModeItem";
 export { default as Navigation } from "./Navigation/Navigation";
+export { default as RouteOption } from "./RouteOption/RouteOption";
 export { default as SearchResults } from "./SearchResults/SearchResults";
 export { default as Setting } from "./Setting/Setting";
 export { default as Sidebar } from "./Sidebar/Sidebar";

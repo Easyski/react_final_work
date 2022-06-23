@@ -7,10 +7,11 @@ import { toast } from "react-toastify";
 import {
 	setCenterCoordinates,
 	setOverrideMarkerList,
+	setUpdateMarker,
 	setZoom,
 } from "@/store/slices";
 import { IMarker } from "@/components/types";
-import { removeFromList } from "@/hooks";
+import { findInList, removeFromList } from "@/hooks";
 
 interface IMarkerOption {
 	marker: IMarker;
@@ -20,7 +21,7 @@ interface IMarkerOption {
 const MarkerOption: FC<IMarkerOption> = ({ marker, indexInList }) => {
 	const dispatch = useDispatch();
 	const markerList: any[] = useSelector(
-		(state: any) => state.sidebar.markerList
+		(state: any) => state.marker.markerList
 	);
 
 	const [isGuide, setIsGuide] = useState<boolean>(false);
@@ -29,8 +30,15 @@ const MarkerOption: FC<IMarkerOption> = ({ marker, indexInList }) => {
 	 * Zooms in on the selected marker.
 	 */
 	const handleMarkerListClicked = () => {
-		dispatch(setZoom(14));
+		dispatch(setZoom(16));
 		dispatch(setCenterCoordinates(marker.coordinates));
+	};
+
+	const handleNameInput = (e: any) => {
+		const tempMarker = { ...marker };
+		tempMarker.name = e.target.value;
+		const index = findInList(marker, markerList, "marker");
+		if (index !== null) dispatch(setUpdateMarker([tempMarker, index]));
 	};
 
 	const handleCloseMarker = () => {
@@ -46,10 +54,12 @@ const MarkerOption: FC<IMarkerOption> = ({ marker, indexInList }) => {
 	return (
 		<div className="marker-option font-md">
 			<input
-				className="input italic"
+				className="input"
 				type="text"
 				placeholder="Name (optional)"
 				autoComplete="off"
+				onChange={handleNameInput}
+				value={marker.name}
 			/>
 			<div className="flex flex-h">
 				<p>

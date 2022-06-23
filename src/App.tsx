@@ -11,7 +11,7 @@ import { ToastContainer } from "react-toastify";
 import { isMobile } from "react-device-detect";
 
 import { AuthRoute, Menu } from "@/components";
-import { Map, Login, Profile, Logout, Mobile } from "@/pages";
+import { Map, Login, Profile, Logout, Mobile, About } from "@/pages";
 import store from "@/store";
 
 import "@/styles/main.scss";
@@ -26,7 +26,7 @@ export const App: FC = () => {
 				<Menu />
 				<Routes>
 					<Route path="/" element={<Login />} />
-					<Route path="/about" element={<p>ABOUT THIS PROJECT</p>} />
+					<Route path="/about" element={<About />} />
 					<Route path="/profile" element={<AuthRoute route={<Profile />} />} />
 					<Route path="/map" element={<AuthRoute route={<Map />} />} />
 					<Route path="/logout" element={<AuthRoute route={<Logout />} />} />
@@ -36,7 +36,7 @@ export const App: FC = () => {
 			</Router>
 			<ToastContainer
 				pauseOnHover={false}
-				autoClose={2000}
+				autoClose={1000}
 				pauseOnFocusLoss={false}
 				className="toast-container"
 			/>
