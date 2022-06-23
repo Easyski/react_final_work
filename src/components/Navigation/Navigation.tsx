@@ -1,6 +1,7 @@
 import { FC, useEffect, useCallback, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import mapboxgl, { GeoJSONSource, Map } from "mapbox-gl";
+
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { Position } from "geojson";
@@ -13,6 +14,10 @@ import {
 import { ICoordinates, IMarker, IMode, ITrack } from "@/components/types";
 import { getAltitude, findInList } from "@/hooks";
 import { RiGuideLine } from "react-icons/ri";
+
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
 export const Navigation: FC = () => {
 	const dispatch = useDispatch();
@@ -155,7 +160,6 @@ export const Navigation: FC = () => {
 	useEffect(() => {
 		if (trackMarkers.length === 1) {
 			toast("First marker selected!", {
-				autoClose: 1000,
 				icon: <RiGuideLine />,
 				progressClassName: "marker-toast",
 			});
@@ -188,11 +192,10 @@ export const Navigation: FC = () => {
 				setAddTrackList({ name: "", isUsed: false, coordinates: track })
 			);
 			toast.success("Track has succesfully been added!", {
-				autoClose: 1000,
 				icon: <RiGuideLine />,
 			});
 
-			setTrackMarkers([]);
+			setTrackMarkers([trackMarkers[1]]);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [trackMarkers]);
@@ -251,7 +254,6 @@ export const Navigation: FC = () => {
 		// TOAST
 		toast.success("Marker added to the map", {
 			icon: <HiOutlineLocationMarker />,
-			autoClose: 1000,
 		});
 	};
 
