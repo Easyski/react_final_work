@@ -239,12 +239,50 @@ const Sidebar: FC = () => {
 	 * @returns A JSX element.
 	 */
 	const handleDefault = (): JSX.Element => (
-		<p className="font-md">
-			Welcome to <span className="bold">Easyski</span>! <br /> If you are nog
-			sure where to start, check out this brief summary of what you can do with
-			me! <br />
-			Thank you for using <span className="bold">Easyski</span>!
-		</p>
+		<div className="font-md">
+			<p>
+				Welcome to <span className="bold color-blue">Easyski</span>! <br /> If
+				you are not sure where to start, check out this brief summary of what
+				you can do with me! <br />
+			</p>
+			<br />
+			<br />
+			<br />
+			<ol>
+				<li>
+					<span className="bold color-blue">1.</span> Search your desired
+					location at the top.
+				</li>
+				<br />
+				<li>
+					<span className="bold color-blue">2.</span> Add markers using the{" "}
+					<span className="bold">marker</span> option at the top.
+				</li>
+				<br />
+				<li>
+					<span className="bold color-blue">3.</span> Connect your markers with
+					the <span className="bold">track</span> tool.
+				</li>
+				<br />
+				<li>
+					<span className="bold color-blue">4.</span> Name your tracks and
+					proceed to the final step: the <span className="bold">route </span>
+					tool.
+				</li>
+				<br />
+				<li>
+					<span className="bold color-blue">5.</span> Change the order of the
+					tracks untill you are satisfied, then download the .gpx file at the
+					bottom.
+				</li>
+			</ol>
+			<br />
+			<br />
+			<br />
+			<p>
+				Thank you for using <span className="bold color-blue">Easyski</span>!
+			</p>
+		</div>
 	);
 
 	return (
